@@ -18,13 +18,21 @@
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param AVDD = {vdda}
+.param AVDD = {vdda}    
 
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
+* VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
+VDD VDD_1V8 VSS dc {AVDD}
+
+*INPUT SIGNALS
+VPWR_ON PWR_ON VSS dc 0
+
+VINP INP VSS SIN(0.6 5m 1Meg)
+VINN INN VSS SIN(0.6 -5m 1Meg)
+
 
 *-----------------------------------------------------------------
 * DUT
@@ -46,10 +54,17 @@ set color0=white
 set color1=black
 unset askquit
 
+* --- Operating point ---
+op
+save all
+write op.raw
+
+* --- ________________ ---
+
 optran 0 0 0 1n 1u 0
 
 
-tran 1n 10n 1p
+tran 1n 5u 1p
 write
 quit
 

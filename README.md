@@ -4,15 +4,18 @@
 [![DOCS](../../actions/workflows/docs.yaml/badge.svg)](../../actions/workflows/docs.yaml)
 
 # Who
-wulff
+
+We are group 3 in the 2026 course of Advanced Integrated Curcuits. 
 
 # Why
 
-<explain why you made this module>
+To get an understanding of design of advanced integrated circuits in CMOS technology, and to get an overview of the circuits needed to make a System-On-Chip.
+
 
 # How
 
-<explain short how you made this module>
+The course consistns of among other things a project divided into 5(6 if tapeout) milestones. The idea is to design a temperature sensor. Further
+below in the README the different milestones will get a short descriptions each. 
 
 
 # What
@@ -47,11 +50,12 @@ wulff
 
 
 
-# Milestone 1:
-The files for milestone 1 are uploaded on branch Henrik and include BANDGAP_OTA.sch, BANDGAP_CURCUIT.sch and BANDGAP_OTA.
+# Milestone 1: The bandgap
+
+The files for milestone 1 are uploaded on branch Henrik and include BANDGAP_OTA.sch, BANDGAP_CURCUIT.sch and BANDGAP_OTA.tb
 
 The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the DC input level. 
 
 The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course. 
 
-The sizes for CTAT and PTAT were calculated using the formulas from the course.   
+The sizes for CTAT and PTAT were calculated using the formulas from the course.

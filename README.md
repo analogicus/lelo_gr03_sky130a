@@ -52,7 +52,7 @@ below in the README the different milestones will get a short descriptions each.
 
 # Milestone 1: The bandgap
 
-The files for milestone 1 are uploaded on branch Henrik and include BANDGAP_OTA.sch, BANDGAP_CURCUIT.sch and BANDGAP_OTA.tb
+The files for milestone 1 are uploaded on branch main, under design and LELO_GR03_SKY130A. The deisgn and test files are called include BANDGAP_OTA.sch, BANDGAP_CURCUIT.sch and BANDGAP_OTA.tb
 
 The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the DC input level. 
 

@@ -44,3 +44,14 @@ wulff
 | Technology          |         | Skywater 130 nm |         |       |
 | AVDD                | 1.7     | 1.8             | 1.9     | V     |
 | Temperature         | -40     | 27              | 125     | C     |
+
+
+
+# Milestone 1:
+The files for milestone 1 are uploaded on branch Henrik and include BANDGAP_OTA.sch, BANDGAP_CURCUIT.sch and BANDGAP_OTA.
+
+The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the DC input level. 
+
+The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course. 
+
+The sizes for CTAT and PTAT were calculated using the formulas from the course.   

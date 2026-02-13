@@ -1,61 +1,42 @@
 #!/usr/bin/env python3
 import pandas as pd
 import yaml
-import glob
-import re
-import pandas as pd
 import matplotlib.pyplot as plt
 
 def main(name):
-  temps = []
-  ipts = []
-  vbgs = []
+  # Delete next line if you want to use python post processing
+  #return
+  yamlfile = name + ".yaml"
 
-  # Parse ngspice logs (adjust extension if needed)
-  for fname in glob.glob("tran_*.log"):
-      with open(fname) as f:
-          txt = f.read()
+  # Read result yaml file
+  with open(yamlfile) as fi:
+    obj = yaml.safe_load(fi)
 
-      t  = float(re.search(r"TEMP=([-0-9.]+)", txt).group(1))
-      ip = float(re.search(r"Iptat=([-0-9.eE]+)", txt).group(1))
-      vb = float(re.search(r"Vbg=([-0-9.eE]+)", txt).group(1))
+  # Do something to parameters
+  iptat = []
+  vctat = []
 
-      temps.append(t)
-      ipts.append(ip)
-      vbgs.append(vb)
+  for key, val in obj.items():
+    if "iptat" in key:
+      iptat.append((int(key[6:]), val))
+    elif "vctat" in key:
+      vctat.append((int(key[6:]), val))
 
-  # Build dataframe
-  df = pd.DataFrame({
-      "Temp_C": temps,
-      "I_PTAT": ipts,
-      "V_BG": vbgs
-  })
+  iptat.sort(key=lambda x : x[0])
+  vctat.sort(key=lambda x : x[1])
 
-  df.sort_values("Temp_C", inplace=True)
-
-  # Save CSV
-  df.to_csv("temp_sweep.csv", index=False)
-
-  print(df)
-
-  # -----------------
-  # Plot PTAT current
-  # -----------------
+  plt.plot([temp for temp, val in iptat], [val for temp, val in iptat])
+  plt.title("I PTAT")
+  plt.xlabel("Temperature [C]")
+  plt.ylabel("Current [A]")
   plt.figure()
-  plt.plot(df["Temp_C"], df["I_PTAT"], marker="o")
-  plt.xlabel("Temperature (°C)")
-  plt.ylabel("I_PTAT (A)")
-  plt.title("PTAT Current vs Temperature")
-  plt.grid(True)
+  plt.plot([temp for temp, val in vctat], [val for temp, val in vctat])
+  plt.title("V CTAT")
+  plt.xlabel("Temperature [C]")
+  plt.ylabel("Voltage [V]")
 
-  # -----------------
-  # Plot Bandgap voltage
-  # -----------------
-  plt.figure()
-  plt.plot(df["Temp_C"], df["V_BG"], marker="o")
-  plt.xlabel("Temperature (°C)")
-  plt.ylabel("V_BG (V)")
-  plt.title("Bandgap Voltage vs Temperature")
-  plt.grid(True)
+  # Save new yaml file
+  # with open(yamlfile,"w") as fo:
+  #   yaml.dump(obj,fo)
 
   plt.show()

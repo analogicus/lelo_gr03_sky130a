@@ -50,9 +50,9 @@ below in the README the different milestones will get a short descriptions each.
 
 # Milestone 1: The bandgap
 
-The files for milestone 1 are uploaded on branch henrik, in the folders design and LELO_GR03_SKY130A. The deisgn and te>
+The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
 
-The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked >
+The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the set voltage.
 
 The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course.
 

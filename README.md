@@ -4,19 +4,21 @@
 [![DOCS](../../actions/workflows/docs.yaml/badge.svg)](../../actions/workflows/docs.yaml)
 
 # Who
-wulff
+
+We are group 3 in the 2026 course of Advanced Integrated Curcuits.
 
 # Why
 
-<explain why you made this module>
+To get an understanding of design of advanced integrated circuits in CMOS technology, and to get an overview of the cir>
 
 # How
 
-<explain short how you made this module>
+The course consistns of among other things a project divided into 5(6 if tapeout) milestones. The idea is to design a t>
+below in the README the different milestones will get a short descriptions each.
+
 
 
 # What
-
 
 | What            |        Cell/Name |
 | :----           |  :----:       |
@@ -44,11 +46,26 @@ wulff
 | Technology          |         | Skywater 130 nm |         |       |
 | AVDD                | 1.7     | 1.8             | 1.9     | V     |
 | Temperature         | -40     | 27              | 125     | C     |
-| I_PTAT (25C)        |         | 2.03            |         | µA    |
-| V_CTAT (25C)        |         | 0.70            |         | V     |
 
-# Simulation Results
 
-## PTAT Current and Bandgap Voltage vs Temperature
+# Milestone 1: The bandgap
 
-![PTAT Current and Bandgap Voltage](docs/ptat_current.png)
+The files for milestone 1 are uploaded on branch henrik, in the folders design and LELO_GR03_SKY130A. The deisgn and te>
+
+The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked >
+
+The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course.
+
+The sizes for CTAT and PTAT were calculated using the formulas from the course.
+
+# Layout
+Layout for the top level bandgap:
+
+![layout](docs/BANDGAP_CIRCUIT.svg)
+
+
+Layout for the OTA:
+![layout](docs/BANDGAP_OTA.svg)
+
+The PTAT plots:
+![layout](docs/ptat_current.png)

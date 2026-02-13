@@ -52,9 +52,6 @@ N -360 -110 -360 -20 {lab=SUPPLY}
 N -410 20 -380 20 {lab=VSS}
 N 190 -50 320 -50 {lab=V2}
 N 120 20 190 20 {lab=V2}
-N 680 -110 680 -80 {lab=SUPPLY}
-N 610 -50 640 -50 {lab=VSS}
-N 680 -20 680 10 {lab=VTAIL}
 N 980 200 1010 200 {lab=#net1}
 N 980 150 980 200 {lab=#net1}
 N 980 150 1050 150 {lab=#net1}
@@ -116,10 +113,6 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 320 -50 0 0 {name=x3[2:0]}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -320 190 0 1 {name=x4}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 320 190 0 0 {name=x6}
 C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -360 -20 1 0 {name=x1 }
-C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 640 -50 0 0 {name=x9}
-C {devices/lab_wire.sym} 680 -110 0 0 {name=p15 sig_type=std_logic lab=SUPPLY}
-C {devices/lab_wire.sym} 610 -50 2 1 {name=p18 sig_type=std_logic lab=VSS}
-C {devices/lab_wire.sym} 680 10 2 1 {name=p19 sig_type=std_logic lab=VTAIL}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 1010 100 0 0 {name=x2}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 1010 200 0 0 {name=x3}
 C {devices/lab_wire.sym} 950 100 0 0 {name=p7 sig_type=std_logic lab=OUT}

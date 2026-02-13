@@ -44,3 +44,11 @@ wulff
 | Technology          |         | Skywater 130 nm |         |       |
 | AVDD                | 1.7     | 1.8             | 1.9     | V     |
 | Temperature         | -40     | 27              | 125     | C     |
+| I_PTAT (25C)        |         | 2.03            |         | µA    |
+| V_CTAT (25C)        |         | 0.70            |         | V     |
+
+# Simulation Results
+
+## PTAT Current and Bandgap Voltage vs Temperature
+
+![PTAT Current and Bandgap Voltage](docs/ptat_current.png)

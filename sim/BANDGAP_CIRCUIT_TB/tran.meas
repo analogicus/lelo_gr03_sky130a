@@ -1,0 +1,11 @@
+.control
+load {cicname}.raw
+
+meas tran Iptat avg I(VPTAT)
+meas tran Vbg   avg V(VBG)
+
+echo "TEMP={temp}"
+echo "Iptat=$&Iptat"
+echo "Vbg=$&Vbg"
+.endc
+

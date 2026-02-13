@@ -12,8 +12,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-9.6388028e-09
-x2=6.4909918e-08
+x1=-3.4288409e-06
+x2=8.8601179e-06
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -70,20 +70,20 @@ N 380 -190 590 -190 {lab=VDD}
 N 660 -130 700 -130 {lab=VDD}
 N 700 -190 700 -130 {lab=VDD}
 N 590 -190 630 -190 {lab=VDD}
-N 600 -130 620 -130 {lab=VB_P}
-N 600 -130 600 -80 {lab=VB_P}
-N 600 -80 660 -80 {lab=VB_P}
-N 660 210 660 240 {lab=#net1}
-N 600 230 660 230 {lab=#net1}
-N 600 230 600 270 {lab=#net1}
-N 600 270 620 270 {lab=#net1}
+N 600 -130 620 -130 {lab=#net1}
+N 600 -130 600 -80 {lab=#net1}
+N 600 -80 660 -80 {lab=#net1}
+N 660 210 660 240 {lab=#net2}
+N 600 230 660 230 {lab=#net2}
+N 600 230 600 270 {lab=#net2}
+N 600 270 620 270 {lab=#net2}
 N 660 300 660 370 {lab=0}
 N 570 180 620 180 {lab=VG}
 N 630 -190 700 -190 {lab=VDD}
 N 510 -190 510 -160 {lab=VDD}
 N 470 -130 510 -130 {lab=VDD}
 N 470 -190 470 -130 {lab=VDD}
-N 550 -130 600 -130 {lab=VB_P}
+N 550 -130 600 -130 {lab=#net1}
 N 510 -100 510 20 {lab=VG}
 N 510 80 510 150 {lab=0}
 N 460 50 510 50 {lab=0}
@@ -98,8 +98,7 @@ N 710 320 750 320 {lab=0}
 N 550 50 580 50 {lab=VG}
 N 580 -0 580 50 {lab=VG}
 N 510 0 580 0 {lab=VG}
-N 660 -100 660 0 {lab=VB_P}
-N 660 60 660 150 {lab=#net2}
+N 660 -100 660 150 {lab=#net1}
 C {LELO_GR03_SKY130A/BANDGAP_OTA.sym} 0 0 3 0 {name=xOTA}
 C {sky130_fd_pr/pnp_05v5.sym} 110 280 0 0 {name=xQ1
 model=pnp_05v5_W3p40L3p40
@@ -115,7 +114,7 @@ model=pnp_05v5_W3p40L3p40
 m=1
 spiceprefix=X
 }
-C {devices/code_shown.sym} -940 -190 0 0 {name=s1 only_toplevel=false value="
+C {devices/code_shown.sym} -950 -190 0 0 {name=s1 only_toplevel=false value="
 .param mc_mm_switch=0
 .param mc_pr_switch=0
 
@@ -128,7 +127,7 @@ C {devices/code_shown.sym} -940 -190 0 0 {name=s1 only_toplevel=false value="
 .option SEED=1
 .save all
 .control
-*optran 0 0 0 10n 1u 0
+optran 0 0 0 10n 1u 0
 tran 10n 10u
 *op
 *ac dec 20 1 1G
@@ -171,5 +170,3 @@ C {JNW_ATR_SKY130A/JNWATR_NCH_4C1F2.sym} 550 50 0 1 {name=x9 }
 C {devices/lab_wire.sym} 510 -30 0 0 {name=p16 sig_type=std_logic lab=VG}
 C {devices/lab_wire.sym} 660 370 0 0 {name=p17 sig_type=std_logic lab=0}
 C {devices/lab_wire.sym} 510 150 0 0 {name=p19 sig_type=std_logic lab=0}
-C {devices/lab_wire.sym} 580 -130 0 0 {name=p2 sig_type=std_logic lab=VB_P}
-C {devices/vsource.sym} 660 30 0 0 {name=I value=0 savecurrent=false}

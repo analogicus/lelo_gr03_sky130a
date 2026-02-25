@@ -1,18 +1,19 @@
 ** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/LELO_GR03_SKY130A/OSCILLATOR.sch
-**.subckt OSCILLATOR PWRUP_1V8 OUT VDD_1V8 VSS
+**.subckt OSCILLATOR PWRUP_1V8 F_OUT VDD_1V8 VSS
 *.ipin PWRUP_1V8
 *.ipin VDD_1V8
 *.ipin VSS
-*.opin OUT
+*.opin F_OUT
 x1 VDD_1V8 VX PWRUP_1V8_BUF V_CTAT VSS PWRUP_N_1V8_BUF BANDGAP_CIRCUIT
 x6 PWRUP_1V8 PWRUP_N_1V8_BUF VDD_1V8 VSS JNWTR_IVX1_CV
 x2 PWRUP_N_1V8_BUF PWRUP_1V8_BUF VDD_1V8 VSS JNWTR_IVX1_CV
 x3 VSS VX JNWTR_CAPX4
 x4 VX PWRUP_N_1V8_BUF VSS VSS JNWATR_NCH_4C5F0
 x5 VX RST VSS VSS JNWATR_NCH_4C5F0
-x8 OUT net1 VDD_1V8 VSS JNWTR_IVX1_CV
+x8 F_IN net1 VDD_1V8 VSS JNWTR_IVX1_CV
 x9 net1 RST VDD_1V8 VSS JNWTR_IVX1_CV
-x7 VDD_1V8 VX OUT V_CTAT VSS PWRUP_N_1V8_BUF PWRUP_1V8_BUF COMPARATOR
+x7 VDD_1V8 VX F_IN V_CTAT VSS PWRUP_N_1V8_BUF PWRUP_1V8_BUF COMPARATOR
+x10 net2 F_IN VDD_1V8 F_OUT net2 VDD_1V8 VSS JNWTR_DFRNQNX1_CV
 **.ends
 
 * expanding   symbol:  LELO_GR03_SKY130A/BANDGAP_CIRCUIT.sym # of pins=6
@@ -126,6 +127,29 @@ x1<1> net1 PWRUP_1V8 VSS VSS JNWATR_NCH_12C1F2
 x1<0> net1 PWRUP_1V8 VSS VSS JNWATR_NCH_12C1F2
 x9 net2 V2 VSS JNWTR_RPPO2
 x11 OUT net2 JNWTR_CAPX4
+.ends
+
+
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_DFRNQNX1_CV.sym # of pins=7
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_DFRNQNX1_CV.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_DFRNQNX1_CV.sch
+.subckt JNWTR_DFRNQNX1_CV D CK RN Q QN AVDD AVSS
+*.iopin D
+*.iopin CK
+*.iopin RN
+*.iopin Q
+*.iopin QN
+*.iopin AVDD
+*.iopin AVSS
+XXA0 AVDD AVSS JNWTR_TAPCELLB_CV
+XXA1 CK RN CKN AVDD AVSS JNWTR_NDX1_CV
+XXA2 CKN CKB AVDD AVSS JNWTR_IVX1_CV
+XXA3 D CKN CKB A0 AVDD AVSS JNWTR_IVTRIX1_CV
+XXA4 A1 CKB CKN A0 AVDD AVSS JNWTR_IVTRIX1_CV
+XXA5 A0 A1 AVDD AVSS JNWTR_IVX1_CV
+XXA6 A1 CKB CKN QN AVDD AVSS JNWTR_IVTRIX1_CV
+XXA7 Q CKN CKB RN QN AVDD AVSS JNWTR_NDTRIX1_CV
+XXA8 QN Q AVDD AVSS JNWTR_IVX1_CV
 .ends
 
 
@@ -284,6 +308,70 @@ XXA1 N P B JNWTR_RES16
 *.iopin B
 XM1 D G S B sky130_fd_pr__nfet_01v8 L=0.22 W=8.32 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_TAPCELLB_CV.sym # of pins=2
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_TAPCELLB_CV.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_TAPCELLB_CV.sch
+.subckt JNWTR_TAPCELLB_CV AVDD AVSS
+*.iopin AVDD
+*.iopin AVSS
+XMN1 AVSS AVSS AVSS AVSS JNWTR_NCHDL
+XMP1 AVDD AVDD AVDD AVDD JNWTR_PCHDL
+.ends
+
+
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_NDX1_CV.sym # of pins=5
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_NDX1_CV.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_NDX1_CV.sch
+.subckt JNWTR_NDX1_CV A B Y AVDD AVSS
+*.iopin A
+*.iopin B
+*.iopin Y
+*.iopin AVDD
+*.iopin AVSS
+XMN0 N1 A AVSS AVSS JNWTR_NCHDL
+XMN1 Y B N1 AVSS JNWTR_NCHDL
+XMP0 Y A AVDD AVDD JNWTR_PCHDL
+XMP1 AVDD B Y AVDD JNWTR_PCHDL
+.ends
+
+
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_IVTRIX1_CV.sym # of pins=6
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_IVTRIX1_CV.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_IVTRIX1_CV.sch
+.subckt JNWTR_IVTRIX1_CV A C CN Y AVDD AVSS
+*.iopin A
+*.iopin C
+*.iopin CN
+*.iopin Y
+*.iopin AVDD
+*.iopin AVSS
+XMN0 N1 A AVSS AVSS JNWTR_NCHDL
+XMN1 Y C N1 AVSS JNWTR_NCHDL
+XMP0 N2 A AVDD AVDD JNWTR_PCHDL
+XMP1 Y CN N2 AVDD JNWTR_PCHDL
+.ends
+
+
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_NDTRIX1_CV.sym # of pins=7
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_NDTRIX1_CV.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_NDTRIX1_CV.sch
+.subckt JNWTR_NDTRIX1_CV A C CN RN Y AVDD AVSS
+*.iopin A
+*.iopin C
+*.iopin CN
+*.iopin RN
+*.iopin Y
+*.iopin AVDD
+*.iopin AVSS
+XMN2 N1 RN AVSS AVSS JNWTR_NCHDL
+XMN0 N2 A N1 AVSS JNWTR_NCHDL
+XMN1 Y C N2 AVSS JNWTR_NCHDL
+XMP2 AVDD RN N2 AVDD JNWTR_PCHDL
+XMP0 N2 A AVDD AVDD JNWTR_PCHDL
+XMP1 Y CN N2 AVDD JNWTR_PCHDL
 .ends
 
 

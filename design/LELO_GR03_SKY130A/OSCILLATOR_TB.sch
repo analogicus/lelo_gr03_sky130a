@@ -5,26 +5,25 @@ V {}
 S {}
 E {}
 B 2 -60 -20 740 380 {flags=graph
-y1=-0.8
-y2=1.2
+y1=-0.56694752
+y2=2.8890525
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=1.1347064e-07
-x2=1.1839517e-07
+x1=9.718555e-07
+x2=1.3639898e-06
 divx=5
 subdivx=1
 xlabmag=1.0
 ylabmag=1.0
-node=out
-color=4
 dataset=-1
 unitx=1
 logx=0
 logy=0
-}
+color=4
+node=out}
 N -160 -40 -160 -20 {lab=VDD}
 N -160 40 -160 60 {lab=0}
 N 140 -140 170 -140 {lab=OUT}
@@ -53,11 +52,12 @@ C {devices/code_shown.sym} -720 -230 0 0 {name=s1 only_toplevel=false value="
 .option gmin=1e-12
 *.option SEED=1
 .save all
+.temp 125
 .control
 
 optran 0 0 0 10n 1u 0
 *dc VIN 0 1.8 1m
-tran 0.1n 3u
+tran 0.1n 2u
 *op
 *ac dec 20 1 1G
 

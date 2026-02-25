@@ -16,4 +16,9 @@ work/lvs
 work/gds
 work/drc
 work/xsch
+<<<<<<< HEAD
 design/LELO_ATR_SKY130A/
+=======
+*.raw
+.claude
+>>>>>>> cc5244cbc7276af8296dce1a604b3918e6bb75ae

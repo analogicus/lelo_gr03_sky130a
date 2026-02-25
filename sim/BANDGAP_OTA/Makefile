@@ -8,7 +8,7 @@ TB=tran
 VIEW=Sch
 #VIEW=Lay
 CELL=BANDGAP_OTA
-LIB =LELO_GR06_SKY130A
+LIB =LELO_GR03_SKY130A
 OPT=
 
 include ../../tech/make/sim.make

@@ -68,4 +68,21 @@ Layout for the OTA:
 ![layout](docs/BANDGAP_OTA.svg)
 
 The PTAT plots:
-![layout](docs/ptat_current.png)
+![layout](docs/bandgap_measurement.svg)
+
+
+# Milestone 2: The Oscillator 
+
+The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
+
+The Oscillator is based on the one in LELO_TEMP with some adjusted components and design choices. The capacitor in the oscillator is set so the frequency is ok.
+
+## Layout
+Layout for the Oscillator:
+
+#![layout](docs/BANDGAP_CIRCUIT.svg)
+
+
+Layout for the Oscillator OTA:
+#![layout](docs/BANDGAP_OTA.svg)
+ 

@@ -68,7 +68,7 @@ Layout for the OTA:
 ![layout](docs/BANDGAP_OTA.svg)
 
 The PTAT plots:
-![layout](docs/ptat_current.png)
+![layout](docs/bandgap_measurement.svg)
 
 
 # Milestone 2: The Oscillator 

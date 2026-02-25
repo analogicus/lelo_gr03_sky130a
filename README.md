@@ -5,21 +5,20 @@
 
 # Who
 
-We are group 3 in the 2026 course of Advanced Integrated Curcuits. 
+We are group 3 in the 2026 course of Advanced Integrated Curcuits.
 
 # Why
 
 To get an understanding of design of advanced integrated circuits in CMOS technology, and to get an overview of the circuits needed to make a System-On-Chip.
 
-
 # How
 
 The course consistns of among other things a project divided into 5(6 if tapeout) milestones. The idea is to design a temperature sensor. Further
-below in the README the different milestones will get a short descriptions each. 
+below in the README the different milestones will get a short descriptions each.
+
 
 
 # What
-
 
 | What            |        Cell/Name |
 | :----           |  :----:       |
@@ -49,13 +48,24 @@ below in the README the different milestones will get a short descriptions each.
 | Temperature         | -40     | 27              | 125     | C     |
 
 
-
 # Milestone 1: The bandgap
 
-The files for milestone 1 are uploaded on branch henrik, in the folders design and LELO_GR03_SKY130A. The deisgn and test files are called include BANDGAP_OTA.sch, BANDGAP_CURCUIT.sch and BANDGAP_OTA_TB.sch
+The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
 
-The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the DC input level. 
+The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the set voltage.
 
-The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course. 
+The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course.
 
 The sizes for CTAT and PTAT were calculated using the formulas from the course.
+
+# Layout
+Layout for the top level bandgap:
+
+![layout](docs/BANDGAP_CIRCUIT.svg)
+
+
+Layout for the OTA:
+![layout](docs/BANDGAP_OTA.svg)
+
+The PTAT plots:
+![layout](docs/ptat_current.png)

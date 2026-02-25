@@ -1,0 +1,34 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1767481200
+<< checkpaint >>
+rect 0 0 2048 2560
+use LELOATR_PCH_2CTAPBOT xa1 
+transform 1 0 0 0 1 0
+box 0 0 1024 480
+use LELOATR_PCH_2C1F2 xa2 
+transform 1 0 0 0 1 480
+box 0 480 1024 1280
+use LELOATR_PCH_2C5F0 xa3 
+transform 1 0 0 0 1 1280
+box 0 1280 1024 2080
+use LELOATR_PCH_2CTAPTOP xa4 
+transform 1 0 0 0 1 2080
+box 0 2080 1024 2560
+use LELOATR_PCH_2CTAPBOT xb1 
+transform 1 0 1024 0 1 0
+box 1024 0 2048 480
+use LELOATR_PCH_2C1F2 xb2 
+transform 1 0 1024 0 1 480
+box 1024 480 2048 1280
+use LELOATR_PCH_2C5F0 xb3 
+transform 1 0 1024 0 1 1280
+box 1024 1280 2048 2080
+use LELOATR_PCH_2CTAPTOP xb4 
+transform 1 0 1024 0 1 2080
+box 1024 2080 2048 2560
+<< labels >>
+<< properties >>
+string FIXED_BBOX 0 0 2048 2560
+<< end >>

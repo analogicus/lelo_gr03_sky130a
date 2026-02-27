@@ -42,7 +42,7 @@ N 250 -130 250 -80 {lab=VB_P}
 N -40 -130 -40 -30 {lab=VB_P}
 N -460 -70 -400 -70 {lab=PWRUP_1V8}
 N -40 -250 -40 -200 {lab=#net1}
-N -140 -280 -80 -280 {lab=PWRUP_N_1V8_BUF}
+N -140 -280 -80 -280 {lab=PWRUP_N_1V8}
 N -40 -360 -40 -310 {lab=VDD_1V8}
 N -90 -360 -40 -360 {lab=VDD_1V8}
 N 40 60 50 60 {lab=PWRUP_N_1V8}
@@ -86,3 +86,4 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 280 -130 0 0 {name=x3}
 C {devices/lab_wire.sym} -130 60 0 0 {name=p20 sig_type=std_logic lab=PWRUP_1V8}
 C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 100 310 1 0 {name=x4 }
 C {devices/ipin.sym} -460 -30 0 0 {name=p7 lab=PWRUP_N_1V8}
+C {devices/title.sym} -520 -430 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}

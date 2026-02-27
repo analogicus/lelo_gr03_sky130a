@@ -1,38 +1,9 @@
 ** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/LELO_GR03_SKY130A/OSCILLATOR_TB.sch
-**.subckt OSCILLATOR_TB
-x1 VDD OUT VDD 0 OSCILLATOR
-VDD VDD 0 1.8
-C1 OUT 0 1f m=1
-**** begin user architecture code
-
-
-.param mc_mm_switch=0
-.param mc_pr_switch=0
-
-.lib ../../../tech/ngspice/temperature.spi Tl
-.lib ../../../tech/ngspice/corners.spi Kss
-.lib ../../../tech/ngspice/supply.spi Vl
-.include ../../../../cpdk/ngspice/ideal_circuits.spi
-*.option savecurrents
-.option gmin=1e-12
-*.option SEED=1
-.save all
-.temp 125
-.control
-
-optran 0 0 0 10n 1u 0
-*dc VIN 0 1.8 1m
-tran 0.1n 2u
-*op
-*ac dec 20 1 1G
-
-write OSCILLATOR_TB.raw
-
-exit
-.endc
-
-
-**** end user architecture code
+**.subckt OSCILLATOR_TB VDD_1V8 F_OUT VSS
+*.ipin VDD_1V8
+*.opin F_OUT
+*.ipin VSS
+x1 VDD_1V8 F_OUT VDD_1V8 VSS OSCILLATOR
 **.ends
 
 * expanding   symbol:  LELO_GR03_SKY130A/OSCILLATOR.sym # of pins=4
@@ -46,6 +17,7 @@ exit
 x1 VDD_1V8 VX PWRUP_1V8_BUF V_CTAT VSS PWRUP_N_1V8_BUF BANDGAP_CIRCUIT
 x6 PWRUP_1V8 PWRUP_N_1V8_BUF VDD_1V8 VSS JNWTR_IVX1_CV
 x2 PWRUP_N_1V8_BUF PWRUP_1V8_BUF VDD_1V8 VSS JNWTR_IVX1_CV
+x3<2> VSS VX JNWTR_CAPX4
 x3<1> VSS VX JNWTR_CAPX4
 x3<0> VSS VX JNWTR_CAPX4
 x4 VX PWRUP_N_1V8_BUF VSS VSS JNWATR_NCH_4C5F0

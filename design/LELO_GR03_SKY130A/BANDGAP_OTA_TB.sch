@@ -12,8 +12,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-3.8956443e+08
-x2=9.928356e+08
+x1=2.6772488e+09
+x2=4.0596489e+09
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -45,7 +45,6 @@ N -170 90 -170 130 {lab=0}
 N -170 90 -160 90 {lab=0}
 N -160 90 -160 100 {lab=0}
 N -80 210 -60 210 {lab=OUT}
-C {LELO_GR03_SKY130A/BANDGAP_OTA.sym} -230 190 0 0 {name=xota}
 C {devices/code_shown.sym} -1200 -70 0 0 {name=s1 only_toplevel=false value="
 .param mc_mm_switch=0
 .param mc_pr_switch=0
@@ -77,10 +76,10 @@ value=300f
 footprint=1206
 device=polarized_capacitor}
 C {devices/vsource.sym} -590 250 0 0 {name=VIN
-value="sin(0.8 1m 1k)"
+value="sin(0.55 3m 1k)"
 savecurrent=false}
 C {devices/vsource.sym} -450 270 0 0 {name=V_REF
-value="sin(0.8 -1m 1k)"
+value="sin(0.55 -3m 1k)"
 savecurrent=false
 }
 C {devices/launcher.sym} -270 -50 0 0 {name=h5
@@ -97,3 +96,5 @@ C {devices/lab_pin.sym} -430 110 0 1 {name=p4 sig_type=std_logic lab=VDD}
 C {devices/lab_pin.sym} -170 290 0 1 {name=p5 sig_type=std_logic lab=VDD}
 C {devices/lab_pin.sym} -330 320 0 1 {name=p6 sig_type=std_logic lab=0}
 C {devices/lab_pin.sym} -160 100 0 1 {name=p7 sig_type=std_logic lab=0}
+C {LELO_GR03_SKY130A/COMPARATOR.sym} -230 190 0 0 {name=x1}
+C {devices/title.sym} -1130 -620 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}

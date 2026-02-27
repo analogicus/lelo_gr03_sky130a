@@ -138,3 +138,4 @@ C {devices/lab_wire.sym} 560 200 2 1 {name=p26 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 790 200 2 0 {name=p27 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 560 -50 0 0 {name=p30 sig_type=std_logic lab=VDD}
 C {devices/lab_wire.sym} 790 -50 0 1 {name=p31 sig_type=std_logic lab=VDD}
+C {devices/title.sym} -320 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}

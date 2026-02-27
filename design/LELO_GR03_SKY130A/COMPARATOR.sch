@@ -66,7 +66,7 @@ C {devices/lab_wire.sym} -80 80 2 0 {name=p16 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 10 -50 0 0 {name=p14 sig_type=std_logic lab=VB_P}
 C {devices/lab_wire.sym} -20 140 0 0 {name=p17 sig_type=std_logic lab=VTAIL}
 C {devices/lab_wire.sym} 280 190 0 0 {name=p20 sig_type=std_logic lab=V_IB}
-C {devices/lab_wire.sym} 190 -50 0 1 {name=p22 sig_type=std_logic lab=V2}
+C {devices/lab_wire.sym} 240 -50 0 1 {name=p22 sig_type=std_logic lab=V2}
 C {devices/ipin.sym} -200 80 0 0 {name=p4 lab=IN-}
 C {devices/opin.sym} 420 80 0 0 {name=p9 lab=OUT}
 C {devices/ipin.sym} 200 80 0 1 {name=p2 lab=IN+}
@@ -97,3 +97,4 @@ C {devices/lab_wire.sym} 380 -50 0 1 {name=p18 sig_type=std_logic lab=VDD}
 C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 200 20 0 0 {name=x9 }
 C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 300 20 1 0 {name=x11 }
 C {devices/lab_wire.sym} 240 40 2 1 {name=p32 sig_type=std_logic lab=VSS}
+C {devices/title.sym} -370 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}

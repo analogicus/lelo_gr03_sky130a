@@ -6,7 +6,7 @@ S {}
 E {}
 B 2 380 -370 1180 30 {flags=graph
 
-y2=36.075223
+y2=14.633941
 ypos1=0
 ypos2=2
 divy=5
@@ -26,10 +26,10 @@ logx=1
 logy=0
 sim_type=ac
 
-y1=-17.527984
+y1=-38.969266
 autoload=1
-x1=1.3223655
-x2=10.386873}
+x1=2.2288163
+x2=11.293323}
 B 2 380 50 1180 450 {flags=graph
 
 
@@ -39,7 +39,7 @@ divy=5
 subdivy=4
 unity=1
 
-x2=10.386873
+x2=11.293323
 divx=5
 subdivx=8
 xlabmag=1.0
@@ -51,7 +51,7 @@ unitx=1
 logx=1
 logy=0
 sim_type=ac
-x1=1.3223655
+x1=2.2288163
 y1=-330.16177
 y2=9.80623
 color=4
@@ -61,7 +61,6 @@ rawfile=$netlist_dir/TB_LELOTEMP_BIAS_IBP_LSTB.raw}
 N -230 40 -230 60 {
 lab=VDD_1V8}
 N -150 40 -150 60 {lab=IN}
-C {LELO_GR03_SKY130A/BANDGAP_OTA.sym} 150 100 0 0 {name=x1}
 C {devices/code_shown.sym} -719.3514969502943 -300 0 0 {name=s1 only_toplevel=false value="
 
 .lib "../../../tech/ngspice/corners.spi" Ktt
@@ -88,8 +87,8 @@ ac dec 50 100 1G
 alter i.X999.Ii acmag=1
 alter v.X999.Vi acmag=0
 ac dec 50 100 1G
-let lg_mag = db(-tian_loop())
-let lg_phase = 180*cph(-tian_loop())/pi
+let lg_mag = db(tian_loop())
+let lg_phase = 180*cph(tian_loop())/pi
 remzerovec
 write TB_LELOTEMP_BIAS_IBP_LSTB.raw
 
@@ -141,3 +140,4 @@ C {devices/lab_wire.sym} -230 120 2 0 {name=p13 sig_type=std_logic lab=0
 value=1.8}
 C {devices/lab_wire.sym} 300 180 2 0 {name=p14 sig_type=std_logic lab=0
 value=1.8}
+C {LELO_GR03_SKY130A/COMPARATOR.sym} 150 100 0 0 {name=x1}

@@ -81,7 +81,7 @@ C {devices/lab_pin.sym} -350 20 0 0 {name=l5 sig_type=std_logic lab=PWRUP_1V8_BU
 C {devices/lab_pin.sym} -350 40 0 0 {name=l6 sig_type=std_logic lab=PWRUP_N_1V8_BUF}
 C {devices/lab_pin.sym} -350 0 0 0 {name=l7 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} -350 60 0 0 {name=l8 sig_type=std_logic lab=VSS}
-C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 450 50 2 0 {name=x3[1:0]}
+C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 450 50 2 0 {name=x3[2:0]}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 90 70 0 0 {name=x4 }
 C {devices/lab_pin.sym} 70 100 0 0 {name=l9 sig_type=std_logic lab=PWRUP_N_1V8_BUF}
 C {devices/lab_pin.sym} 100 140 0 0 {name=l10 sig_type=std_logic lab=VSS}
@@ -108,3 +108,4 @@ C {devices/lab_pin.sym} 270 -100 3 0 {name=l25 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 240 -100 3 0 {name=l26 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} 270 -290 0 0 {name=l27 sig_type=std_logic lab=VDD_1V8}
 C {devices/opin.sym} 380 -210 0 0 {name=p4 lab=F_OUT}
+C {devices/title.sym} -520 -360 0 0 {name=l28 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}

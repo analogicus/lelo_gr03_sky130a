@@ -1,36 +1,54 @@
-** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/LELO_GR03_SKY130A/BANDGAP_OTA_TB.sch
-**.subckt BANDGAP_OTA_TB
-CL OUT 0 300f m=1
-VIN IN+ 0 sin(0.55 3m 1k)
-V_REF IN- 0 sin(0.55 -3m 1k)
-VDD VDD 0 1.8
-x1 VDD IN+ OUT IN- 0 0 VDD COMPARATOR
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/LELO_GR03_SKY130A/BP_OTA.sch
+**.subckt BP_OTA
+V1 VDD_1V8 0 1.8
+C1 VDD_1V8 LPI 1f m=1
+V2 IN 0 0.8
+C2 LPO 0 200f m=1
+x1 VDD_1V8 IN LPO LPI 0 0 VDD_1V8 COMPARATOR
 **** begin user architecture code
 
 
-.param mc_mm_switch=0
-.param mc_pr_switch=0
 
-.lib ../../../tech/ngspice/temperature.spi Tl
-.lib ../../../tech/ngspice/corners.spi Kss
-.lib ../../../tech/ngspice/supply.spi Vl
-.include ../../../../cpdk/ngspice/ideal_circuits.spi
-*.option savecurrents
-.option gmin=1e-12
-*.option SEED=1
-.save all
+.lib ../../../tech/ngspice/corners.spi Ktt
+.lib ../../../tech/ngspice/temperature.spi Tt
+.lib ../../../tech/ngspice/supply.spi Vt
+.include ../../../../cpdk/ngspice/tian_subckt.lib
+X999 LPI LPO loopgainprobe
+
 .control
+optran 0 0 0 10n 20u 0
+save alli
+save allv
+save @m.*[gm]
+op
+remzerovec
+write TB_LELOTEMP_BIAS_IBP_LSTB_OP.raw
+unsave all
 
-optran 0 0 0 10n 1u 0
-*dc VIN 0 1.8 1m
-tran 0.5u 6m
-*op
-*ac dec 20 1 1G
+save allv
+save i(v1) i(v2)
+* Set voltage AC to 1
+ac dec 50 100 1G
+* Set Current to 1
+alter i.X999.Ii acmag=1
+alter v.X999.Vi acmag=0
+ac dec 50 100 1G
+let lg_mag = db(tian_loop())
+let lg_phase = 180*cph(tian_loop())/pi
+remzerovec
+write TB_LELOTEMP_BIAS_IBP_LSTB.raw
 
-write BANDGAP_OTA_TB.raw
-
+meas ac gm_db find lg_mag when lg_phase=0
+meas ac pm_deg find lg_phase when lg_mag=0
+meas ac f3db when lg_phase=135
+meas ac ug when lg_mag=0
+meas ac lf_gain find lg_mag at=1k
+remzerovec
+write TB_LELOTEMP_BIAS_IBP_LSTB_meas.raw
 exit
 .endc
+.end
+
 
 
 **** end user architecture code

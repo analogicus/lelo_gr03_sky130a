@@ -18,3 +18,4 @@ C {devices/ipin.sym} -180 40 0 0 {name=p1 lab=VSS}
 C {devices/opin.sym} 210 -20 0 0 {name=p2 lab=I_PTAT}
 C {devices/opin.sym} 210 0 0 0 {name=p3 lab=V_CTAT}
 C {devices/ipin.sym} -180 -20 0 0 {name=p4 lab=VDD_1V8}
+C {devices/title.sym} -210 -110 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}

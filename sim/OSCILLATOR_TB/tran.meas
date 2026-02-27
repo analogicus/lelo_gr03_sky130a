@@ -3,11 +3,11 @@
 echo "MEAS_START"
 
 set fend = .raw
-compose temp_vec values -40 -30 -20 -10 0 10 25 30 40 50 60 70 85 90 100 125
-compose freq_vec values -40 -30 -20 -10 0 10 25 30 40 50 60 70 85 90 100 125
+compose temp_vec values -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110 120 125
+compose freq_vec values -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110 120 125
 
 let ind=0
-foreach vtemp -40 -30 -20 -10 0 10 25 30 40 50 60 70 85 90 100 125
+foreach vtemp -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110 120 125
 
 load {cicname}_$vtemp$fend
 

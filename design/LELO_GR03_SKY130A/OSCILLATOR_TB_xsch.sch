@@ -12,8 +12,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=1.6488889e-07
-x2=1.5699772e-06
+x1=-4.5874351e-08
+x2=1.359214e-06
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -22,8 +22,9 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-color=4
-node=out}
+color="4 4"
+node="out
+x1.vx"}
 N -160 -40 -160 -20 {lab=VDD}
 N -160 40 -160 60 {lab=0}
 N 140 -140 170 -140 {lab=OUT}
@@ -52,7 +53,7 @@ C {devices/code_shown.sym} -720 -230 0 0 {name=s1 only_toplevel=false value="
 .option gmin=1e-12
 *.option SEED=1
 .save all
-.temp 125
+.temp 75
 .control
 
 optran 0 0 0 10n 1u 0

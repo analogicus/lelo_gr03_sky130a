@@ -14,3 +14,9 @@ C {devices/title.sym} -500 -100 0 0 {name=l1 author="Martin Solvik, Kim Hamberg,
 C {devices/ipin.sym} -190 -20 0 0 {name=p1 lab=VDD_1V8}
 C {devices/opin.sym} 170 -20 0 0 {name=p3 lab=F_OUT}
 C {devices/ipin.sym} -190 20 0 0 {name=p2 lab=VSS}
+C {devices/capa.sym} 160 10 0 0 {name=C1
+m=1
+value=1f
+footprint=1206
+device="ceramic capacitor"}
+C {devices/lab_wire.sym} 160 40 2 1 {name=p6 sig_type=std_logic lab=VSS}

@@ -52,9 +52,11 @@ below in the README the different milestones will get a short descriptions each.
 
 The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
 
-The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the input common mode voltage of the diode drop from ~0.8V to ~0.5V over the temperature range of -40° to 125°.
+The bandgap OTA is a two stage Miller OTA. The input nmos transistors are low treshold voltage transistors since they work with the input common mode voltage of the diode drop from ~0.8V to ~0.5V over the temperature range of -40° to 125°. The circuit diagram is shown in the Schematics page under BANDGAP_OTA.
 
-The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course.
+The Bandgap circuit is shown in the Schematics page under the header BANDGAP_CIRCUIT. If we compare the voltages over the the lower diode connected BJTs, Q1 and Q2, the difference in voltage will be proportional to the size difference and temperature. Given by:
+
+$$V_{D1} - V_{D2} = V_T \text{ln}(\frac{I_D}{I_{S1}}) - V_T \text{ln}(\frac{I_D}{I_{S2}})
 
 The sizes for PTAT and CTAT were calculated using the formulas from the course.
 

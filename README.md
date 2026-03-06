@@ -56,11 +56,11 @@ The OTA is based on a two stage Miller OTA. The transistors were chosen for thei
 
 The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course.
 
-The sizes for CTAT and PTAT were calculated using the formulas from the course.
+The sizes for PTAT and CTAT were calculated using the formulas from the course.
 
 The layouts for milestone 1 can be found under Schematics. These include BANDGAP_CIRCUIT and BANDGAP_OTA, and together they convert the temperature into a current and a voltage.
 
-The PTAT plots and CTAT plots showing the corner simulations over the different temperatures as well as leakage current with respect to temperature:
+The plots below show the corner simulations over the different temperatures for PTAT and CTAT, as well as leakage current with respect to temperature:
 
 ![layout](svgs/bandgap_measurement.svg)
 
@@ -71,7 +71,7 @@ The files for milestone 1 are uploaded on the main branch, under the folders des
 
 The Oscillator is based on the one in LELO_TEMP with some adjusted components and design choices. The capacitor in the oscillator is set so the frequency is ok. The layouts for the Oscillator and Comparator used in milestone 2 can be found under Schematics. The two new layouts made for this milestone are OSCILLATOR and COMPARATOR, these in tandem with the layouts from Milestone 1 create a curcuit that converts the temperature into a frequency. 
 
-The frequency/temperature plots:
+The plot below shows the frequency from the oscillator with regards to the temperature changes:
 
 ![layout](svgs/oscillator_measurement.svg)
 

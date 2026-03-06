@@ -11,8 +11,6 @@ email: anon@anon.com
 # Your github site, usually <github username>.github.io
 url: analogicus.github.io
 doc:
-  # Make docs
-  #libraries:
-  #   <library>:
-  #       - <cell>
-  #       - <cell>
+  libraries:
+     LELO_GR03_SKY130A:
+       - LELO_GR03

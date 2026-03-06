@@ -74,3 +74,5 @@ The Oscillator is based on the one in LELO_TEMP with some adjusted components an
 The frequency/temperature plots:
 
 ![layout](svgs/oscillator_measurement.svg)
+
+Test formula: $“FOM_W = \frac{P}{2^B f_s}”$

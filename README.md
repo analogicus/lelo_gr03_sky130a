@@ -60,9 +60,7 @@ $$V_{D1} - V_{D2} = \Delta V_{BE} = V_T \text{ln}\left (\frac{I_D}{I_{S1}}\right
 
 Here $V_T = \frac{kT}{q}$. The V_CTAT voltage will be the voltage over Q1 and will have a negative tempco which is approximately linear over the temperature range of interest (-40° to 125°). I_PTAT will be the current that is set by the voltage difference $\Delta V_{BE}$ over the resistor, which we denote as R1 here. This is accomplished by the op amp which forces its inputs to be equal giving the voltage drop $V_{D1} - V_{D2} = \Delta V_{BE}$ over R1. I_PTAT will thus be = $\Delta V_{BE} / R1$. 
 
-The layouts for milestone 1 can be found under Schematics. These include BANDGAP_CIRCUIT and BANDGAP_OTA, and together they convert the temperature into a current and a voltage.
-
-The plots below show the corner simulations over the different temperatures for PTAT and CTAT, as well as the leakage current with respect to temperature:
+The plots below show the corner simulations over the different temperatures for PTAT and CTAT, as well as the leakage current with respect to temperature. We can see that the PTAT current varies significantly over process corners, which is verified to be the variation in resitance of the resistor R1 for the different corners. This was seen by replacing it with a generic resistor without process variations and seeing much less variation, less than 10% worse case error compared to 30%.
 
 ![layout](svgs/bandgap_measurement.svg)
 
@@ -71,10 +69,11 @@ The plots below show the corner simulations over the different temperatures for 
 
 The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
 
-The Oscillator is based on the one in LELO_TEMP with some adjusted components and design choices. The capacitor in the oscillator is set so the frequency is ok. The layouts for the Oscillator and Comparator used in milestone 2 can be found under Schematics. The two new layouts made for this milestone are OSCILLATOR and COMPARATOR, these in tandem with the layouts from Milestone 1 create a curcuit that converts the temperature into a frequency. 
+The Schematic is shown in the Schematics page under the header OSCILLATOR. The current I_PTAT is chargin a capacitor and the voltage across it is compared to the voltage V_CTAT. As the current and voltage in question are both proportional to temperature the resulting output frequency from the comparator will also be linear in temperature. Using the equation for current through a capacitor we have
+
+$$i = C \frac{dV}{dt} => dt = C \frac{dV}{i} => f = 1/dt = \frac{\text{I_PTAT}}{C \text{V_CTAT}} $$
 
 The plot below shows the frequency from the oscillator with regards to the temperature changes:
 
 ![layout](svgs/oscillator_measurement.svg)
 
-The frequency we get from the oscillator will result in max 108 to min 53 steps of temperature, which we think is a too low a resolution for the 165 whole degrees we are testing over. This will later result in low resolution temperature reads, which we hope to fix in the coming weeks. 

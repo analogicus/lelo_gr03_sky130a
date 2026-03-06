@@ -60,15 +60,6 @@ The sizes for CTAT and PTAT were calculated using the formulas from the course.
 
 The layouts for milestone 1 can be found under Schematics. These include BANDGAP_CURICUIT and BANDGAP_OTA, and together they convert the temperature into a current and a voltage.
 
-# Layout
-Layout for the top level bandgap:
-
-![layout](svgs/BANDGAP_CIRCUIT.svg)
-
-
-Layout for the OTA:
-![layout](svgs/BANDGAP_OTA.svg)
-
 The PTAT plots:
 ![layout](svgs/bandgap_measurement.svg)
 
@@ -78,13 +69,3 @@ The PTAT plots:
 The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
 
 The Oscillator is based on the one in LELO_TEMP with some adjusted components and design choices. The capacitor in the oscillator is set so the frequency is ok. The layouts for the Oscillator and Comparator used in milestone 2 can be found under Schematics. The two new layouts made for this milestone are OSCILLATOR and COMPARATOR, these in tandem with the layouts from Milestone 1 create a curcuit that converts the temperature into a frequency. 
-
-# Layout
-Layout for the Oscillator:
-
-![layout](svgs/OSCILLATOR.svg)
-
-
-Layout for the Oscillator OTA:
-![layout](svgs/COMPARATOR.svg)
- 

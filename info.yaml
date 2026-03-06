@@ -1,13 +1,13 @@
 library: LELO_GR03_SKY130A
 cell: LELO_GR03
 # Your name
-author: Anonymous
+author: Group 3
 # Your github username
 github: analogicus
 # Something funny and descriptive
-tagline: The answer is 42
+tagline: The answer is 67
 # Your email, if you so wish
-email: anon@anon.com
+email: 
 # Your github site, usually <github username>.github.io
 url: analogicus.github.io
 doc:

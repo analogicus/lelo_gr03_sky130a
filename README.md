@@ -75,4 +75,4 @@ The frequency/temperature plots:
 
 ![layout](svgs/oscillator_measurement.svg)
 
-Test formula: $“FOM_W = \frac{P}{2^B f_s}”$
+The frequency we get from the oscillator will result in max 108 to min 53 steps of temperature, which is a is too low a resolution for the 165 whole degrees we are testing over. This will later result in low resolution temperature reads, which we hope to fix in the coming weeks. 

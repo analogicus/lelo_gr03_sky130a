@@ -56,7 +56,7 @@ The bandgap OTA is a two stage Miller OTA. The input nmos transistors are low tr
 
 The Bandgap circuit is shown in the Schematics page under the header BANDGAP_CIRCUIT. If we compare the voltages over the the lower diode connected BJTs, Q1 and Q2, the difference in voltage will be proportional to the size difference and temperature. Given by:
 
-$$V_{D1} - V_{D2} = V_T \text{ln}\left (\frac{I_D}{I_{S1}}\right ) - V_T \text{ln}\left (\frac{I_D}{I_{S2}})\right $$
+$$V_{D1} - V_{D2} = V_T \text{ln}\left (\frac{I_D}{I_{S1}}\right ) - V_T \text{ln}\left (\frac{I_D}{I_{S2}}\right ) $$
 
 The sizes for PTAT and CTAT were calculated using the formulas from the course.
 

@@ -58,7 +58,7 @@ The Bandgap circuit is shown in the Schematics page under the header BANDGAP_CIR
 
 $$V_{D1} - V_{D2} = \Delta V_{BE} = V_T \text{ln}\left (\frac{I_D}{I_{S1}}\right ) - V_T \text{ln}\left (\frac{I_D}{I_{S2}}\right ) = V_T \text{ln}(N)$$
 
-Here $V_T = \frac{kT}{q}$. The V_CTAT voltage will be the voltage over Q1 and will have a negative tempco which is approximately linear over the temperature range of interest (-40° to 125°). I_PTAT will be the current that is set by the voltage difference $\Delta V_{BE}$ over the resistor, which we denote as R1 here, giving a current I_PTAT = $\Delta V_{BE} / R1$. 
+Here $V_T = \frac{kT}{q}$. The V_CTAT voltage will be the voltage over Q1 and will have a negative tempco which is approximately linear over the temperature range of interest (-40° to 125°). I_PTAT will be the current that is set by the voltage difference $\Delta V_{BE}$ over the resistor, which we denote as R1 here. This is accomplished by the op amp which forces its inputs to be equal giving the voltage drop $V_{D1} - V_{D2} = \Delta V_{BE}$ over R1. I_PTAT will thus be = $\Delta V_{BE} / R1$. 
 
 The layouts for milestone 1 can be found under Schematics. These include BANDGAP_CIRCUIT and BANDGAP_OTA, and together they convert the temperature into a current and a voltage.
 

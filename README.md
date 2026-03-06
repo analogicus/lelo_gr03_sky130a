@@ -61,6 +61,7 @@ The sizes for CTAT and PTAT were calculated using the formulas from the course.
 The layouts for milestone 1 can be found under Schematics. These include BANDGAP_CURICUIT and BANDGAP_OTA, and together they convert the temperature into a current and a voltage.
 
 The PTAT plots:
+
 ![layout](svgs/bandgap_measurement.svg)
 
 
@@ -70,5 +71,6 @@ The files for milestone 1 are uploaded on the main branch, under the folders des
 
 The Oscillator is based on the one in LELO_TEMP with some adjusted components and design choices. The capacitor in the oscillator is set so the frequency is ok. The layouts for the Oscillator and Comparator used in milestone 2 can be found under Schematics. The two new layouts made for this milestone are OSCILLATOR and COMPARATOR, these in tandem with the layouts from Milestone 1 create a curcuit that converts the temperature into a frequency. 
 
-The frequency/temperature plots
+The frequency/temperature plots:
+
 ![layout](svgs/oscillator_measurement.svg)

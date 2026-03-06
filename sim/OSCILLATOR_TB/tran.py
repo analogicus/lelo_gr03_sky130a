@@ -41,7 +41,7 @@ def main(name):
     ax.grid(True)
 
     fig.tight_layout()
-    fig.savefig("../../docs/oscillator_measurement.svg")
+    fig.savefig("../../svgs/oscillator_measurement.svg")
 
 
 if __name__ == "__main__":

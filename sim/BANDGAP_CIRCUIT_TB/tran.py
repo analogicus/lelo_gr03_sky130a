@@ -71,4 +71,4 @@ def main(name):
     ax3.legend(fontsize="small")
 
     fig.tight_layout()
-    fig.savefig("../../docs/bandgap_measurement.svg")
+    fig.savefig("../../svgs/bandgap_measurement.svg")

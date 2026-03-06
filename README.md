@@ -69,7 +69,7 @@ The plots below show the corner simulations over the different temperatures for 
 
 The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
 
-The Schematic is shown in the Schematics page under the header OSCILLATOR. The current I_PTAT is chargin a capacitor and the voltage across it is compared to the voltage V_CTAT. As the current and voltage in question are both proportional to temperature the resulting output frequency from the comparator will also be linear in temperature. Using the equation for current through a capacitor we have
+The schematic is shown in the Schematics page under the header OSCILLATOR. The current I_PTAT is charging a capacitor and the voltage across it is compared to the voltage V_CTAT. As the current and voltage in question are both proportional to temperature the resulting output frequency from the comparator will also be linear in temperature. Using the equation for current through a capacitor we have
 
 $$i = C \frac{dV}{dt} => dt = C \frac{dV}{i} => f = \frac{1}{dt} = \frac{I_{PTAT}}{C V_{CTAT}} $$
 

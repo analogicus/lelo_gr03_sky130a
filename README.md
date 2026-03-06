@@ -52,13 +52,13 @@ below in the README the different milestones will get a short descriptions each.
 
 The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
 
-The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the set voltage.
+The OTA is based on a two stage Miller OTA. The transistors were chosen for their low treshold voltage, as they worked with the input common mode voltage of the diode drop from ~0.8V to ~0.5V over the temperature range of -40° to 125°.
 
 The overhead bandgap curcuit was made from the standard bandgap design following the instructions in the AIC course.
 
 The sizes for CTAT and PTAT were calculated using the formulas from the course.
 
-The layouts for milestone 1 can be found under Schematics. These include BANDGAP_CURICUIT and BANDGAP_OTA, and together they convert the temperature into a current and a voltage.
+The layouts for milestone 1 can be found under Schematics. These include BANDGAP_CIRCUIT and BANDGAP_OTA, and together they convert the temperature into a current and a voltage.
 
 The PTAT plots:
 

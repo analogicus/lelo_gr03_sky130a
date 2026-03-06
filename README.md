@@ -61,14 +61,14 @@ The sizes for CTAT and PTAT were calculated using the formulas from the course.
 # Layout
 Layout for the top level bandgap:
 
-![layout](docs/BANDGAP_CIRCUIT.svg)
+![layout](svgs/BANDGAP_CIRCUIT.svg)
 
 
 Layout for the OTA:
-![layout](docs/BANDGAP_OTA.svg)
+![layout](svgs/BANDGAP_OTA.svg)
 
 The PTAT plots:
-![layout](docs/bandgap_measurement.svg)
+![layout](svgs/bandgap_measurement.svg)
 
 
 # Milestone 2: The Oscillator 
@@ -80,9 +80,9 @@ The Oscillator is based on the one in LELO_TEMP with some adjusted components an
 # Layout
 Layout for the Oscillator:
 
-![layout](docs/OSCILLATOR.svg)
+![layout](svgs/OSCILLATOR.svg)
 
 
 Layout for the Oscillator OTA:
-![layout](docs/COMPARATOR.svg)
+![layout](svgs/COMPARATOR.svg)
  

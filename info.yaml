@@ -13,4 +13,7 @@ url: analogicus.github.io
 doc:
   libraries:
      LELO_GR03_SKY130A:
-       - LELO_GR03
+       - BANDGAP_OTA
+       - BANDGAP_CIRCUIT
+       - COMPARATOR
+       - OSCILLATOR

@@ -60,7 +60,7 @@ The sizes for CTAT and PTAT were calculated using the formulas from the course.
 
 The layouts for milestone 1 can be found under Schematics. These include BANDGAP_CIRCUIT and BANDGAP_OTA, and together they convert the temperature into a current and a voltage.
 
-The PTAT plots:
+The PTAT plots and CTAT plots showing the corner simulations over the different temperatures:
 
 ![layout](svgs/bandgap_measurement.svg)
 

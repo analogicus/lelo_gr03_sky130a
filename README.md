@@ -62,7 +62,7 @@ $$V_{D1} - V_{D2} = \Delta V_{BE} = V_T \text{ln}\left (\frac{I_D}{I_{S1}}\right
 
 Here $V_T = \frac{kT}{q}$. The V_CTAT voltage across Q1 will have a negative temperature coefficient and will be approximately linear over the temperature range of interest (-40° to 125°). I_PTAT will be the current set by the voltage difference $\Delta V_{BE}$ over the resistor, which we denote as R1. The operational amplifier forces its inputs to be equal, resulting in a voltage drop $V_{D1} - V_{D2} = \Delta V_{BE}$ across R1. I_PTAT will thus be $\Delta V_{BE} / R1$.
 
-The plots below show the corner simulations over temperature for PTAT current, CTAT voltage, power-down leakage current, and active supply current. The PTAT current varies significantly across process corners, as verified by the resistance variation of resistor R1 across the different corners. We tested this by replacing R1 with a generic resistor without process variations and observing much less variation, with a worst-case error of less than 10% compared to 30%. The power-down leakage stays well below 1 nA across all corners.
+The plots below show the corner simulations over temperature for PTAT current, CTAT voltage, power-down leakage current, and active supply current. The PTAT current varies significantly across process corners, as verified by the resistance variation of resistor R1 across the different corners. We tested this by replacing R1 with a generic resistor with no process variations and observed much less variation, with a worst-case error of less than 10% compared to 30%. The power-down leakage stays well below 1 nA across all corners.
 
 ![bandgap measurements](svgs/bandgap_measurement.svg)
 
@@ -75,13 +75,13 @@ $$i = C \frac{dV}{dt} \Rightarrow dt = C \frac{dV}{i} \Rightarrow f = \frac{1}{d
 
 ## Temperature error estimation
 
-Since the FSM and counter are not yet implemented, we estimate the temperature measurement error directly from the simulated frequency. The idea is to invert the frequency-to-temperature relationship: given a measured frequency, we compute what temperature a calibrated system would report, and compare that to the actual simulation temperature.
+Since there is no FSM and counter yet, we estimate the temperature measurement error directly from the simulated frequency. The idea is to invert the frequency-to-temperature relationship: given a measured frequency, we compute what temperature a calibrated system would report, and compare that to the actual simulation temperature.
 
 **1-point calibration** uses a single calibration point at 25°C. We take the nominal frequency-vs-temperature slope from the typical corner (KttVt) and apply it to all corners. For each corner, we compute the offset at 25°C and convert frequency back to temperature using:
 
 $$T_{meas} = \text{slope}_{nom} \cdot f + \text{offset}_{25}$$
 
-This assumes all chips share the same slope, which breaks down at extreme PVT corners.
+The calibration assumes all chips share the same slope, which breaks down at extreme PVT corners.
 
 **2-point calibration** fits a line through two calibration points at 25°C and 85°C for each individual corner. This per-chip calibration removes slope variation and only leaves residual non-linearity as error:
 

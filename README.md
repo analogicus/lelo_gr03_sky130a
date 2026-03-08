@@ -5,16 +5,15 @@
 
 # Who
 
-We are group 3 in the 2026 course of Advanced Integrated Curcuits.
+We are group 3 in the 2026 Advanced Integrated Circuits course.
 
 # Why
 
-To get an understanding of design of advanced integrated circuits in CMOS technology, and to get an overview of the circuits needed to make a System-On-Chip.
+To get an understanding of the design of advanced integrated circuits in CMOS technology, and to get an overview of the circuits needed to make a System-On-Chip.
 
 # How
 
-The course consistns of among other things a project divided into 5(6 if tapeout) milestones. The idea is to design a temperature sensor. Further
-below in the README the different milestones will get a short descriptions each.
+The course consists, among other things, of a project divided into 5 (6 if tapeout) milestones. The idea is to design a temperature sensor. In the README below, each milestone will have a short description.
 
 
 
@@ -34,7 +33,7 @@ below in the README the different milestones will get a short descriptions each.
 | :---         | :---:     | :---:   | :---                                      |
 | VDD_1V8      | Input     | VDD_1V8 | Main supply                               |
 | OSC_TEMP_1V8 | Output    | VDD_1V8 | Temperature dependent oscillation frequency|
-| PWRUP_1V8    | Input     | VDD_1V8 | Power up the circuit
+| PWRUP_1V8    | Input     | VDD_1V8 | Power up the circuit                      |
 | VSS          | Input     | Ground  |                                           |
 
 
@@ -46,34 +45,34 @@ below in the README the different milestones will get a short descriptions each.
 | Technology          |         | Skywater 130 nm |         |       |
 | AVDD                | 1.7     | 1.8             | 1.9     | V     |
 | Temperature         | -40     | 27              | 125     | C     |
+| Frequency (typical) |         | ~4              |         | MHz   |
+| Ileak (power-down)  |         |                 | 1       | nA    |
+| Iact (active)       |         | ~90             |         | µA    |
+| Kerr (1-pt cal)     |         |                 | ±10     | C     |
+| Kerr (2-pt cal)     |         |                 | ±5      | C     |
 
 
-# Milestone 1: The bandgap
+# Milestone 1: The Bandgap
 
-The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
+The bandgap OTA is a two-stage Miller OTA. The input NMOS transistors are low-threshold-voltage transistors, since they operate with the diode drop in the input common-mode voltage, reducing it from ~0.8V to ~0.5V over the temperature range of -40° to 125°. The circuit diagram is in the Schematics page under BANDGAP_OTA.
 
-The bandgap OTA is a two stage Miller OTA. The input nmos transistors are low treshold voltage transistors since they work with the input common mode voltage of the diode drop from ~0.8V to ~0.5V over the temperature range of -40° to 125°. The circuit diagram is shown in the Schematics page under BANDGAP_OTA.
-
-The Bandgap circuit is shown in the Schematics page under the header BANDGAP_CIRCUIT. If we compare the voltages over the the lower diode connected BJTs, Q1 and Q2, the difference in voltage will be proportional to the size difference and temperature. Given by:
+The bandgap circuit is under the header BANDGAP_CIRCUIT. It uses a 1:8 BJT ratio (Q1 = 1×, Q2 = 8×). If we compare the voltages across the lower diode-connected BJTs, Q1 and Q2, the voltage difference will be proportional to the size difference and temperature:
 
 $$V_{D1} - V_{D2} = \Delta V_{BE} = V_T \text{ln}\left (\frac{I_D}{I_{S1}}\right ) - V_T \text{ln}\left (\frac{I_D}{I_{S2}}\right ) = V_T \text{ln}(N)$$
 
-Here $V_T = \frac{kT}{q}$. The V_CTAT voltage will be the voltage over Q1 and will have a negative tempco which is approximately linear over the temperature range of interest (-40° to 125°). I_PTAT will be the current that is set by the voltage difference $\Delta V_{BE}$ over the resistor, which we denote as R1 here. This is accomplished by the op amp which forces its inputs to be equal giving the voltage drop $V_{D1} - V_{D2} = \Delta V_{BE}$ over R1. I_PTAT will thus be = $\Delta V_{BE} / R1$. 
+Here $V_T = \frac{kT}{q}$. The V_CTAT voltage across Q1 will have a negative temperature coefficient and will be approximately linear over the temperature range of interest (-40° to 125°). I_PTAT will be the current set by the voltage difference $\Delta V_{BE}$ over the resistor, which we denote as R1. The operational amplifier forces its inputs to be equal, resulting in a voltage drop $V_{D1} - V_{D2} = \Delta V_{BE}$ across R1. I_PTAT will thus be $\Delta V_{BE} / R1$.
 
-The plots below show the corner simulations over the different temperatures for PTAT and CTAT, as well as the leakage current with respect to temperature. We can see that the PTAT current varies significantly over process corners, which is verified to be the variation in resitance of the resistor R1 for the different corners. This was seen by replacing it with a generic resistor without process variations and seeing much less variation, less than 10% worse case error compared to 30%.
+The plots below show the corner simulations over temperature for PTAT current, CTAT voltage, power-down leakage current, and active supply current. The PTAT current varies significantly across process corners, as verified by the resistance variation of resistor R1 across the different corners. We tested this by replacing R1 with a generic resistor without process variations and observing much less variation, with a worst-case error of less than 10% compared to 30%. The power-down leakage stays well below 1 nA across all corners.
 
-![layout](svgs/bandgap_measurement.svg)
+![bandgap measurements](svgs/bandgap_measurement.svg)
 
 
-# Milestone 2: The Oscillator 
+# Milestone 2: The Oscillator
 
-The files for milestone 1 are uploaded on the main branch, under the folders design and then LELO_GR03_SKY130A.
+The schematic is on the Schematics page under the OSCILLATOR header. The PTAT current from the bandgap charges a timing capacitor (12 MIM caps), and the voltage across the capacitors feeds into the comparator alongside the reference voltage V_CTAT. Then, if the capacitor voltage exceeds V_CTAT, the comparator fires, and a reset pulse discharges the capacitor through an NMOS switch, restarting the cycle. The comparator output feeds into a D flip-flop, which divides the frequency by 2 to produce a clean square wave. Since both the charging current (PTAT) and the threshold voltage (CTAT) are proportional to temperature, the resulting output frequency is approximately linear in temperature. Using the equation for current through a capacitor:
 
-The schematic is shown in the Schematics page under the header OSCILLATOR. The current I_PTAT is charging a capacitor and the voltage across it is compared to the voltage V_CTAT. The output of the comparator feeds into a D-flip-flop which produces a celan square wave frequency. As the current and voltage in question are both proportional to temperature the resulting output frequency from the comparator will also be linear in temperature. Using the equation for current through a capacitor we have
+$$i = C \frac{dV}{dt} \Rightarrow dt = C \frac{dV}{i} \Rightarrow f = \frac{1}{dt} = \frac{I_{PTAT}}{C \cdot V_{CTAT}} $$
 
-$$i = C \frac{dV}{dt} => dt = C \frac{dV}{i} => f = \frac{1}{dt} = \frac{I_{PTAT}}{C V_{CTAT}} $$
+The plots below show the oscillator performance across PVT corners. All corners pass the 2-point calibration spec of ±5°C with margin (max 2.1°C error). The 1-point calibration meets ±10°C for most corners, with the extreme corners KffVh and KssVl slightly exceeding the limit.
 
-The value of C here will be the equivalent shunt capacitance to ground as seen from the positive input of the comparator. The plot below shows the frequency from the oscillator with regards to the temperature changes:
-
-![layout](svgs/oscillator_measurement.svg)
-
+![oscillator measurements](svgs/oscillator_measurement.svg)

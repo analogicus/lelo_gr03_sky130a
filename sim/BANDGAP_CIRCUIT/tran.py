@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-import pandas as pd
+"""Post-process BANDGAP_CIRCUIT transient simulation results."""
+
+from pathlib import Path
+
 import yaml
 
-def main(name):
-  # Delete next line if you want to use python post processing
-  return
-  yamlfile = name + ".yaml"
 
-  # Read result yaml file
-  with open(yamlfile) as fi:
-    obj = yaml.safe_load(fi)
+def main(name: str) -> None:
+    """Post-process BANDGAP_CIRCUIT simulation results."""
+    # Delete next line if you want to use python post processing
+    return
+    yamlfile = Path(name).with_suffix(".yaml")
 
-  # Do something to parameters
+    # Read result yaml file
+    with yamlfile.open() as fi:
+        obj = yaml.safe_load(fi)
 
-  # Save new yaml file
-  with open(yamlfile,"w") as fo:
-    yaml.dump(obj,fo)
+    # Do something to parameters
+
+    # Save new yaml file
+    with yamlfile.open("w") as fo:
+        yaml.dump(obj, fo)

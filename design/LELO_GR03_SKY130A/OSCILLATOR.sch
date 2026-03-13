@@ -1,10 +1,10 @@
-v {xschem version=3.4.4 file_version=1.2
-}
+v {xschem version=3.4.7 file_version=1.2}
 G {}
 K {}
 V {}
 S {}
 E {}
+T {Generating bias current} -840 -240 0 0 0.4 0.4 {}
 N -270 -180 -270 -170 {lab=VSS}
 N -270 -270 -270 -260 {lab=VDD_1V8}
 N -170 -180 -170 -170 {lab=VSS}
@@ -59,22 +59,36 @@ N 270 -120 270 -100 {lab=VSS}
 N 240 -120 240 -100 {lab=VDD_1V8}
 N 310 -150 340 -150 {lab=#net2}
 N 400 -260 400 -150 {lab=#net2}
-N 180 -310 340 -310 {lab=#net3}
-N 180 -260 180 -210 {lab=#net3}
-N 180 -210 210 -210 {lab=#net3}
+N 180 -310 340 -310 {lab=#net2}
+N 180 -260 180 -210 {lab=#net2}
+N 180 -210 210 -210 {lab=#net2}
 N 690 130 690 150 {
 lab=VDD_1V8}
 N 790 130 790 150 {
 lab=VDD_1V8}
 N 180 -310 180 -260 {
-lab=#net3}
+lab=#net2}
 N 310 -210 320 -210 {
 lab=F_OUT}
 N 340 -150 400 -150 {
 lab=#net2}
-N 270 -260 270 -240 {}
-N 400 -310 400 -260 {}
-N 340 -310 400 -310 {}
+N 270 -260 270 -240 {lab=VDD_1V8}
+N 400 -310 400 -260 {lab=#net2}
+N 340 -310 400 -310 {lab=#net2}
+N -710 120 -670 120 {lab=V_IB}
+N -690 70 -690 120 {lab=V_IB}
+N -750 70 -690 70 {lab=V_IB}
+N -790 120 -750 120 {lab=VSS}
+N -750 150 -750 190 {lab=VSS}
+N -750 -10 -750 90 {lab=V_IB}
+N -750 -180 -750 -90 {lab=VDD_1V8}
+N -800 -50 -770 -50 {lab=VSS}
+N 600 -120 600 -100 {lab=V_IB}
+N -170 90 -170 110 {lab=V_IB}
+N -1080 120 -1040 120 {lab=PWRUP_N_1V8_BUF}
+N -1000 120 -960 120 {lab=VSS}
+N -1000 150 -1000 190 {lab=VSS}
+N -1000 50 -1000 90 {lab=V_IB}
 C {LELO_GR03_SKY130A/BANDGAP_CIRCUIT.sym} -170 20 0 0 {name=x1}
 C {devices/ipin.sym} -320 -220 0 0 {name=p3 lab=PWRUP_1V8}
 C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} -310 -220 0 0 {name=x6 }
@@ -117,3 +131,17 @@ C {devices/lab_pin.sym} 240 -100 3 0 {name=l26 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} 270 -260 0 0 {name=l27 sig_type=std_logic lab=VDD_1V8}
 C {devices/opin.sym} 320 -210 0 0 {name=p4 lab=F_OUT}
 C {devices/title.sym} -520 -360 0 0 {name=l28 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
+C {devices/lab_wire.sym} -670 120 0 1 {name=p8 sig_type=std_logic lab=V_IB}
+C {devices/lab_wire.sym} -800 -50 2 1 {name=p13 sig_type=std_logic lab=VSS}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -710 120 0 1 {name=x3}
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -750 -90 1 0 {name=x11 }
+C {devices/lab_wire.sym} -790 120 2 1 {name=p25 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 600 -120 0 0 {name=l7 sig_type=std_logic lab=V_IB}
+C {devices/lab_pin.sym} -170 110 0 0 {name=l8 sig_type=std_logic lab=V_IB}
+C {devices/lab_pin.sym} -750 190 0 0 {name=l29 sig_type=std_logic lab=VSS}
+C {devices/lab_wire.sym} -1000 50 0 0 {name=p7 sig_type=std_logic lab=V_IB}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -1040 120 0 0 {name=x12}
+C {devices/lab_wire.sym} -960 120 2 0 {name=p9 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} -1000 190 0 1 {name=l30 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} -750 -180 0 1 {name=l31 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_pin.sym} -1080 120 3 0 {name=l32 sig_type=std_logic lab=PWRUP_N_1V8_BUF}

@@ -53,9 +53,6 @@ N -130 60 -120 60 {lab=PWRUP_1V8}
 N -460 -30 -400 -30 {lab=PWRUP_N_1V8}
 N -460 10 -400 10 {lab=V_IB}
 N -130 190 -120 190 {lab=V_IB}
-N 220 350 240 350 {lab=VSS}
-N 100 390 200 390 {lab=VD2}
-N 100 310 200 310 {lab=DV}
 C {devices/lab_pin.sym} 60 350 0 0 {name=p5 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} -130 120 0 0 {name=p9 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 100 410 0 1 {name=p13 sig_type=std_logic lab=VD2}
@@ -94,5 +91,3 @@ C {devices/ipin.sym} -460 -30 0 0 {name=p7 lab=PWRUP_N_1V8}
 C {devices/title.sym} -520 -430 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
 C {devices/ipin.sym} -460 10 0 0 {name=p8 lab=V_IB}
 C {devices/lab_wire.sym} -130 190 0 0 {name=p10 sig_type=std_logic lab=V_IB}
-C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 200 390 3 0 {name=x1 }
-C {devices/lab_pin.sym} 240 350 0 1 {name=p11 sig_type=std_logic lab=VSS}

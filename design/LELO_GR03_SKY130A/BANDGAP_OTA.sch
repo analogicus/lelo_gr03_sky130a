@@ -4,6 +4,7 @@ K {}
 V {}
 S {}
 E {}
+T {Startup circuit} 530 -180 0 0 0.4 0.4 {}
 N -120 -20 -120 50 {lab=VB_P}
 N -120 20 -40 20 {lab=VB_P}
 N -40 -50 -40 20 {lab=VB_P}

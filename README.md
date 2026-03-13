@@ -71,7 +71,7 @@ The plots below show the corner simulations over temperature for PTAT current, C
 
 The PTAT current from the bandgap charges a timing capacitor (12 MIM caps, see [OSCILLATOR](#oscillator)), and the voltage across the capacitors feeds into the [COMPARATOR](#comparator) alongside the reference voltage V_CTAT. Then, if the capacitor voltage exceeds V_CTAT, the comparator fires, and a reset pulse discharges the capacitor through an NMOS switch, restarting the cycle. The comparator output feeds into a D flip-flop, which divides the frequency by 2 to produce a clean square wave. Since both the charging current (PTAT) and the threshold voltage (CTAT) are proportional to temperature, the resulting output frequency is approximately linear in temperature. Using the equation for current through a capacitor:
 
-$$i = C \frac{dV}{dt} \Rightarrow dt = C \frac{dV}{i} \Rightarrow f(T) = \frac{1}{dt} = \frac{I_{PTAT}(T)}{C \cdot V_{CTAT(T)}} $$
+$$i = C \frac{dV}{dt} \Rightarrow dt = C \frac{dV}{i} \Rightarrow f(T) = \frac{1}{dt} = \frac{I_{PTAT}(T)}{C \cdot V_{CTAT}(T)} $$
 
 ## Temperature error estimation
 

@@ -1,4 +1,5 @@
-v {xschem version=3.4.7 file_version=1.2}
+v {xschem version=3.4.4 file_version=1.2
+}
 G {}
 K {}
 V {}
@@ -64,19 +65,19 @@ N 690 200 720 200 {lab=#net3}
 N 690 150 690 200 {lab=#net3}
 N 690 150 760 150 {lab=#net3}
 N 760 130 760 170 {lab=#net3}
-N 690 100 720 100 {lab=OUT}
-N 660 100 690 100 {lab=OUT}
-N 760 -20 760 70 {lab=#net4}
+N 690 100 720 100 {lab=#net4}
+N 660 100 690 100 {lab=#net4}
+N 760 -20 760 70 {lab=#net5}
 N 760 -110 760 -80 {lab=VD}
 N 590 -110 760 -110 {lab=VD}
 N 590 -110 590 -80 {lab=VD}
-N 590 -20 590 170 {lab=OUT}
-N 630 200 660 200 {lab=OUT}
-N 660 150 660 200 {lab=OUT}
-N 590 150 660 150 {lab=OUT}
-N 630 -50 720 -50 {lab=#net4}
-N 690 -50 690 0 {lab=#net4}
-N 690 0 760 0 {lab=#net4}
+N 590 -20 590 170 {lab=#net4}
+N 630 200 660 200 {lab=#net4}
+N 660 150 660 200 {lab=#net4}
+N 590 150 660 150 {lab=#net4}
+N 630 -50 720 -50 {lab=#net5}
+N 690 -50 690 0 {lab=#net5}
+N 690 0 760 0 {lab=#net5}
 N 590 230 590 260 {lab=VSS}
 N 590 260 760 260 {lab=VSS}
 N 760 230 760 260 {lab=VSS}
@@ -88,6 +89,10 @@ N 560 -50 590 -50 {lab=VDD}
 N 560 -110 590 -110 {lab=VD}
 N 760 -50 790 -50 {lab=VDD}
 N 760 -110 790 -110 {lab=VD}
+N 590 100 660 100 {
+lab=#net4}
+N 560 100 590 100 {
+lab=#net4}
 C {devices/lab_wire.sym} -80 190 0 0 {name=p3 sig_type=std_logic lab=V_IB}
 C {devices/lab_wire.sym} -280 190 0 1 {name=p8 sig_type=std_logic lab=V_IB}
 C {devices/lab_wire.sym} -80 80 2 0 {name=p16 sig_type=std_logic lab=VSS}
@@ -127,12 +132,11 @@ C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 300 20 1 0 {name=x11 }
 C {devices/lab_wire.sym} 240 40 2 1 {name=p32 sig_type=std_logic lab=VSS}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 720 100 0 0 {name=x2}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 720 200 0 0 {name=x3}
-C {devices/lab_wire.sym} 660 100 0 0 {name=p7 sig_type=std_logic lab=OUT}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 720 -50 0 0 {name=x5}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 630 -50 0 1 {name=x7}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 630 200 0 1 {name=x8}
 C {devices/lab_wire.sym} 670 -110 0 0 {name=p10 sig_type=std_logic lab=VD}
-C {devices/lab_wire.sym} 590 60 0 0 {name=p11 sig_type=std_logic lab=OUT}
+C {devices/lab_wire.sym} 560 100 0 0 {name=p11 sig_type=std_logic lab=OUT}
 C {devices/lab_wire.sym} 680 260 2 1 {name=p12 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 560 200 2 1 {name=p26 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 790 200 2 0 {name=p27 sig_type=std_logic lab=VSS}

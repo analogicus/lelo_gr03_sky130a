@@ -5,7 +5,7 @@
 
 # Who
 
-We are group 3 in the 2026 Advanced Integrated Circuits course.
+We are group 3 in the 2026 Advanced Integrated Circuits course. Test.
 
 # Why
 

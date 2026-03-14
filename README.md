@@ -40,6 +40,7 @@ The course consists, among other things, of a project divided into 5 (6 if tapeo
 # Key parameters
 
 
+<!-- AUTO:KEY_PARAMS -->
 | Parameter           | Min     | Typ             | Max     | Unit  |
 | :---                | :---:   | :---:           | :---:   | :---: |
 | Technology          |         | Skywater 130 nm |         |       |
@@ -50,6 +51,7 @@ The course consists, among other things, of a project divided into 5 (6 if tapeo
 | Iact (active)       |         | ~90             |         | µA    |
 | Kerr (1-pt cal)     |         |                 | ±10     | C     |
 | Kerr (2-pt cal)     |         |                 | ±5      | C     |
+<!-- /AUTO:KEY_PARAMS -->
 
 
 # Milestone 1: The Bandgap
@@ -123,6 +125,7 @@ The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized
 
 ## TempSens FSM
 
+<!-- AUTO:FSM -->
 ```mermaid
 stateDiagram-v2
     [*] --> IDLE
@@ -138,3 +141,4 @@ stateDiagram-v2
 | COUNT | 1 | Oscillator on. Dual-edge counter runs for one 32768 Hz period. |
 | WAIT | 0 | Oscillator off. Counter values settle (CDC safety). |
 | CAPTURE | 0 | Count latched into output register. |
+<!-- /AUTO:FSM -->

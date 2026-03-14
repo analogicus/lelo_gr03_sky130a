@@ -32,19 +32,19 @@ typedef enum logic [1:0] {
 
 class TestExtractFsm:
     def test_states(self) -> None:
-        states, _transitions = extract_fsm(SV_TEXT)
+        states = extract_fsm(SV_TEXT)[0]
         assert set(states) == {"IDLE", "COUNT", "WAIT", "CAPTURE"}
 
     def test_transitions(self) -> None:
-        _states, transitions = extract_fsm(SV_TEXT)
+        transitions = extract_fsm(SV_TEXT)[1]
         assert ("IDLE", "COUNT", "i_start") in transitions
         assert ("COUNT", "WAIT", "") in transitions
         assert ("WAIT", "CAPTURE", "") in transitions
         assert ("CAPTURE", "IDLE", "") in transitions
 
     def test_no_self_loops(self) -> None:
-        _states, transitions = extract_fsm(SV_TEXT)
-        for src, dst, _cond in transitions:
+        transitions = extract_fsm(SV_TEXT)[1]
+        for src, dst, _ in transitions:
             assert src != dst, f"Self-loop found: {src} -> {dst}"
 
     def test_mermaid_output(self) -> None:

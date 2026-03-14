@@ -2,7 +2,7 @@ CORNER ?= KttTtVt
 CORNERS := $(shell python3 fit_osc.py --list)
 IVFLAGS = -g2012
 
-all: fit tb plot
+all: fit tb plot readme
 
 fit:
 	python3 fit_osc.py $(CORNER)
@@ -24,6 +24,9 @@ all-corners:
 		mv tb.csv output/tb_$$c.csv; \
 	done
 	python3 tb.py
+
+readme:
+	python3 ../update_readme.py
 
 clean:
 	-rm -f design tb.vcd tb.csv osc_params.vh

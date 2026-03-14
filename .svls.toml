@@ -1,5 +1,0 @@
-[verilog]
-include_paths = ["rtl"]
-
-[lint]
-enabled = true

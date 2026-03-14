@@ -48,10 +48,9 @@ The course consists, among other things, of a project divided into 5 (6 if tapeo
 | Temperature         | -40     | 27              | 125     | C     |
 | Tc (conversion)     |         | ~30.5           |         | µs    |
 | Ts (sample rate)    |         | 100             |         | ms    |
-| Frequency           |         | ~3.9     |         | MHz   |
 | Ileak (power-down)  |         | ~0.0    | 1       | nA    |
-| Iact (active)       |         | ~15     | 100     | µA    |
-| Iavg (average)      |         | ~4.6     | 50      | nA    |
+| Iact (active)       |         | ~92     | 100     | µA    |
+| Iavg (average)      |         | ~28.1     | 50      | nA    |
 | Kerr (1-pt cal)     |         | ±22.0    | ±10     | C     |
 | Kerr (2-pt cal)     |         | ±10.2    | ±5      | C     |
 <!-- /AUTO:KEY_PARAMS -->

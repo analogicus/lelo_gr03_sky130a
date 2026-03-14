@@ -19,3 +19,6 @@ work/xsch
 *.raw
 .claude
 .vscode/
+docs/plans/
+.svlint.toml
+.svls.toml

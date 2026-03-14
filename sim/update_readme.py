@@ -121,8 +121,8 @@ def _parse_osc_freq_25(root: Path) -> float:
     return freq_25 / 1e6
 
 
-def _parse_bandgap_currents_25(root: Path) -> tuple[float, float]:
-    """Extract ileak (nA) and iact (uA) at 25C from bandgap YAML."""
+def _parse_ileak_25(root: Path) -> float:
+    """Extract leakage current (nA) at 25°C from bandgap YAML."""
     yf = _find_typical_yaml(
         "sim/BANDGAP_CIRCUIT_TB/output_tran/tran_*KttTtVt*.yaml", root
     )
@@ -134,26 +134,35 @@ def _parse_bandgap_currents_25(root: Path) -> tuple[float, float]:
         obj: dict[str, float] = yaml.safe_load(f)
 
     ileak_vals: dict[int, float] = {}
-    iact_vals: dict[int, float] = {}
     for key, val in obj.items():
-        temp = int(key.split("_")[-1])
         if key.startswith("ileak_"):
-            ileak_vals[temp] = float(val)
-        elif key.startswith("iact_"):
-            iact_vals[temp] = float(val)
+            ileak_vals[int(key.split("_")[-1])] = float(val)
 
-    # Interpolate to 25C
-    ileak_temps = sorted(ileak_vals.keys())
-    iact_temps = sorted(iact_vals.keys())
+    temps = sorted(ileak_vals.keys())
+    ileak_25 = float(np.interp(25.0, temps, [ileak_vals[t] for t in temps]))
+    return abs(ileak_25) * 1e9
 
-    ileak_25 = float(
-        np.interp(25.0, ileak_temps, [ileak_vals[t] for t in ileak_temps])
+
+def _parse_iact_25(root: Path) -> float:
+    """Extract active current (µA) at 25°C from oscillator YAML (idd)."""
+    yf = _find_typical_yaml(
+        "sim/OSCILLATOR_TB/output_tran/tran_*KttTtVt*.yaml", root
     )
-    iact_25 = float(
-        np.interp(25.0, iact_temps, [iact_vals[t] for t in iact_temps])
-    )
+    if yf is None:
+        msg = "Typical oscillator YAML not found"
+        raise FileNotFoundError(msg)
 
-    return abs(ileak_25) * 1e9, abs(iact_25) * 1e6
+    with yf.open() as f:
+        obj: dict[str, float] = yaml.safe_load(f)
+
+    idd_vals: dict[int, float] = {}
+    for key, val in obj.items():
+        if key.startswith("idd_"):
+            idd_vals[int(key.split("_")[1])] = float(val)
+
+    temps = sorted(idd_vals.keys())
+    idd_25 = float(np.interp(25.0, temps, [idd_vals[t] for t in temps]))
+    return abs(idd_25) * 1e6
 
 
 def _load_csv_corners(root: Path) -> list[tuple[str, str, str, np.ndarray, np.ndarray]]:
@@ -216,7 +225,7 @@ def _compute_kerr(root: Path) -> tuple[float, float]:
     max_err_1pt = 0.0
     max_err_2pt = 0.0
 
-    for _, _proc, _volt_var, t_arr, freq in corners:
+    for _, _, _, t_arr, freq in corners:
         if len(t_arr) < 2:
             continue
 
@@ -248,7 +257,8 @@ def _compute_kerr(root: Path) -> tuple[float, float]:
 def extract_params(root: Path) -> dict[str, float]:
     """Extract all measured parameters from simulation data."""
     freq = _parse_osc_freq_25(root)
-    ileak, iact = _parse_bandgap_currents_25(root)
+    ileak = _parse_ileak_25(root)
+    iact = _parse_iact_25(root)
 
     tc_us = 1.0 / 32768.0 * 1e6  # conversion time in us
     ts_ms = 100.0  # sample period in ms
@@ -281,7 +291,6 @@ KEY_PARAMS_TEMPLATE = """\
 | Temperature         | -40     | 27              | 125     | C     |
 | Tc (conversion)     |         | ~30.5           |         | \u00b5s    |
 | Ts (sample rate)    |         | 100             |         | ms    |
-| Frequency           |         | ~{freq:.1f}     |         | MHz   |
 | Ileak (power-down)  |         | ~{ileak:.1f}    | 1       | nA    |
 | Iact (active)       |         | ~{iact:.0f}     | 100     | \u00b5A    |
 | Iavg (average)      |         | ~{iavg:.1f}     | 50      | nA    |

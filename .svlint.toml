@@ -1,0 +1,92 @@
+[option]
+exclude_paths = ["work", "tech", "sim", "design"]
+copyright_linenum = 1
+copyright_year = "2026"
+copyright_holder = "All rights reserved."
+
+[textrules]
+header_copyright = true
+style_directives = true
+style_semicolon = true
+style_textwidth = true
+
+[syntaxrules]
+action_block_with_side_effect = true
+blocking_assignment_in_always_ff = true
+blocking_assignment_in_always_latch = true
+case_default = true
+default_nettype_none = true
+enum_with_type = true
+# eventlist_comma_always_ff: contradicts eventlist_or
+eventlist_or = true
+explicit_case_default = true
+explicit_if_else = true
+function_same_as_system_function = true
+function_with_automatic = true
+generate_case_with_label = true
+generate_for_with_label = true
+generate_if_with_label = true
+genvar_declaration_in_loop = true
+# genvar_declaration_out_loop: contradicts genvar_declaration_in_loop
+inout_with_tri = true
+input_with_var = true
+interface_port_with_modport = true
+keyword_forbidden_always = true
+# keyword_forbidden_generate: optional, generate/endgenerate not required
+keyword_forbidden_priority = true
+keyword_forbidden_unique = true
+keyword_forbidden_unique0 = true
+keyword_forbidden_wire_reg = true
+# keyword_required_generate: generate/endgenerate keywords are optional in modern SV
+level_sensitive_always = true
+localparam_explicit_type = true
+localparam_type_twostate = true
+# loop_statement_in_always_*: for-loops are standard practice in combinational/sequential logic
+
+loop_variable_declaration = true
+# lowercamelcase_module: contradicts uppercamelcase_module
+# lowercamelcase_interface: contradicts uppercamelcase_interface
+# lowercamelcase_package: contradicts uppercamelcase_package
+multiline_for_begin = true
+multiline_if_begin = true
+non_ansi_module = true
+non_blocking_assignment_in_always_comb = true
+operator_case_equality = true
+output_with_var = true
+parameter_default_value = true
+parameter_explicit_type = true
+parameter_in_generate = true
+parameter_in_package = true
+parameter_type_twostate = true
+prefix_inout = true
+prefix_input = true
+prefix_instance = true
+prefix_interface = true
+# prefix_module: contradicts uppercamelcase_module
+prefix_output = true
+prefix_package = true
+# re_forbidden_*: disabled, need project-specific regex configuration
+# re_required_*: disabled, need project-specific regex configuration
+# sequential_block_in_always_*: industry standard is to allow/require begin/end
+style_commaleading = true
+style_indent = true
+style_keyword_0or1space = true
+style_keyword_0space = true
+style_keyword_1or2space = true
+# style_keyword_1space: disabled, conflicts with verible-verilog-format alignment
+style_keyword_construct = true
+style_keyword_datatype = true
+style_keyword_end = true
+# style_keyword_maybelabel: disabled, conflicts with svls autoformat
+# style_keyword_maybelabel = true
+style_keyword_new = true
+style_keyword_newline = true
+style_operator_arithmetic = true
+style_operator_boolean = true
+style_operator_integer = true
+style_operator_unary = true
+style_trailingwhitespace = true
+tab_character = true
+uppercamelcase_interface = true
+uppercamelcase_module = true
+uppercamelcase_package = true

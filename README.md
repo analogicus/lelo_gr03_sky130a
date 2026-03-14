@@ -96,28 +96,14 @@ The plots below show the oscillator performance across PVT corners. All corners 
 
 The goal is to measure the frequency of the oscillator. We assume access to an accurate 32768 Hz clock source. The approach is to power up the oscillator for a fixed number of reference clock cycles and count the output pulses. For example, counting 128 pulses over 2 periods of the 32768 Hz clock gives a frequency of approximately 2.09 MHz. Once we have the frequency, we can calculate the temperature.
 
-The digital block ([temp_sens.sv](rtl/temp_sens.sv)) implements a 4-state FSM with a dual-edge counter that captures both rising and falling edges of the oscillator output for 2× resolution:
-
-```mermaid
-stateDiagram-v2
-    [*] --> IDLE
-    IDLE --> COUNT : i_start
-    COUNT --> WAIT
-    WAIT --> CAPTURE
-    CAPTURE --> IDLE
-```
-
-- **IDLE**: Waiting for measurement trigger. Counter held in reset.
-- **COUNT**: Oscillator powered up (`o_pwrup_osc` = 1). Dual-edge counter runs for one 32768 Hz period (~30 µs).
-- **WAIT**: Oscillator powered down. Counter values settle (CDC safety).
-- **CAPTURE**: Count latched into output register.
+The digital block ([temp_sens.sv](rtl/temp_sens.sv)) implements a 4-state FSM with a dual-edge counter that captures both rising and falling edges of the oscillator output for 2× resolution. The FSM powers up the oscillator for one reference clock period (~30 µs), lets the counter settle (CDC safety), then latches the count. See the [FSM state diagram](#tempsens-fsm) below.
 
 The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized oscillator frequency, then sweeps temperature from -40°C to 125°C. The plots below show the measured count and calibration error across all PVT corners:
 
 ![temp_sens measurements](svgs/temp_sens_measurement.svg)
 
 
-# Schematics
+# Implementation
 
 ## BANDGAP_OTA
 
@@ -134,3 +120,21 @@ The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized
 ## OSCILLATOR
 
 ![OSCILLATOR schematic](svgs/OSCILLATOR.svg)
+
+## TempSens FSM
+
+```mermaid
+stateDiagram-v2
+    [*] --> IDLE
+    IDLE --> COUNT : i_start
+    COUNT --> WAIT
+    WAIT --> CAPTURE
+    CAPTURE --> IDLE
+```
+
+| State | `o_pwrup_osc` | Description |
+| :--- | :---: | :--- |
+| IDLE | 0 | Waiting for trigger. Counter held in reset. |
+| COUNT | 1 | Oscillator on. Dual-edge counter runs for one 32768 Hz period. |
+| WAIT | 0 | Oscillator off. Counter values settle (CDC safety). |
+| CAPTURE | 0 | Count latched into output register. |

@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module fsm_measure #(
     parameter REF_COUNT_MAX = 128
 )(
@@ -75,6 +77,11 @@ module fsm_measure #(
                     count_out <= osc_counter;
                 end
 
+                default: begin
+                    ref_counter <= 0;
+                    osc_counter <= 0;
+                    count_out   <= 0;
+                    end
             endcase
         end
     end
@@ -101,7 +108,14 @@ module fsm_measure #(
                 done      = 1;
             end
 
+            default: begin
+                enableOsc = 0;
+                cnt_rst   = 1;
+                done      = 0;
+                end
         endcase
     end
 
 endmodule
+
+

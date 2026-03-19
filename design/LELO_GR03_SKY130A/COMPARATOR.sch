@@ -66,7 +66,7 @@ C {devices/ipin.sym} -110 360 0 0 {name=p1 lab=VSS}
 C {devices/lab_wire.sym} 80 80 2 1 {name=p6 sig_type=std_logic lab=VSS}
 C {LELO_ATR_SKY130A/LELOATR_LVT_NCH_4C5F0.sym} -160 80 0 0 {name=x18[4:0]}
 C {LELO_ATR_SKY130A/LELOATR_LVT_NCH_4C5F0.sym} 160 80 0 1 {name=x19[4:0]}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -40 190 0 0 {name=x2[2:0]}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -40 190 0 0 {name=x2}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 80 -50 0 0 {name=x20}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} -80 -50 0 1 {name=x21}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 320 -50 0 0 {name=x10}
@@ -83,7 +83,7 @@ C {JNW_ATR_SKY130A/JNWATR_NCH_12C1F2.sym} -40 320 0 0 {name=x1[3:0]}
 C {devices/ipin.sym} -100 320 0 0 {name=p15 lab=PWRUP_1V8}
 C {devices/lab_wire.sym} 380 -50 0 1 {name=p18 sig_type=std_logic lab=VDD}
 C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 200 20 0 0 {name=x9 }
-C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 300 20 1 0 {name=x11 }
 C {devices/lab_wire.sym} 240 40 2 1 {name=p32 sig_type=std_logic lab=VSS}
 C {devices/title.sym} -370 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
 C {devices/ipin.sym} -180 190 0 0 {name=p7 lab=V_IB}
+C {JNW_TR_SKY130A/JNWTR_CAPX1.sym} 350 20 3 0 {name=x1 }

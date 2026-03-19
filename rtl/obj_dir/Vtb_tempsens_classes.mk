@@ -2,7 +2,7 @@
 # DESCRIPTION: Verilator output: Make include file with class lists
 #
 # This file lists generated Verilated files, for including in higher level makefiles.
-# See Vfsm_measure.mk for the caller.
+# See Vtb_tempsens.mk for the caller.
 
 ### Switches...
 # C11 constructs required?  0/1 (always on now)
@@ -14,36 +14,40 @@ VM_COVERAGE = 0
 # Parallel builds?  0/1 (from --output-split)
 VM_PARALLEL_BUILDS = 0
 # Tracing output mode?  0/1 (from --trace/--trace-fst)
-VM_TRACE = 0
+VM_TRACE = 1
 # Tracing output mode in VCD format?  0/1 (from --trace)
-VM_TRACE_VCD = 0
+VM_TRACE_VCD = 1
 # Tracing output mode in FST format?  0/1 (from --trace-fst)
 VM_TRACE_FST = 0
 
 ### Object file lists...
 # Generated module classes, fast-path, compile with highest optimization
 VM_CLASSES_FAST += \
-	Vfsm_measure \
-	Vfsm_measure___024root__DepSet_h005f0a59__0 \
-	Vfsm_measure___024root__DepSet_hb1a8301e__0 \
+	Vtb_tempsens \
+	Vtb_tempsens___024root__DepSet_hf1dc40c8__0 \
+	Vtb_tempsens___024root__DepSet_h25100134__0 \
+	Vtb_tempsens__main \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
 VM_CLASSES_SLOW += \
-	Vfsm_measure__ConstPool_0 \
-	Vfsm_measure___024root__Slow \
-	Vfsm_measure___024root__DepSet_h005f0a59__0__Slow \
-	Vfsm_measure___024root__DepSet_hb1a8301e__0__Slow \
+	Vtb_tempsens___024root__Slow \
+	Vtb_tempsens___024root__DepSet_hf1dc40c8__0__Slow \
+	Vtb_tempsens___024root__DepSet_h25100134__0__Slow \
 
 # Generated support classes, fast-path, compile with highest optimization
 VM_SUPPORT_FAST += \
+	Vtb_tempsens__Trace__0 \
 
 # Generated support classes, non-fast-path, compile with low/medium optimization
 VM_SUPPORT_SLOW += \
-	Vfsm_measure__Syms \
+	Vtb_tempsens__Syms \
+	Vtb_tempsens__Trace__0__Slow \
+	Vtb_tempsens__TraceDecls__0__Slow \
 
 # Global classes, need linked once per executable, fast-path, compile with highest optimization
 VM_GLOBAL_FAST += \
 	verilated \
+	verilated_vcd_c \
 	verilated_timing \
 	verilated_threads \
 

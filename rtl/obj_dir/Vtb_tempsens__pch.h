@@ -3,11 +3,11 @@
 //
 // Internal details; most user sources do not need this header,
 // unless using verilator public meta comments.
-// Suggest use Vfsm_measure.h instead.
+// Suggest use Vtb_tempsens.h instead.
 
 
-#ifndef VERILATED_VFSM_MEASURE__PCH_H_
-#define VERILATED_VFSM_MEASURE__PCH_H_  // guard
+#ifndef VERILATED_VTB_TEMPSENS__PCH_H_
+#define VERILATED_VTB_TEMPSENS__PCH_H_  // guard
 
 // GCC and Clang only will precompile headers (PCH) for the first header.
 // So, make sure this is the one and only PCH.
@@ -20,7 +20,7 @@
 
 #include "verilated.h"
 
-#include "Vfsm_measure__Syms.h"
-#include "Vfsm_measure.h"
+#include "Vtb_tempsens__Syms.h"
+#include "Vtb_tempsens.h"
 
 #endif  // guard

@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f Vfsm_measure.mk
+#    make -f Vtb_tempsens.mk
 
-default: Vfsm_measure
+default: Vtb_tempsens
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -30,38 +30,35 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = Vfsm_measure
+VM_PREFIX = Vtb_tempsens
 # Module prefix (from --prefix)
-VM_MODPREFIX = Vfsm_measure
+VM_MODPREFIX = Vtb_tempsens
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
+	-DVL_TIME_CONTEXT \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
-	tb_fsm_measure_main \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	. \
 
 
 ### Default rules...
 # Include list of all generated classes
-include Vfsm_measure_classes.mk
+include Vtb_tempsens_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-tb_fsm_measure_main.o: tb_fsm_measure_main.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-Vfsm_measure: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+Vtb_tempsens: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

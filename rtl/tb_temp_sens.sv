@@ -13,7 +13,7 @@ module tb_tempsens;
 
     logic [WIDTH-1:0] o_osc_count;
     logic o_pwrup_osc;
-    logic signed [15:0] o_temperature; // connect the temperature
+    logic signed [15:0] o_temperature; // temperature
 
     // DUT
     tempsens #(

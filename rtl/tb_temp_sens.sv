@@ -35,7 +35,7 @@ module tb_tempsens;
         $dumpvars(0, tb_tempsens);
     end
 
-    // Clocks
+    //Clocks
     // 32768 Hz (30.5 us period)
     initial i_clk = 0;
     always #15250 i_clk = ~i_clk;
@@ -63,7 +63,7 @@ module tb_tempsens;
         i_start = 0;  // let FSM run
 
         // wait long enough for COUNT+WAIT+CAPTURE
-        #(128*30500 + 2*30500); // 128 ref cycles + WAIT+CAPTURE
+        #(128*30500 + 2*30500); // 128 ref cycles +WAIT+CAPTURE
 
         $display("Measured count = %0d", o_osc_count);
         $display("The temperature is = %0d", o_temperature);

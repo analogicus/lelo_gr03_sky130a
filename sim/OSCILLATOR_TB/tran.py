@@ -159,7 +159,7 @@ def _setup_oscillator_axes(axes: tuple) -> None:
 def main(name: str) -> None:
     """Plot oscillator measurement results."""
     yamlfile = Path(name).with_suffix(".yaml")
-    outdir = yamlfile.parent
+    outdir = Path("output_tran")
     corner_files = sorted(outdir.glob("tran_*.yaml"))
 
     # First pass: parse all corners, find typical slope

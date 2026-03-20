@@ -4,7 +4,6 @@ K {}
 V {}
 S {}
 E {}
-T {Startup circuit} 600 -150 0 0 0.4 0.4 {}
 N -120 -20 -120 50 {lab=VB_P}
 N -120 20 -40 20 {lab=VB_P}
 N -40 -50 -40 20 {lab=VB_P}
@@ -51,40 +50,9 @@ N 30 320 30 360 {lab=VSS}
 N 0 360 30 360 {lab=VSS}
 N 190 20 200 20 {lab=V2}
 N 280 20 290 20 {lab=#net3}
-N 690 200 720 200 {lab=#net4}
-N 690 150 690 200 {lab=#net4}
-N 690 150 760 150 {lab=#net4}
-N 760 130 760 170 {lab=#net4}
-N 690 100 720 100 {lab=OUT}
-N 660 100 690 100 {lab=OUT}
-N 760 -20 760 70 {lab=#net5}
-N 760 -110 760 -80 {lab=#net1}
-N 590 -110 590 -80 {lab=#net1}
-N 590 -20 590 170 {lab=OUT}
-N 630 200 660 200 {lab=OUT}
-N 660 150 660 200 {lab=OUT}
-N 590 150 660 150 {lab=OUT}
-N 630 -50 720 -50 {lab=#net5}
-N 690 -50 690 0 {lab=#net5}
-N 690 0 760 0 {lab=#net5}
-N 590 230 590 260 {lab=#net2}
-N 590 260 760 260 {lab=#net2}
-N 760 230 760 260 {lab=#net2}
-N 760 200 790 200 {lab=VSS}
-N 560 200 590 200 {lab=VSS}
-N 760 100 790 100 {lab=VSS}
-N 790 100 790 200 {lab=VSS}
-N 560 -50 590 -50 {lab=VDD}
-N 760 -50 790 -50 {lab=VDD}
-N 590 100 660 100 {
-lab=OUT}
-N 560 100 590 100 {
-lab=OUT}
 N -120 -110 360 -110 {lab=#net1}
 N 0 260 360 260 {lab=#net2}
 N -200 190 -180 190 {lab=V_IB}
-N 360 260 590 260 {lab=#net2}
-N 360 -110 760 -110 {lab=#net1}
 C {devices/lab_wire.sym} -80 190 0 0 {name=p3 sig_type=std_logic lab=V_IB}
 C {devices/lab_wire.sym} -80 80 2 0 {name=p16 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 10 -50 0 0 {name=p14 sig_type=std_logic lab=VB_P}
@@ -114,17 +82,7 @@ C {devices/lab_wire.sym} 380 -50 0 1 {name=p18 sig_type=std_logic lab=VDD}
 C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 200 20 0 0 {name=x9 }
 C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 300 20 1 0 {name=x11 }
 C {devices/lab_wire.sym} 240 40 2 1 {name=p32 sig_type=std_logic lab=VSS}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 720 100 0 0 {name=x2}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 720 200 0 0 {name=x3}
-C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 720 -50 0 0 {name=x5}
-C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 630 -50 0 1 {name=x7}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 630 200 0 1 {name=x8}
-C {devices/lab_wire.sym} 560 100 0 0 {name=p11 sig_type=std_logic lab=OUT}
-C {devices/lab_wire.sym} 560 200 2 1 {name=p26 sig_type=std_logic lab=VSS}
-C {devices/lab_wire.sym} 790 200 2 0 {name=p27 sig_type=std_logic lab=VSS}
-C {devices/lab_wire.sym} 560 -50 0 0 {name=p30 sig_type=std_logic lab=VDD}
-C {devices/lab_wire.sym} 790 -50 0 1 {name=p31 sig_type=std_logic lab=VDD}
 C {devices/title.sym} -320 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
 C {devices/ipin.sym} -200 190 0 0 {name=p7 lab=V_IB}
-C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -40 320 0 0 {name=x1 }
-C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -40 -190 0 0 {name=x4 }
+C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -40 320 0 0 {name=x1[2:0]}
+C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -40 -190 0 0 {name=x4[2:0]}

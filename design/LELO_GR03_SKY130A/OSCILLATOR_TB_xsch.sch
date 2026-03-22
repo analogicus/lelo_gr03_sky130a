@@ -4,7 +4,7 @@ K {}
 V {}
 S {}
 E {}
-B 2 -60 -20 740 380 {flags=graph
+B 2 260 -260 1060 140 {flags=graph
 y1=-0.56694752
 y2=2.8890525
 ypos1=0
@@ -12,8 +12,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-4.5874351e-08
-x2=1.359214e-06
+x1=1.427793e-05
+x2=1.5239787e-05
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -25,6 +25,27 @@ logy=0
 color="4 4"
 node="out
 x1.vx"}
+B 2 260 160 1060 560 {flags=graph
+y1=0.46482426
+y2=1.3707939
+ypos1=0
+ypos2=2
+divy=5
+subdivy=1
+unity=1
+x1=1.427793e-05
+x2=1.5239787e-05
+divx=5
+subdivx=1
+xlabmag=1.0
+ylabmag=1.0
+dataset=-1
+unitx=1
+logx=0
+logy=0
+color="4 4"
+node="x1.v_ref
+x1.x1.vd1"}
 N -160 -40 -160 -20 {lab=VDD}
 N -160 40 -160 60 {lab=0}
 N 140 -140 170 -140 {lab=OUT}
@@ -46,19 +67,19 @@ C {devices/code_shown.sym} -720 -230 0 0 {name=s1 only_toplevel=false value="
 .param mc_pr_switch=0
 
 .lib "../../../tech/ngspice/temperature.spi" Tl
-.lib "../../../tech/ngspice/corners.spi" Kss
+.lib "../../../tech/ngspice/corners.spi" Kff
 .lib "../../../tech/ngspice/supply.spi" Vl
 .include ../../../../cpdk/ngspice/ideal_circuits.spi
 *.option savecurrents
 .option gmin=1e-12
 *.option SEED=1
 .save all
-.temp 75
+.temp 70
 .control
 
 optran 0 0 0 10n 1u 0
 *dc VIN 0 1.8 1m
-tran 0.1n 2u
+tran 0.2n 4u
 *op
 *ac dec 20 1 1G
 

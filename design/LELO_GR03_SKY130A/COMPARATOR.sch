@@ -98,3 +98,22 @@ C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 200 20 0 0 {name=x9 }
 C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 300 20 1 0 {name=x11 }
 C {devices/lab_wire.sym} 240 40 2 1 {name=p32 sig_type=std_logic lab=VSS}
 C {devices/title.sym} -370 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
+<<<<<<< Updated upstream
+=======
+C {devices/ipin.sym} -160 190 0 0 {name=p7 lab=V_IB}
+C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} -80 -50 0 0 {name=x2[1:0]}
+C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 80 -50 0 1 {name=x3[1:0]}
+C {devices/lab_wire.sym} -40 -50 2 0 {name=p8 sig_type=std_logic lab=VDD}
+C {devices/lab_wire.sym} 40 -50 2 1 {name=p10 sig_type=std_logic lab=VDD}
+C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} -350 -50 0 1 {name=x1}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -350 190 0 1 {name=x3}
+C {devices/lab_wire.sym} -430 190 2 1 {name=p12 sig_type=std_logic lab=VSS}
+C {devices/lab_wire.sym} -410 -50 0 0 {name=p13 sig_type=std_logic lab=VDD}
+C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -40 -190 0 0 {name=x4[2:0]}
+C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -40 320 0 0 {name=x5[2:0]}
+C {devices/opin.sym} 600 80 0 0 {name=p11 lab=OUT}
+C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 480 30 0 0 {name=x7}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 480 130 0 0 {name=x8}
+C {devices/lab_wire.sym} 560 130 2 0 {name=p14 sig_type=std_logic lab=VSS}
+C {devices/lab_wire.sym} 540 30 0 1 {name=p20 sig_type=std_logic lab=VDD}
+>>>>>>> Stashed changes

@@ -10,21 +10,33 @@ E {}
 L 4 -150 -20 -130 -20 {}
 L 4 130 -20 150 -20 {}
 L 4 -150 0 -130 0 {}
-L 4 130 0 150 0 {}
 L 4 -150 40 -130 40 {}
 L 4 -150 20 -130 20 {}
+<<<<<<< Updated upstream
+=======
+L 4 0 50 0 70 {}
+L 4 130 20 150 20 {}
+>>>>>>> Stashed changes
 B 5 -152.5 -22.5 -147.5 -17.5 {name=VDD_1V8 dir=in}
 B 5 147.5 -22.5 152.5 -17.5 {name=I_PTAT dir=out}
 B 5 -152.5 -2.5 -147.5 2.5 {name=PWRUP_1V8 dir=in}
-B 5 147.5 -2.5 152.5 2.5 {name=V_CTAT dir=out}
 B 5 -152.5 37.5 -147.5 42.5 {name=VSS dir=in}
 B 5 -152.5 17.5 -147.5 22.5 {name=PWRUP_N_1V8 dir=in}
+<<<<<<< Updated upstream
+=======
+B 5 -2.5 67.5 2.5 72.5 {name=V_IB dir=in}
+B 5 147.5 17.5 152.5 22.5 {name=V_CTAT dir=out}
+>>>>>>> Stashed changes
 P 4 5 130 -30 -130 -30 -130 50 130 50 130 -30 {}
-T {@symname} -55.5 -16 0 0 0.3 0.3 {}
+T {@symname} -65.5 -26 0 0 0.3 0.3 {}
 T {@name} 135 -42 0 0 0.2 0.2 {}
 T {VDD_1V8} -125 -24 0 0 0.2 0.2 {}
 T {I_PTAT} 125 -24 0 1 0.2 0.2 {}
 T {PWRUP_1V8} -125 -4 0 0 0.2 0.2 {}
-T {V_CTAT} 125 -4 0 1 0.2 0.2 {}
 T {VSS} -125 36 0 0 0.2 0.2 {}
 T {PWRUP_N_1V8} -125 16 0 0 0.2 0.2 {}
+<<<<<<< Updated upstream
+=======
+T {V_IB} 5 36 0 0 0.2 0.2 {}
+T {V_CTAT} 125 16 0 1 0.2 0.2 {}
+>>>>>>> Stashed changes

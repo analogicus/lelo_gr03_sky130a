@@ -6,7 +6,7 @@ S {}
 E {}
 B 2 380 -370 1180 30 {flags=graph
 
-y2=14.633941
+y2=101.4
 ypos1=0
 ypos2=2
 divy=5
@@ -26,10 +26,10 @@ logx=1
 logy=0
 sim_type=ac
 
-y1=-38.969266
+y1=-35.6
 autoload=1
-x1=-5.2740408
-x2=3.7904659}
+x1=2
+x2=9}
 B 2 380 50 1180 450 {flags=graph
 
 
@@ -39,7 +39,7 @@ divy=5
 subdivy=4
 unity=1
 
-x2=3.7904659
+x2=9
 divx=5
 subdivx=8
 xlabmag=1.0
@@ -51,7 +51,7 @@ unitx=1
 logx=1
 logy=0
 sim_type=ac
-x1=-5.2740408
+x1=2
 y1=-330.16177
 y2=9.80623
 color=4
@@ -64,7 +64,7 @@ N -110 280 -110 300 {lab=IN}
 N -80 30 -40 30 {lab=V_IBN}
 N -160 30 -120 30 {lab=0}
 N -120 150 -120 190 {lab=0}
-N -170 -160 -140 -160 {lab=0}
+N -200 -210 -200 -180 {lab=0}
 N -120 -330 -120 -280 {lab=VDD}
 N -120 -250 -90 -250 {lab=VDD}
 N -90 -300 -90 -250 {lab=VDD}
@@ -102,6 +102,11 @@ N 80 -120 80 0 {lab=V_IBP}
 N 80 -150 120 -150 {lab=VDD}
 N 20 -150 20 -100 {lab=V_IBP}
 N 20 -100 80 -100 {lab=V_IBP}
+N -200 -100 -200 -70 {lab=0}
+N -240 -160 -240 -120 {lab=#net6}
+N -160 -160 -120 -160 {lab=#net1}
+N -120 -200 -120 -160 {lab=#net1}
+N -160 -120 -120 -120 {lab=#net3}
 C {devices/code_shown.sym} -719.3514969502943 -300 0 0 {name=s1 only_toplevel=false value="
 
 .lib "../../../tech/ngspice/corners.spi" Ktt
@@ -182,9 +187,9 @@ value=1.8}
 C {devices/lab_wire.sym} 300 390 2 0 {name=p14 sig_type=std_logic lab=0
 value=1.8}
 C {devices/lab_wire.sym} -40 30 0 1 {name=p18 sig_type=std_logic lab=V_IBN}
-C {devices/lab_wire.sym} -170 -160 2 1 {name=p19 sig_type=std_logic lab=0}
+C {devices/lab_wire.sym} -200 -210 3 1 {name=p19 sig_type=std_logic lab=0}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -80 30 0 1 {name=x3}
-C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -120 -200 1 0 {name=x11 }
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -160 -160 2 0 {name=x11 }
 C {devices/lab_wire.sym} -160 30 2 1 {name=p25 sig_type=std_logic lab=0}
 C {devices/lab_pin.sym} -120 190 0 0 {name=l29 sig_type=std_logic lab=0}
 C {devices/lab_pin.sym} -120 -330 0 1 {name=l31 sig_type=std_logic lab=VDD}
@@ -207,3 +212,5 @@ C {devices/lab_wire.sym} 10 -150 0 0 {name=p27 sig_type=std_logic lab=V_IBP}
 C {devices/lab_wire.sym} 120 -150 2 0 {name=p28 sig_type=std_logic lab=VDD}
 C {LELO_GR03_SKY130A/BANDGAP_OTA_PMOS.sym} 150 310 0 0 {name=x1}
 C {devices/lab_wire.sym} 80 410 2 1 {name=p15 sig_type=std_logic lab=V_IBP}
+C {devices/lab_wire.sym} -200 -70 1 1 {name=p16 sig_type=std_logic lab=0}
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -240 -120 0 0 {name=x2 }

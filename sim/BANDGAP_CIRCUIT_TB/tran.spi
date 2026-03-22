@@ -62,7 +62,7 @@ write {cicname}.raw
 set fend = .raw
 foreach vtemp -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110 120 125
   option temp=$vtemp
-  tran 5n 25u
+  tran 5n 40u
   write {cicname}_$vtemp$fend
 end
 

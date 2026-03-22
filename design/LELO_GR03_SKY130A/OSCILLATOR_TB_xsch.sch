@@ -46,14 +46,14 @@ C {devices/code_shown.sym} -720 -230 0 0 {name=s1 only_toplevel=false value="
 .param mc_pr_switch=0
 
 .lib "../../../tech/ngspice/temperature.spi" Tl
-.lib "../../../tech/ngspice/corners.spi" Kss
-.lib "../../../tech/ngspice/supply.spi" Vl
+.lib "../../../tech/ngspice/corners.spi" Kff
+.lib "../../../tech/ngspice/supply.spi" Vh
 .include ../../../../cpdk/ngspice/ideal_circuits.spi
 *.option savecurrents
 .option gmin=1e-12
 *.option SEED=1
 .save all
-.temp 75
+.temp 120
 .control
 
 optran 0 0 0 10n 1u 0

@@ -1,5 +1,53 @@
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/LELO_GR03_SKY130A/BANDGAP_CIRCUIT_LEAK_TB.sch
+**.subckt BANDGAP_CIRCUIT_LEAK_TB
+x1 VDD_1V8 0 0 net7 0 VDD_1V8 V_IBP BANDGAP_CIRCUIT
+x2 V_IBN V_IBN net2 0 JNWATR_NCH_4C5F0
+x4 net6 net1 0 JNWTR_RPPO16
+x5 net1 VDD_1V8 VDD_1V8 VDD_1V8 JNWATR_PCH_8C1F2
+x6 net2 0 0 0 JNWATR_NCH_8C1F2
+x15 V_IBP V_IBN net4 0 JNWATR_NCH_4C5F0
+x16 net4 0 0 0 JNWATR_NCH_8C1F2
+x17 V_IBP V_IBP net5 VDD_1V8 JNWATR_PCH_4C5F0
+x18 net5 VDD_1V8 VDD_1V8 VDD_1V8 JNWATR_PCH_8C1F2
+x3 net6 net3 0 JNWTR_RPPO16
+x7 V_IBN net3 0 JNWTR_RPPO4
+VDD VDD_1V8 0 1.8
+**** begin user architecture code
+
+
+.param mc_mm_switch=0
+.param mc_pr_switch=0
+
+.lib ../../../tech/ngspice/temperature.spi Tl
+.lib ../../../tech/ngspice/corners.spi Kfs
+.lib ../../../tech/ngspice/supply.spi Vh
+.include ../../../../cpdk/ngspice/ideal_circuits.spi
+*.option savecurrents
+.option gmin=1e-12
+*.option SEED=1
+.temp 100
+.save all
+.control
+
+optran 0 0 0 10n 1u 0
+*dc VIN 0 1.8 1m
+tran 0.5u 6m
+*op
+*ac dec 20 1 1G
+
+write BANDGAP_CIRCUIT_LEAK_TB.raw
+
+exit
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  LELO_GR03_SKY130A/BANDGAP_CIRCUIT.sym # of pins=7
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/LELO_GR03_SKY130A/BANDGAP_CIRCUIT.sym
 ** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/LELO_GR03_SKY130A/BANDGAP_CIRCUIT.sch
-**.subckt BANDGAP_CIRCUIT VDD_1V8 I_PTAT PWRUP_1V8 V_CTAT VSS PWRUP_N_1V8 V_IB
+.subckt BANDGAP_CIRCUIT VDD_1V8 I_PTAT PWRUP_1V8 V_CTAT VSS PWRUP_N_1V8 V_IB
 *.opin I_PTAT
 *.opin V_CTAT
 *.ipin VDD_1V8
@@ -43,21 +91,8 @@ x19 net8 V_CAS net4 VDD_1V8 JNWATR_PCH_2C5F0
 x14 net6 VP net2 VDD_1V8 JNWATR_PCH_2C5F0
 x17 I_PTAT V_CAS net6 VDD_1V8 JNWATR_PCH_2C5F0
 x1 VD2 DV VSS JNWTR_RPPO2
-x2 V_CTAT DV VSS JNWTR_RPPO4
-x12 net1 net8 VSS JNWTR_RPPO4
-x22 DV VD2 VSS JNWTR_RPPO8
-**.ends
-
-* expanding   symbol:  JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym # of pins=4
-** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym
-** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sch
-.subckt JNWATR_PCH_4C5F0 D G S B
-*.iopin D
-*.iopin G
-*.iopin S
-*.iopin B
-XM1 D G S B sky130_fd_pr__pfet_01v8 L=0.94 W=3.2 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+x12 V_CTAT DV VSS JNWTR_RPPO8
+x22 net8 net1 VSS JNWTR_RPPO8
 .ends
 
 
@@ -74,6 +109,17 @@ XM1 D G S B sky130_fd_pr__nfet_01v8 L=0.94 W=3.2 nf=2 ad='int((nf+1)/2) * W/nf *
 .ends
 
 
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_RPPO16.sym # of pins=3
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RPPO16.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RPPO16.sch
+.subckt JNWTR_RPPO16 N P B
+*.iopin P
+*.iopin N
+*.iopin B
+XXA1 N P B JNWTR_RES16
+.ends
+
+
 * expanding   symbol:  JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym # of pins=4
 ** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym
 ** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sch
@@ -84,6 +130,43 @@ XM1 D G S B sky130_fd_pr__nfet_01v8 L=0.94 W=3.2 nf=2 ad='int((nf+1)/2) * W/nf *
 *.iopin B
 XM1 D G S B sky130_fd_pr__pfet_01v8 L=0.22 W=5.76 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+
+* expanding   symbol:  JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym # of pins=4
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sch
+.subckt JNWATR_NCH_8C1F2 D G S B
+*.iopin D
+*.iopin G
+*.iopin S
+*.iopin B
+XM1 D G S B sky130_fd_pr__nfet_01v8 L=0.22 W=5.76 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+
+* expanding   symbol:  JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym # of pins=4
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sch
+.subckt JNWATR_PCH_4C5F0 D G S B
+*.iopin D
+*.iopin G
+*.iopin S
+*.iopin B
+XM1 D G S B sky130_fd_pr__pfet_01v8 L=0.94 W=3.2 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_RPPO4.sym # of pins=3
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RPPO4.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RPPO4.sch
+.subckt JNWTR_RPPO4 N P B
+*.iopin P
+*.iopin N
+*.iopin B
+XXA1 N P B JNWTR_RES4
 .ends
 
 
@@ -119,20 +202,22 @@ x11<0> OUT net2 JNWTR_CAPX4
 x1<2> net1 PWRUP_1V8 VSS VSS JNWATR_NCH_8C1F2
 x1<1> net1 PWRUP_1V8 VSS VSS JNWATR_NCH_8C1F2
 x1<0> net1 PWRUP_1V8 VSS VSS JNWATR_NCH_8C1F2
-x4<2> net3 PWRUP_N_1V8 VDD VDD JNWATR_PCH_8C1F2
-x4<1> net3 PWRUP_N_1V8 VDD VDD JNWATR_PCH_8C1F2
-x4<0> net3 PWRUP_N_1V8 VDD VDD JNWATR_PCH_8C1F2
-x3<1> net4<1> V_IBP net3 VDD JNWATR_PCH_4C5F0
-x3<0> net4<0> V_IBP net3 VDD JNWATR_PCH_4C5F0
-x2 OUT V_IBP net3 VDD JNWATR_PCH_4C5F0
+x4<2> net3<1> PWRUP_N_1V8 VDD VDD JNWATR_PCH_8C1F2
+x4<1> net3<0> PWRUP_N_1V8 VDD VDD JNWATR_PCH_8C1F2
+x4<0> net3<1> PWRUP_N_1V8 VDD VDD JNWATR_PCH_8C1F2
+x3<2> net4<2> V_IBP net3<1> VDD JNWATR_PCH_4C5F0
+x3<1> net4<1> V_IBP net3<0> VDD JNWATR_PCH_4C5F0
+x3<0> net4<0> V_IBP net3<1> VDD JNWATR_PCH_4C5F0
+x6<1> OUT V_IBP net3<1> VDD JNWATR_PCH_4C5F0
+x6<0> OUT V_IBP net3<0> VDD JNWATR_PCH_4C5F0
 x3 net6 net5 net1 VSS JNWATR_NCH_4C5F0
 x4 net5 net5 net1 VSS JNWATR_NCH_4C5F0
-x2<2> net5 IN- net4<1> VDD LELOATR_LVT_PCH_4C5F0
-x2<1> net5 IN- net4<0> VDD LELOATR_LVT_PCH_4C5F0
-x2<0> net5 IN- net4<1> VDD LELOATR_LVT_PCH_4C5F0
-x5<2> net6 IN+ net4<1> VDD LELOATR_LVT_PCH_4C5F0
-x5<1> net6 IN+ net4<0> VDD LELOATR_LVT_PCH_4C5F0
-x5<0> net6 IN+ net4<1> VDD LELOATR_LVT_PCH_4C5F0
+x2<2> net5 IN- net4<2> VDD LELOATR_LVT_PCH_4C5F0
+x2<1> net5 IN- net4<1> VDD LELOATR_LVT_PCH_4C5F0
+x2<0> net5 IN- net4<0> VDD LELOATR_LVT_PCH_4C5F0
+x5<2> net6 IN+ net4<2> VDD LELOATR_LVT_PCH_4C5F0
+x5<1> net6 IN+ net4<1> VDD LELOATR_LVT_PCH_4C5F0
+x5<0> net6 IN+ net4<0> VDD LELOATR_LVT_PCH_4C5F0
 x1 net2 net6 VSS JNWTR_RPPO4
 .ends
 
@@ -161,17 +246,6 @@ XXA1 N P B JNWTR_RES2
 .ends
 
 
-* expanding   symbol:  JNW_TR_SKY130A/JNWTR_RPPO4.sym # of pins=3
-** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RPPO4.sym
-** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RPPO4.sch
-.subckt JNWTR_RPPO4 N P B
-*.iopin P
-*.iopin N
-*.iopin B
-XXA1 N P B JNWTR_RES4
-.ends
-
-
 * expanding   symbol:  JNW_TR_SKY130A/JNWTR_RPPO8.sym # of pins=3
 ** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RPPO8.sym
 ** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RPPO8.sch
@@ -183,6 +257,46 @@ XXA1 N P B JNWTR_RES8
 .ends
 
 
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_RES16.sym # of pins=3
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RES16.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RES16.sch
+.subckt JNWTR_RES16 N P B
+*.iopin N
+*.iopin P
+*.iopin B
+XR1_0 INT_0 N B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_1 INT_1 INT_0 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_2 INT_2 INT_1 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_3 INT_3 INT_2 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_4 INT_4 INT_3 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_5 INT_5 INT_4 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_6 INT_6 INT_5 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_7 INT_7 INT_6 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_8 INT_8 INT_7 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_9 INT_9 INT_8 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_10 INT_10 INT_9 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_11 INT_11 INT_10 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_12 INT_12 INT_11 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_13 INT_13 INT_12 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_14 INT_14 INT_13 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_15 P INT_14 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+.ends
+
+
+* expanding   symbol:  JNW_TR_SKY130A/JNWTR_RES4.sym # of pins=3
+** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RES4.sym
+** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RES4.sch
+.subckt JNWTR_RES4 N P B
+*.iopin N
+*.iopin P
+*.iopin B
+XR1_0 INT_0 N B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_1 INT_1 INT_0 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_2 INT_2 INT_1 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+XR1_3 P INT_2 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
+.ends
+
+
 * expanding   symbol:  JNW_TR_SKY130A/JNWTR_CAPX1.sym # of pins=2
 ** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_CAPX1.sym
 ** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_CAPX1.sch
@@ -190,19 +304,6 @@ XXA1 N P B JNWTR_RES8
 *.iopin A
 *.iopin B
 XC1 B A sky130_fd_pr__cap_mim_m3_1 W=5 L=5 MF=1 m=1
-.ends
-
-
-* expanding   symbol:  JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym # of pins=4
-** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym
-** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sch
-.subckt JNWATR_NCH_8C1F2 D G S B
-*.iopin D
-*.iopin G
-*.iopin S
-*.iopin B
-XM1 D G S B sky130_fd_pr__nfet_01v8 L=0.22 W=5.76 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
 .ends
 
 
@@ -228,20 +329,6 @@ XM1 D G S B sky130_fd_pr__pfet_01v8_lvt L=0.94 W=3.2 nf=2 ad='int((nf+1)/2) * W/
 *.iopin B
 XR1_0 INT_0 N B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
 XR1_1 P INT_0 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
-.ends
-
-
-* expanding   symbol:  JNW_TR_SKY130A/JNWTR_RES4.sym # of pins=3
-** sym_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RES4.sym
-** sch_path: /home/halst/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A/JNWTR_RES4.sch
-.subckt JNWTR_RES4 N P B
-*.iopin N
-*.iopin P
-*.iopin B
-XR1_0 INT_0 N B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
-XR1_1 INT_1 INT_0 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
-XR1_2 INT_2 INT_1 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
-XR1_3 P INT_2 B sky130_fd_pr__res_high_po W=0.36 L=7.36 mult=1 m=1
 .ends
 
 

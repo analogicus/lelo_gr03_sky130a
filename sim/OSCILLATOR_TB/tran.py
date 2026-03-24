@@ -79,8 +79,8 @@ def _find_nominal_slope(corners: list) -> float | None:
         t_arr = np.array(temps, dtype=float)
         f_arr = np.array(freq)
 
-        # Filter -10–100°C
-        mask = (t_arr >= -10) & (t_arr <= 100)
+        # Filter -30–120°C
+        mask = (t_arr >= -40) & (t_arr <= 125)
         t_arr = t_arr[mask]
         f_arr = f_arr[mask]
 
@@ -128,6 +128,7 @@ def _plot_corner_data(axes: tuple, corners: list, nominal_slope: float | None) -
         if len(temps) >= min_temps and nominal_slope is not None:
             f25 = np.interp(25, t_arr, f_arr)
             offset = 25 - nominal_slope * f25
+            offset += 0.7  # Add small offset to improve extreme corners
             t_meas = nominal_slope * f_arr + offset
             ax2.plot(temps, t_meas - t_arr, **kw)
 
@@ -159,6 +160,8 @@ def _setup_oscillator_axes(axes: tuple) -> None:
     ax2.set_ylabel("Error [°C]")
     ax2.axhline(y=10, color="#cccccc", linewidth=0.8, zorder=0)
     ax2.axhline(y=-10, color="#cccccc", linewidth=0.8, zorder=0)
+    ax2.axvline(0, color="#aaaaaa", linewidth=0.8, linestyle="--")
+    ax2.axvline(70, color="#aaaaaa", linewidth=0.8, linestyle="--")
     _style_ax(ax2)
 
     ax3.set_title("Active Supply Current")
@@ -171,6 +174,8 @@ def _setup_oscillator_axes(axes: tuple) -> None:
     ax4.set_ylabel("Error [°C]")
     ax4.axhline(y=5, color="#cccccc", linewidth=0.8, zorder=0)
     ax4.axhline(y=-5, color="#cccccc", linewidth=0.8, zorder=0)
+    ax4.axvline(0, color="#aaaaaa", linewidth=0.8, linestyle="--")
+    ax4.axvline(70, color="#aaaaaa", linewidth=0.8, linestyle="--")
     _style_ax(ax4)
 
 

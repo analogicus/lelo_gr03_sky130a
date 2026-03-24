@@ -64,7 +64,6 @@ N 670 150 670 160 {lab=VDD_1V8}
 N 670 130 670 150 {
 lab=VDD_1V8}
 N 710 200 730 200 {lab=#net1}
-N -350 -380 -320 -380 {lab=VB_P}
 N 845 -235 875 -235 {lab=VB_P}
 N 845 -200 875 -200 {lab=VB_N}
 N 575 -245 605 -245 {lab=VDD_1V8}
@@ -119,7 +118,6 @@ C {devices/lab_pin.sym} 240 -260 0 0 {name=l27 sig_type=std_logic lab=VDD_1V8}
 C {devices/opin.sym} 290 -210 0 0 {name=p4 lab=F_OUT}
 C {devices/title.sym} -280 -370 0 0 {name=l28 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
 C {devices/lab_pin.sym} 600 -120 0 0 {name=l7 sig_type=std_logic lab=VB_N}
-C {devices/lab_pin.sym} -350 -380 2 1 {name=l8 sig_type=std_logic lab=VB_P}
 C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 710 200 0 1 {name=x20 }
 C {devices/lab_pin.sym} 670 250 0 0 {name=l34 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 670 130 0 0 {name=l35 sig_type=std_logic lab=VDD_1V8}

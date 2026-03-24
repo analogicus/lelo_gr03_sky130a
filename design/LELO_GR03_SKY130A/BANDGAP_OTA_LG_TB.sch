@@ -6,7 +6,7 @@ S {}
 E {}
 B 2 380 -370 1180 30 {flags=graph
 
-y2=101.4
+y2=-47.29574
 ypos1=0
 ypos2=2
 divy=5
@@ -26,7 +26,7 @@ logx=1
 logy=0
 sim_type=ac
 
-y1=-35.6
+y1=-184.29574
 autoload=1
 x1=2
 x2=9}
@@ -61,7 +61,7 @@ rawfile=$netlist_dir/TB_LELOTEMP_BIAS_IBP_LSTB.raw}
 N -190 280 -190 300 {
 lab=VDD_1V8}
 N -110 280 -110 300 {lab=IN}
-N -80 30 -40 30 {lab=V_IBN}
+N -80 30 -40 30 {lab=VB_N}
 N -160 30 -120 30 {lab=0}
 N -120 150 -120 190 {lab=0}
 N -200 -210 -200 -180 {lab=0}
@@ -75,11 +75,11 @@ N -90 110 -90 150 {lab=0}
 N -120 150 -90 150 {lab=0}
 N -120 -220 -120 -200 {lab=#net1}
 N -120 60 -120 80 {lab=#net2}
-N -120 -10 -60 -10 {lab=V_IBN}
-N -120 -20 -120 0 {lab=V_IBN}
+N -120 -10 -60 -10 {lab=VB_N}
+N -120 -20 -120 0 {lab=VB_N}
 N -120 -120 -120 -100 {lab=#net3}
 N -170 -60 -140 -60 {lab=0}
-N -60 -10 -60 30 {lab=V_IBN}
+N -60 -10 -60 30 {lab=VB_N}
 N -180 110 -160 110 {lab=VDD}
 N -180 -250 -160 -250 {lab=0}
 N 80 150 80 190 {lab=0}
@@ -89,7 +89,7 @@ N 110 110 110 150 {lab=0}
 N 80 150 110 150 {lab=0}
 N 80 60 80 80 {lab=#net4}
 N 20 110 40 110 {lab=VDD}
-N -40 30 40 30 {lab=V_IBN}
+N -40 30 40 30 {lab=VB_N}
 N 80 30 120 30 {lab=0}
 N 80 -330 80 -280 {lab=VDD}
 N 80 -250 110 -250 {lab=VDD}
@@ -97,11 +97,11 @@ N 110 -300 110 -250 {lab=VDD}
 N 80 -300 110 -300 {lab=VDD}
 N 20 -250 40 -250 {lab=0}
 N 80 -220 80 -180 {lab=#net5}
-N 10 -150 40 -150 {lab=V_IBP}
-N 80 -120 80 0 {lab=V_IBP}
+N 10 -150 40 -150 {lab=VB_P}
+N 80 -120 80 0 {lab=VB_P}
 N 80 -150 120 -150 {lab=VDD}
-N 20 -150 20 -100 {lab=V_IBP}
-N 20 -100 80 -100 {lab=V_IBP}
+N 20 -150 20 -100 {lab=VB_P}
+N 20 -100 80 -100 {lab=VB_P}
 N -200 -100 -200 -70 {lab=0}
 N -240 -160 -240 -120 {lab=#net6}
 N -160 -160 -120 -160 {lab=#net1}
@@ -186,7 +186,7 @@ C {devices/lab_wire.sym} -190 360 2 0 {name=p13 sig_type=std_logic lab=0
 value=1.8}
 C {devices/lab_wire.sym} 300 390 2 0 {name=p14 sig_type=std_logic lab=0
 value=1.8}
-C {devices/lab_wire.sym} -40 30 0 1 {name=p18 sig_type=std_logic lab=V_IBN}
+C {devices/lab_wire.sym} -40 30 0 1 {name=p18 sig_type=std_logic lab=VB_N}
 C {devices/lab_wire.sym} -200 -210 3 1 {name=p19 sig_type=std_logic lab=0}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -80 30 0 1 {name=x3}
 C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -160 -160 2 0 {name=x11 }
@@ -195,7 +195,6 @@ C {devices/lab_pin.sym} -120 190 0 0 {name=l29 sig_type=std_logic lab=0}
 C {devices/lab_pin.sym} -120 -330 0 1 {name=l31 sig_type=std_logic lab=VDD}
 C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -160 -250 0 0 {name=x12 }
 C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -160 110 0 0 {name=x13 }
-C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} -120 -100 1 0 {name=x14 }
 C {devices/lab_wire.sym} -170 -60 2 1 {name=p22 sig_type=std_logic lab=0}
 C {devices/lab_wire.sym} -180 110 2 1 {name=p21 sig_type=std_logic lab=VDD}
 C {devices/lab_wire.sym} -180 -250 2 1 {name=p20 sig_type=std_logic lab=0}
@@ -208,9 +207,10 @@ C {devices/lab_pin.sym} 80 -330 0 1 {name=l3 sig_type=std_logic lab=VDD}
 C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} 40 -250 0 0 {name=x6 }
 C {devices/lab_wire.sym} 20 -250 2 1 {name=p26 sig_type=std_logic lab=0}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 40 -150 0 0 {name=x7 }
-C {devices/lab_wire.sym} 10 -150 0 0 {name=p27 sig_type=std_logic lab=V_IBP}
+C {devices/lab_wire.sym} 10 -150 0 0 {name=p27 sig_type=std_logic lab=VB_P}
 C {devices/lab_wire.sym} 120 -150 2 0 {name=p28 sig_type=std_logic lab=VDD}
 C {LELO_GR03_SKY130A/BANDGAP_OTA_PMOS.sym} 150 310 0 0 {name=x1}
-C {devices/lab_wire.sym} 80 410 2 1 {name=p15 sig_type=std_logic lab=V_IBP}
+C {devices/lab_wire.sym} 80 410 2 1 {name=p15 sig_type=std_logic lab=VB_P}
 C {devices/lab_wire.sym} -200 -70 1 1 {name=p16 sig_type=std_logic lab=0}
 C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -240 -120 0 0 {name=x2 }
+C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} -120 -100 1 0 {name=x8 }

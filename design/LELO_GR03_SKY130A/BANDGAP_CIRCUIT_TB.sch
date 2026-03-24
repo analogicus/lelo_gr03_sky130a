@@ -5,14 +5,14 @@ V {}
 S {}
 E {}
 T {Generating bias voltage} -810 -310 0 0 0.4 0.4 {}
-N -160 -20 -140 -20 {lab=VDD_1V8}
-N -180 40 -140 40 {lab=VSS}
+N -160 -40 -140 -40 {lab=VDD_1V8}
+N -180 20 -140 20 {lab=VSS}
 N 160 -20 210 -20 {lab=I_PTAT}
-N 160 -0 210 0 {lab=V_CTAT}
-N -180 -20 -160 -20 {lab=VDD_1V8}
-N -180 20 -140 20 {lab=PWRUP_N_1V8}
-N -180 -0 -140 0 {lab=PWRUP_1V8}
-N 10 70 10 100 {lab=V_IBP}
+N 160 20 210 20 {lab=V_CTAT}
+N -180 -40 -160 -40 {lab=VDD_1V8}
+N -180 0 -140 0 {lab=PWRUP_N_1V8}
+N -180 -20 -140 -20 {lab=PWRUP_1V8}
+N -170 40 -140 40 {lab=V_IBP}
 N -720 110 -680 110 {lab=V_IBN}
 N -800 110 -760 110 {lab=VSS}
 N -760 230 -760 270 {lab=VSS}
@@ -59,15 +59,15 @@ N -760 -120 -760 -100 {lab=#net1}
 N -790 -40 -760 -40 {lab=#net3}
 N -870 -100 -870 -40 {lab=#net6}
 C {LELO_GR03_SKY130A/BANDGAP_CIRCUIT.sym} 10 0 0 0 {name=x1}
-C {devices/ipin.sym} -180 40 0 0 {name=p1 lab=VSS}
+C {devices/ipin.sym} -180 20 0 0 {name=p1 lab=VSS}
 C {devices/opin.sym} 210 -20 0 0 {name=p2 lab=I_PTAT}
-C {devices/opin.sym} 210 0 0 0 {name=p3 lab=V_CTAT}
-C {devices/ipin.sym} -180 -20 0 0 {name=p4 lab=VDD_1V8}
+C {devices/opin.sym} 210 20 0 0 {name=p3 lab=V_CTAT}
+C {devices/ipin.sym} -180 -40 0 0 {name=p4 lab=VDD_1V8}
 C {devices/title.sym} -210 -110 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
-C {devices/ipin.sym} -180 0 0 0 {name=p5 lab=PWRUP_1V8
+C {devices/ipin.sym} -180 -20 0 0 {name=p5 lab=PWRUP_1V8
 }
-C {devices/ipin.sym} -180 20 0 0 {name=p6 lab=PWRUP_N_1V8}
-C {devices/lab_wire.sym} 10 100 2 0 {name=p9 sig_type=std_logic lab=V_IBP}
+C {devices/ipin.sym} -180 0 0 0 {name=p6 lab=PWRUP_N_1V8}
+C {devices/lab_wire.sym} -170 40 2 1 {name=p9 sig_type=std_logic lab=V_IBP}
 C {devices/lab_wire.sym} -680 110 0 1 {name=p10 sig_type=std_logic lab=V_IBN}
 C {devices/lab_wire.sym} -830 -120 0 0 {name=p11 sig_type=std_logic lab=VSS}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -720 110 0 1 {name=x2}

@@ -22,12 +22,12 @@ N -0 320 30 320 {lab=VSS}
 N 30 320 30 360 {lab=VSS}
 N 0 360 30 360 {lab=VSS}
 N 330 100 340 100 {lab=#net2}
-N -180 -90 -160 -90 {lab=V_IBP}
+N -180 -90 -160 -90 {lab=VB_P}
 N 0 -160 -0 -120 {lab=#net3}
 N 0 -90 20 -90 {lab=VDD}
-N -80 -90 -40 -90 {lab=V_IBP}
+N -80 -90 -40 -90 {lab=VB_P}
 N 410 -90 430 -90 {lab=VDD}
-N 330 -90 370 -90 {lab=V_IBP}
+N 330 -90 370 -90 {lab=VB_P}
 N -0 -60 -0 -30 {lab=#net4}
 N -110 -30 0 -30 {lab=#net4}
 N -0 -30 110 -30 {lab=#net4}
@@ -65,15 +65,13 @@ C {devices/ipin.sym} -100 320 0 0 {name=p15 lab=PWRUP_1V8}
 C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 350 100 1 1 {name=x11[2:0]}
 C {devices/lab_wire.sym} 290 120 2 1 {name=p32 sig_type=std_logic lab=VSS}
 C {devices/title.sym} -320 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
-C {devices/ipin.sym} -180 -90 0 0 {name=p7 lab=V_IBP}
-C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -40 320 0 0 {name=x1[2:0]}
-C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -40 -190 0 0 {name=x4[2:0]}
+C {devices/ipin.sym} -180 -90 0 0 {name=p7 lab=VB_P}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} -40 -90 0 0 {name=x3[1:0]}
 C {devices/lab_wire.sym} 20 -90 2 0 {name=p8 sig_type=std_logic lab=VDD}
-C {devices/lab_wire.sym} -80 -90 0 0 {name=p10 sig_type=std_logic lab=V_IBP}
+C {devices/lab_wire.sym} -80 -90 0 0 {name=p10 sig_type=std_logic lab=VB_P}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 370 -90 0 0 {name=x2}
 C {devices/lab_wire.sym} 430 -90 2 0 {name=p11 sig_type=std_logic lab=VDD}
-C {devices/lab_wire.sym} 330 -90 0 0 {name=p12 sig_type=std_logic lab=V_IBP}
+C {devices/lab_wire.sym} 330 -90 0 0 {name=p12 sig_type=std_logic lab=VB_P}
 C {devices/lab_wire.sym} 90 30 2 1 {name=p13 sig_type=std_logic lab=VDD}
 C {devices/lab_wire.sym} -90 30 2 0 {name=p23 sig_type=std_logic lab=VDD}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 70 190 0 0 {name=x3}
@@ -84,3 +82,5 @@ C {devices/lab_wire.sym} -130 190 2 1 {name=p3 sig_type=std_logic lab=VSS}
 C {LELO_ATR_SKY130A/LELOATR_LVT_PCH_4C5F0.sym} -150 30 0 0 {name=x2[2:0]}
 C {LELO_ATR_SKY130A/LELOATR_LVT_PCH_4C5F0.sym} 150 30 0 1 {name=x5[2:0]}
 C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} 250 100 0 0 {name=x1 }
+C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -40 -190 0 0 {name=x1[2:0]}
+C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -40 320 0 0 {name=x4[2:0]}

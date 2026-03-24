@@ -41,8 +41,8 @@ N -10 -330 -10 -280 {lab=VDD_1V8}
 N -40 -330 -10 -330 {lab=VDD_1V8}
 N -130 60 -120 60 {lab=PWRUP_1V8}
 N -330 100 -270 100 {lab=PWRUP_N_1V8}
-N -330 140 -270 140 {lab=V_IB}
-N -130 190 -120 190 {lab=V_IB}
+N -330 140 -270 140 {lab=VB_P}
+N -130 190 -120 190 {lab=VB_P}
 N 580 -80 580 -60 {lab=#net3}
 N 580 -100 580 -80 {lab=#net3}
 N 580 -200 580 -160 {lab=#net2}
@@ -142,8 +142,8 @@ C {devices/lab_wire.sym} 380 -130 0 1 {name=p23 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} -130 60 0 0 {name=p20 sig_type=std_logic lab=PWRUP_1V8}
 C {devices/ipin.sym} -330 100 0 0 {name=p7 lab=PWRUP_N_1V8}
 C {devices/title.sym} -310 -420 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
-C {devices/ipin.sym} -330 140 0 0 {name=p8 lab=V_IB}
-C {devices/lab_wire.sym} -130 190 0 0 {name=p10 sig_type=std_logic lab=V_IB}
+C {devices/ipin.sym} -330 140 0 0 {name=p8 lab=VB_P}
+C {devices/lab_wire.sym} -130 190 0 0 {name=p10 sig_type=std_logic lab=VB_P}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 620 -130 0 1 {name=x5}
 C {devices/lab_wire.sym} 560 -130 0 0 {name=p14 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} -220 -30 0 0 {name=p27 sig_type=std_logic lab=VDD_1V8}
@@ -166,7 +166,6 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 710 -130 0 0 {name=x10}
 C {devices/lab_wire.sym} 690 -90 3 0 {name=p33 sig_type=std_logic lab=V_CAS}
 C {devices/lab_wire.sym} 770 -130 0 1 {name=p35 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 640 -130 1 1 {name=p24 sig_type=std_logic lab=VP}
-C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -80 -280 0 0 {name=x3}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 1070 80 0 0 {name=x16}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 990 -130 0 1 {name=x18}
 C {devices/lab_wire.sym} 930 -130 0 0 {name=p40 sig_type=std_logic lab=VDD_1V8}
@@ -199,3 +198,4 @@ C {devices/lab_pin.sym} -220 190 2 1 {name=p41 sig_type=std_logic lab=VSS}
 C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} -180 150 1 0 {name=x12 }
 C {JNW_TR_SKY130A/JNWTR_RPPO8.sym} 190 390 3 0 {name=x22 }
 C {devices/lab_pin.sym} 230 350 0 1 {name=p19 sig_type=std_logic lab=VSS}
+C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -80 -280 0 0 {name=x3[2:0]}

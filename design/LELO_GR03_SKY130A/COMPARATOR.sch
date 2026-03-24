@@ -41,7 +41,7 @@ N 30 320 30 360 {lab=VSS}
 N 0 360 30 360 {lab=VSS}
 N -0 260 360 260 {lab=#net4}
 N -120 -110 360 -110 {lab=#net3}
-N -160 190 -140 190 {lab=V_IB}
+N -160 190 -140 190 {lab=VB_N}
 N -130 -50 -110 -50 {lab=#net1}
 N -170 140 170 140 {lab=VTAIL}
 N -40 -20 170 20 {lab=#net2}
@@ -86,7 +86,7 @@ N 520 -110 520 0 {lab=#net3}
 N 520 80 600 80 {lab=OUT}
 N 420 30 420 130 {lab=#net5}
 N 360 80 420 80 {lab=#net5}
-C {devices/lab_wire.sym} -80 190 0 0 {name=p3 sig_type=std_logic lab=V_IB}
+C {devices/lab_wire.sym} -80 190 0 0 {name=p3 sig_type=std_logic lab=VB_N}
 C {devices/lab_wire.sym} -130 80 2 0 {name=p16 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} -20 140 0 0 {name=p17 sig_type=std_logic lab=VTAIL}
 C {devices/ipin.sym} 250 80 0 1 {name=p4 lab=IN-}
@@ -109,7 +109,7 @@ C {devices/lab_wire.sym} 190 -50 2 0 {name=p29 sig_type=std_logic lab=VDD}
 C {devices/ipin.sym} -100 320 0 0 {name=p15 lab=PWRUP_1V8}
 C {devices/lab_wire.sym} 380 -50 0 1 {name=p18 sig_type=std_logic lab=VDD}
 C {devices/title.sym} -370 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
-C {devices/ipin.sym} -160 190 0 0 {name=p7 lab=V_IB}
+C {devices/ipin.sym} -160 190 0 0 {name=p7 lab=VB_N}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} -80 -50 0 0 {name=x2[1:0]}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 80 -50 0 1 {name=x3[1:0]}
 C {devices/lab_wire.sym} -40 -50 2 0 {name=p8 sig_type=std_logic lab=VDD}
@@ -118,8 +118,8 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} -350 -50 0 1 {name=x1}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -350 190 0 1 {name=x3}
 C {devices/lab_wire.sym} -430 190 2 1 {name=p12 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} -410 -50 0 0 {name=p13 sig_type=std_logic lab=VDD}
-C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -40 -190 0 0 {name=x4 }
-C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -40 320 0 0 {name=x5 }
+C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -40 -190 0 0 {name=x4[2:0]}
+C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -40 320 0 0 {name=x5[2:0]}
 C {devices/opin.sym} 600 80 0 0 {name=p11 lab=OUT}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 480 30 0 0 {name=x7}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 480 130 0 0 {name=x8}

@@ -72,19 +72,37 @@ def _parse_corner(cf: Path) -> tuple | None:
 
 
 def _find_nominal_slope(corners: list) -> float | None:
-    """Find typical slope from the Ktt+Vt corner, fallback to first valid corner."""
+    """Find slope using only 0–70°C range (Ktt+Vt preferred)."""
     min_temps = 2
-    for proc, volt_var, temps, freq in [(c[1], c[2], c[3], c[4]) for c in corners]:
-        if proc == "Ktt" and volt_var == "Vt" and len(temps) >= min_temps:
-            t_arr = np.array(temps, dtype=float)
-            f_arr = np.array(freq)
-            coeffs = np.polyfit(f_arr, t_arr, 1)
-            return coeffs[0]
 
+    def compute_slope(temps, freq):
+        t_arr = np.array(temps, dtype=float)
+        f_arr = np.array(freq)
+
+        # Filter -10–100°C
+        mask = (t_arr >= -10) & (t_arr <= 100)
+        t_arr = t_arr[mask]
+        f_arr = f_arr[mask]
+
+        if len(t_arr) < min_temps:
+            return None
+
+        coeffs = np.polyfit(f_arr, t_arr, 1)
+        return coeffs[0]
+
+    # Prefer Ktt + Vt
+    for proc, volt_var, temps, freq in [(c[1], c[2], c[3], c[4]) for c in corners]:
+        if proc == "Ktt" and volt_var == "Vt":
+            slope = compute_slope(temps, freq)
+            if slope is not None:
+                return slope
+
+    # Fallback: first valid corner
     for _, _, temps, freq in [(c[1], c[2], c[3], c[4]) for c in corners]:
-        if len(temps) >= min_temps:
-            coeffs = np.polyfit(np.array(freq), np.array(temps, dtype=float), 1)
-            return coeffs[0]
+        slope = compute_slope(temps, freq)
+        if slope is not None:
+            return slope
+
     return None
 
 

@@ -44,6 +44,17 @@ def _parse_measurements(obj: dict) -> tuple[dict, dict, dict]:
             idd_vals[int(key.split("_")[1])] = float(val)
     return t1_vals, t2_vals, idd_vals
 
+#testing stuff
+def export_corner_csv(label, temps, freq):
+    outdir = Path("fsm_input")
+    outdir.mkdir(exist_ok=True)
+
+    path = outdir / f"{label}.csv"
+    with path.open("w") as f:
+        f.write("temperature,frequency\n")
+        for t, f_mhz in zip(temps, freq):
+            f.write(f"{t},{f_mhz * 1e6}\n")  # convert MHz → Hz
+
 
 def _parse_corner(cf: Path) -> tuple | None:
     """Read a corner YAML and return (label, proc, volt_var, temps, freq, idd_vals)."""
@@ -201,6 +212,7 @@ def main(name: str) -> None:
         seen.add(dedup_key)
 
         corners.append(result)
+        export_corner_csv(_label, _temps, _freq)
 
     nominal_slope = _find_nominal_slope(corners)
 
@@ -237,5 +249,5 @@ def main(name: str) -> None:
 
 if __name__ == "__main__":
     import sys
-
-    main(sys.argv[1])
+    name = sys.argv[1] if len(sys.argv) > 1 else "dummyargument"
+    main(name)

@@ -12,8 +12,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-4.5874351e-08
-x2=1.359214e-06
+x1=1.1555359e-06
+x2=2.000216e-06
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -46,14 +46,14 @@ C {devices/code_shown.sym} -720 -230 0 0 {name=s1 only_toplevel=false value="
 .param mc_pr_switch=0
 
 .lib "../../../tech/ngspice/temperature.spi" Tl
-.lib "../../../tech/ngspice/corners.spi" Kff
+.lib "../../../tech/ngspice/corners.spi" Ktt
 .lib "../../../tech/ngspice/supply.spi" Vh
 .include ../../../../cpdk/ngspice/ideal_circuits.spi
 *.option savecurrents
 .option gmin=1e-12
 *.option SEED=1
 .save all
-.temp 120
+.temp 70
 .control
 
 optran 0 0 0 10n 1u 0

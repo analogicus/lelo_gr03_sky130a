@@ -45,15 +45,15 @@ def _parse_measurements(obj: dict) -> tuple[dict, dict, dict]:
     return t1_vals, t2_vals, idd_vals
 
 #testing stuff
-def export_corner_csv(label, temps, freq):
-    outdir = Path("fsm_input")
-    outdir.mkdir(exist_ok=True)
+# def export_corner_csv(label, temps, freq):
+#     outdir = Path("fsm_input")
+#     outdir.mkdir(exist_ok=True)
 
-    path = outdir / f"{label}.csv"
-    with path.open("w") as f:
-        f.write("temperature,frequency\n")
-        for t, f_mhz in zip(temps, freq):
-            f.write(f"{t},{f_mhz * 1e6}\n")  # convert MHz → Hz
+#     path = outdir / f"{label}.csv"
+#     with path.open("w") as f:
+#         f.write("temperature,frequency\n")
+#         for t, f_mhz in zip(temps, freq):
+#             f.write(f"{t},{f_mhz * 1e6}\n")  # convert MHz → Hz
 
 
 def _parse_corner(cf: Path) -> tuple | None:
@@ -212,7 +212,7 @@ def main(name: str) -> None:
         seen.add(dedup_key)
 
         corners.append(result)
-        export_corner_csv(_label, _temps, _freq)
+        #export_corner_csv(_label, _temps, _freq)
 
     nominal_slope = _find_nominal_slope(corners)
 

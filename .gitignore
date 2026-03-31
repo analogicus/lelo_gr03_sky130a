@@ -24,3 +24,4 @@ docs/plans/
 .svls.toml
 sim/**/README.md
 sim/tb_temp_sens/*.csv
+CLAUDE.md

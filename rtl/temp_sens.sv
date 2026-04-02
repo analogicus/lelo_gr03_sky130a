@@ -1,6 +1,6 @@
 // Copyright (c) 2026 All rights reserved.
 `default_nettype none
-module TempSens #(
+module temp_sens #(
     parameter int WIDTH = 9
 ) (
     input var logic i_clk

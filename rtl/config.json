@@ -1,0 +1,6 @@
+{
+    "DESIGN_NAME": "temp_sens",
+    "VERILOG_FILES": ["dir::temp_sens.sv"],
+    "CLOCK_PERIOD": 200,
+    "CLOCK_PORT": "i_clk"
+}

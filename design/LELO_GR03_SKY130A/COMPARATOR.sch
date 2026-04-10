@@ -15,7 +15,7 @@ N -250 80 -210 80 {lab=IN+}
 N 210 80 250 80 {lab=IN-}
 N -190 -50 -170 -50 {lab=VDD}
 N 170 -50 190 -50 {lab=VDD}
-N -80 190 -40 190 {lab=V_IB}
+N -80 190 -40 190 {lab=VB_N}
 N 0 220 0 260 {lab=#net4}
 N 0 190 40 190 {lab=VSS}
 N -170 80 -130 80 {lab=VSS}
@@ -95,7 +95,7 @@ C {devices/ipin.sym} -110 360 0 0 {name=p1 lab=VSS}
 C {devices/lab_wire.sym} 130 80 2 1 {name=p6 sig_type=std_logic lab=VSS}
 C {LELO_ATR_SKY130A/LELOATR_LVT_NCH_4C5F0.sym} -210 80 0 0 {name=x18[4:0]}
 C {LELO_ATR_SKY130A/LELOATR_LVT_NCH_4C5F0.sym} 210 80 0 1 {name=x19[4:0]}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -40 190 0 0 {name=x2}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -40 190 0 0 {name=x1[1:0]}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 130 -50 0 0 {name=x20}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} -130 -50 0 1 {name=x21}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 320 -50 0 0 {name=x10}

@@ -2,5 +2,6 @@
     "DESIGN_NAME": "temp_sens",
     "VERILOG_FILES": ["dir::temp_sens.sv"],
     "CLOCK_PERIOD": 200,
-    "CLOCK_PORT": "i_clk"
+    "CLOCK_PORT": "i_clk",
+    "SYNTH_MAX_FANOUT": 6
 }

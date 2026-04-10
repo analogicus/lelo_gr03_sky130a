@@ -139,7 +139,6 @@ def _plot_corner_data(axes: tuple, corners: list, nominal_slope: float | None) -
         if len(temps) >= min_temps and nominal_slope is not None:
             f25 = np.interp(25, t_arr, f_arr)
             offset = 25 - nominal_slope * f25
-            offset += 0.7  # Add small offset to improve extreme corners
             t_meas = nominal_slope * f_arr + offset
             ax2.plot(temps, t_meas - t_arr, **kw)
 

@@ -28,7 +28,7 @@ module tb;
     .temperature(temperature)
   );
 
-  TempSens #(
+  temp_sens #(
     .WIDTH(`WIDTH)
   ) u_dut (
     .i_clk(clk),

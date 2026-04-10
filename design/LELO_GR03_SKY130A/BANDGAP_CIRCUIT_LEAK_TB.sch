@@ -26,10 +26,10 @@ logx=0
 logy=0
 }
 T {Generating bias voltage} -810 -310 0 0 0.4 0.4 {}
-N -80 320 -40 320 {lab=0}
-N -80 300 -40 300 {lab=VDD_1V8}
-N -80 280 -40 280 {lab=0}
-N 110 350 110 380 {lab=V_IBP}
+N -80 300 -40 300 {lab=0}
+N -80 280 -40 280 {lab=VDD_1V8}
+N -80 260 -40 260 {lab=0}
+N -40 320 -40 350 {lab=V_IBP}
 N -720 110 -680 110 {lab=V_IBN}
 N -800 110 -760 110 {lab=0}
 N -760 230 -760 270 {lab=0}
@@ -77,7 +77,7 @@ N -790 -40 -760 -40 {lab=#net3}
 N -870 -100 -870 -40 {lab=#net6}
 C {LELO_GR03_SKY130A/BANDGAP_CIRCUIT.sym} 110 280 0 0 {name=x1}
 C {devices/title.sym} -330 -270 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
-C {devices/lab_wire.sym} 110 380 2 0 {name=p9 sig_type=std_logic lab=V_IBP}
+C {devices/lab_wire.sym} -40 350 2 0 {name=p9 sig_type=std_logic lab=V_IBP}
 C {devices/lab_wire.sym} -680 110 0 1 {name=p10 sig_type=std_logic lab=V_IBN}
 C {devices/lab_wire.sym} -830 -120 0 0 {name=p11 sig_type=std_logic lab=0}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -720 110 0 1 {name=x2}
@@ -100,10 +100,10 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -550 -170 0 1 {name=x18 }
 C {devices/lab_wire.sym} -830 -20 2 1 {name=p7 sig_type=std_logic lab=0}
 C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -790 -40 0 1 {name=x3 }
 C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} -760 -20 1 0 {name=x7 }
-C {devices/lab_wire.sym} -80 320 2 1 {name=p2 sig_type=std_logic lab=0}
-C {devices/lab_wire.sym} -80 280 2 1 {name=p3 sig_type=std_logic lab=0}
-C {devices/lab_wire.sym} -80 300 2 1 {name=p4 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_wire.sym} -40 260 0 0 {name=p5 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_wire.sym} -80 300 2 1 {name=p2 sig_type=std_logic lab=0}
+C {devices/lab_wire.sym} -80 260 2 1 {name=p3 sig_type=std_logic lab=0}
+C {devices/lab_wire.sym} -80 280 2 1 {name=p4 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_wire.sym} -40 240 0 0 {name=p5 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 260 260 2 0 {name=p6 sig_type=std_logic lab=0}
 C {devices/lab_wire.sym} -490 190 2 0 {name=p1 sig_type=std_logic lab=0}
 C {devices/lab_wire.sym} -860 190 2 1 {name=p8 sig_type=std_logic lab=0}
@@ -129,7 +129,7 @@ C {devices/code_shown.sym} -370 -190 0 0 {name=s1 only_toplevel=false value="
 
 optran 0 0 0 10n 1u 0
 *dc VIN 0 1.8 1m
-tran 0.5u 6m
+tran 0.5u 0.5m
 *op
 *ac dec 20 1 1G
 

@@ -59,7 +59,7 @@ def afterPlace(layout):
         _inst(layout, "xb6"),
     ])
 
-    layout._scopes = {
+    layout._route_scopes = {
         "res": res,   "res_stack": res_stack,
         "pmos": pmos, "pmos_xc": pmos_xc, "pmos_xb": pmos_xb,
         "nmos": nmos, "nmos_xc": nmos_xc, "nmos_xb": nmos_xb,

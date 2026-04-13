@@ -87,3 +87,14 @@ def afterPlace(layout):
         "pmos": pmos, "pmos_xc": pmos_xc, "pmos_xb": pmos_xb,
         "nmos": nmos, "nmos_xc": nmos_xc, "nmos_xb": nmos_xb,
     }
+
+
+def beforeRoute(layout):
+    # s is unused in Task 7; later tasks (8-11) append per-group routes to this function.
+    s = layout._route_scopes
+
+    # Power rings (M1, drawn explicitly because noPowerRoute=True)
+    layout.addRouteRing("M1", "VDD_1V8", "t", widthmult=3, spacemult=2)
+    layout.addRouteRing("M1", "VSS",     "b", widthmult=3, spacemult=2)
+    layout.addPowerConnection("VDD_1V8", "", "top")
+    layout.addPowerConnection("VSS",     "", "bottom")

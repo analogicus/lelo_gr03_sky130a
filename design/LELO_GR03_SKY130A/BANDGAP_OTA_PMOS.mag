@@ -1,114 +1,97 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1776083324
-<< locali >>
-rect -12 25993 330 26100
-rect 625 25993 1920 26100
-rect 2264 25993 3514 26100
-rect 3870 25993 4788 26100
-rect -12 25780 180 25993
-rect 1396 25772 1780 25993
-rect 2996 25772 3380 25993
-rect 4596 25760 4788 25993
-rect -12 25000 5132 25100
-rect 1188 24777 1380 25000
-rect 2340 24784 2680 25000
-rect 3640 24790 3980 25000
-rect 4940 24960 5132 25000
-rect -100 21416 964 21500
-rect -12 21400 964 21416
-rect -12 21200 5200 21400
-rect -100 20200 4800 20400
+timestamp 1776031200
+<< checkpaint >>
+rect 0 0 2640 24656
 << metal1 >>
-rect 2612 25312 2804 25496
-use JNWATR_PCH_8C1F2  x1<0> ../JNW_ATR_SKY130A
-timestamp 1740610800
-transform 1 0 1684 0 1 25128
-box -184 -128 1592 928
-use JNWATR_PCH_8C1F2  x1<1>
-timestamp 1740610800
-transform 1 0 3284 0 1 25128
-box -184 -128 1592 928
-use JNWTR_RPPO4  x1 ../JNW_TR_SKY130A
-timestamp 1775823531
-transform 1 0 -900 0 1 21400
+rect 160 12280 224 12360
+rect 160 9080 224 9160
+rect 288 9320 480 9400
+rect 160 18648 224 18728
+rect 160 11480 224 11560
+<< metal3 >>
+rect 480 3440 1560 3540
+<< locali >>
+rect 16 16 1864 128
+use JNWTR_RPPO4 x1 ../JNW_TR_SKY130A
+transform 1 0 0 0 1 0
 box 0 0 1880 3440
-use JNWATR_PCH_8C1F2  x1<2>
-timestamp 1740610800
-transform 1 0 84 0 1 25128
-box -184 -128 1592 928
-use JNWATR_PCH_4C5F0  x2 ../JNW_ATR_SKY130A
-timestamp 1740610800
-transform 1 0 3884 0 1 22528
-box -184 -128 1336 928
-use LELOATR_LVT_PCH_4C5F0  x2<0> ../LELO_ATR_SKY130A
-timestamp 1767481200
-transform 1 0 2584 0 1 23328
-box -184 -128 1336 928
-use LELOATR_LVT_PCH_4C5F0  x2<1>
-timestamp 1767481200
-transform 1 0 1284 0 1 24128
-box -184 -128 1336 928
-use LELOATR_LVT_PCH_4C5F0  x2<2>
-timestamp 1767481200
-transform 1 0 1284 0 1 22528
-box -184 -128 1336 928
-use JNWATR_PCH_4C5F0  x3<0>
-timestamp 1740610800
-transform 1 0 3884 0 1 24128
-box -184 -128 1336 928
-use JNWATR_PCH_4C5F0  x3<1>
-timestamp 1740610800
-transform 1 0 3884 0 1 23328
-box -184 -128 1336 928
-use JNWATR_NCH_4C5F0  x3 ../JNW_ATR_SKY130A
-timestamp 1740610800
-transform 1 0 2584 0 1 21428
-box -184 -128 1336 928
-use JNWATR_NCH_8C1F2  x4<0> ../JNW_ATR_SKY130A
-timestamp 1740610800
-transform 1 0 3284 0 1 20428
-box -184 -128 1592 928
-use JNWATR_NCH_8C1F2  x4<1>
-timestamp 1740610800
-transform 1 0 1684 0 1 20428
-box -184 -128 1592 928
-use JNWATR_NCH_8C1F2  x4<2>
-timestamp 1740610800
-transform 1 0 84 0 1 20428
-box -184 -128 1592 928
-use JNWATR_NCH_4C5F0  x4
-timestamp 1740610800
-transform 1 0 1284 0 1 21428
-box -184 -128 1336 928
-use LELOATR_LVT_PCH_4C5F0  x5<0>
-timestamp 1767481200
-transform 1 0 2584 0 1 24128
-box -184 -128 1336 928
-use LELOATR_LVT_PCH_4C5F0  x5<1>
-timestamp 1767481200
-transform 1 0 1284 0 1 23328
-box -184 -128 1336 928
-use LELOATR_LVT_PCH_4C5F0  x5<2>
-timestamp 1767481200
-transform 1 0 2584 0 1 22528
-box -184 -128 1336 928
-use JNWATR_NCH_4C5F0  x6
-timestamp 1740610800
-transform 1 0 3884 0 1 21428
-box -184 -128 1336 928
-use JNWTR_CAPX4  x11<1> ../JNW_TR_SKY130A
-timestamp 1775823531
-transform 1 0 -4090 0 1 23330
-box 480 0 3120 2640
-use JNWTR_CAPX4  x11<2>
-timestamp 1775823531
-transform 1 0 -4108 0 1 20426
-box 480 0 3120 2640
+use JNWTR_CAPX4 x11<0> ../JNW_TR_SKY130A
+transform 1 0 0 0 1 3440
+box 0 3440 2640 6080
+use JNWTR_CAPX4 x11<1> ../JNW_TR_SKY130A
+transform 1 0 0 0 1 6080
+box 0 6080 2640 8720
+use JNWATR_PCH_8C1F2 x1<0> ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 8720
+box 0 8720 1408 9520
+use JNWATR_PCH_8C1F2 x1<1> ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 9520
+box 0 9520 1408 10320
+use JNWATR_PCH_8C1F2 x1<2> ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 10320
+box 0 10320 1408 11120
+use JNWATR_PCH_4C5F0 x2 ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 11120
+box 0 11120 1152 11920
+use LELOATR_LVT_PCH_4C5F0 x2<0> ../LELO_ATR_SKY130A
+transform 1 0 0 0 1 11920
+box 0 11920 1520 12976
+use LELOATR_LVT_PCH_4C5F0 x2<1> ../LELO_ATR_SKY130A
+transform 1 0 0 0 1 12976
+box 0 12976 1520 14032
+use LELOATR_LVT_PCH_4C5F0 x2<2> ../LELO_ATR_SKY130A
+transform 1 0 0 0 1 14032
+box 0 14032 1520 15088
+use JNWATR_NCH_4C5F0 x3 ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 15088
+box 0 15088 1152 15888
+use JNWATR_PCH_4C5F0 x3<0> ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 15888
+box 0 15888 1152 16688
+use JNWATR_PCH_4C5F0 x3<1> ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 16688
+box 0 16688 1152 17488
+use JNWATR_NCH_4C5F0 x4 ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 17488
+box 0 17488 1152 18288
+use JNWATR_NCH_8C1F2 x4<0> ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 18288
+box 0 18288 1408 19088
+use JNWATR_NCH_8C1F2 x4<1> ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 19088
+box 0 19088 1408 19888
+use JNWATR_NCH_8C1F2 x4<2> ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 19888
+box 0 19888 1408 20688
+use LELOATR_LVT_PCH_4C5F0 x5<0> ../LELO_ATR_SKY130A
+transform 1 0 0 0 1 20688
+box 0 20688 1520 21744
+use LELOATR_LVT_PCH_4C5F0 x5<1> ../LELO_ATR_SKY130A
+transform 1 0 0 0 1 21744
+box 0 21744 1520 22800
+use LELOATR_LVT_PCH_4C5F0 x5<2> ../LELO_ATR_SKY130A
+transform 1 0 0 0 1 22800
+box 0 22800 1520 23856
+use JNWATR_NCH_4C5F0 x6 ../JNW_ATR_SKY130A
+transform 1 0 0 0 1 23856
+box 0 23856 1152 24656
 << labels >>
-flabel locali s 1400 20200 3248 20312 0 FreeSans 400 0 0 0 VSS
-port 5 nsew ground bidirectional
+flabel metal1 s 160 12280 224 12360 0 FreeSans 400 0 0 0 IN-
+port 1 nsew signal bidirectional
+flabel metal3 s 480 3440 1560 3540 0 FreeSans 400 0 0 0 OUT
+port 2 nsew signal bidirectional
+flabel locali s 16 16 1864 128 0 FreeSans 400 0 0 0 VSS
+port 3 nsew ground bidirectional
+flabel metal1 s 160 9080 224 9160 0 FreeSans 400 0 0 0 PWRUP_N_1V8
+port 4 nsew signal bidirectional
+flabel metal1 s 288 9320 480 9400 0 FreeSans 400 0 0 0 VDD
+port 5 nsew power bidirectional
+flabel metal1 s 160 18648 224 18728 0 FreeSans 400 0 0 0 PWRUP_1V8
+port 6 nsew signal bidirectional
+flabel metal1 s 160 11480 224 11560 0 FreeSans 400 0 0 0 VB_P
+port 7 nsew signal bidirectional
 << properties >>
-string FIXED_BBOX 0 0 2640 27296
+string FIXED_BBOX 0 0 2640 24656
 << end >>

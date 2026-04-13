@@ -107,11 +107,13 @@ def beforeRoute(layout):
 
     # In-group signal routes (M2 vertical stub + M3 horizontal trunk)
     s = layout._route_scopes
-    # VB_N spans nmos_xc.xc2 (gate) and nmos_xb.xb6 (gate=drain, since it's diode-connected)
-    s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_N$", "track0", 1, "")
-    # VB_P at xc3 (diode-connected, gate=drain). Local vertical M2 strap only —
-    # no horizontal trunk needed because VB_P lives at a single device.
-    s["pmos"].addConnectivityRoute("M2", r"^VB_P$", "||", "", 1, "")
+    # VB_N spans nmos_xc.xc2 (gate) and nmos_xb.xb6 (gate=drain, diode-connected).
+    # accessLayer=M1 bridges both the M2 gate rect and the M1 drain rect of xb6.
+    s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_N$", "track0", 1, "", accessLayer="M1")
+    # VB_P at xc3 (diode-connected). Single-device net — a vertical M2
+    # strap inside xc3's column bridges the M2 gate and drain terminals
+    # without any M3 horizontal trunk that could collide with neighbours.
+    layout.addConnectivityRoute("M2", r"^VB_P$", "||", "", 1, "", r"^xc3$")
 
     # PWRUP_1V8 connects nmos_xb.xb5 gate and nmos_xc.xc1 gate (both NCH PWRUP switches)
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_1V8$",   "track2", 1, "")
@@ -131,8 +133,10 @@ def beforeRoute(layout):
     # Resistors expose terminals on M1. Use the orthogonal API with
     # accessLayer=M1 so the trunk lands on M2/M3 (avoiding the M1 plane
     # where VSS bulk rects would short to our signal).
-    s["res"].addOrthogonalConnectivityRoute("M2", "M3", r"^net5$", "track0",  1, "", accessLayer="M1")
-    s["res"].addOrthogonalConnectivityRoute("M2", "M3", r"^net6$", "track-4", 1, "", accessLayer="M1")
+    s["res"].addOrthogonalConnectivityRoute("M2", "M3", r"^net5$", "track0", 1, "", accessLayer="M1")
+    # net6 uses a local vertical M2 strap so no wide M3 trunk collides
+    # with the VB_N right-edge port extension.
+    s["res"].addConnectivityRoute("M2", r"^net6$", "||", "", 1, "")
 
     # Cross-group: net1 connects xa6 (top of res) to xb7 (top of pmos_xb)
     layout.addOrthogonalConnectivityRoute(
@@ -146,4 +150,4 @@ def afterPorts(layout):
     layout.addPortOnEdge("M3", "VB_P",        "left",  "|-", "track0")
     layout.addPortOnEdge("M3", "PWRUP_1V8",   "left",  "|-", "track2")
     layout.addPortOnEdge("M3", "PWRUP_N_1V8", "left",  "|-", "track4")
-    # layout.addPortOnEdge("M3", "VB_N",        "right", "-|", "offset_track0")  # debug: testing net6
+    layout.addPortOnEdge("M3", "VB_N",        "right", "-|", "offset_track0")

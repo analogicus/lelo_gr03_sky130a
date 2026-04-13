@@ -95,3 +95,8 @@ def beforeRoute(layout):
     layout.addRouteRing("M1", "VSS",     "b", widthmult=3, spacemult=2)
     layout.addPowerConnection("VDD_1V8", "", "top")
     layout.addPowerConnection("VSS",     "", "bottom")
+
+    # In-group signal routes (M2 vertical stub + M3 horizontal trunk)
+    s = layout._route_scopes
+    # VB_N spans nmos_xc.xc2 (gate) and nmos_xb.xb6 (gate=drain, since it's diode-connected)
+    s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_N$", "track0", 1, "")

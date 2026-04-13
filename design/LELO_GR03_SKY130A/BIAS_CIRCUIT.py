@@ -107,3 +107,10 @@ def beforeRoute(layout):
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_1V8$",   "track2", 1, "")
     # PWRUP_N_1V8 connects pmos_xb.xb7 gate and pmos_xc.xc4 gate (both PCH PWRUP switches)
     s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_N_1V8$", "track2", 1, "")
+
+    # Cross-group: net1 connects xa6 (top of res) to xb7 (top of pmos_xb)
+    layout.addOrthogonalConnectivityRoute(
+        "M4", "M3", r"^net1$",
+        "track0", 1, "", r"^(xa6|xb7)$",
+        accessLayer="M2",
+    )

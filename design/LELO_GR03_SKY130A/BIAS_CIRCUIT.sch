@@ -1,4 +1,5 @@
-v {xschem version=3.4.7 file_version=1.2}
+v {xschem version=3.4.4 file_version=1.2
+}
 G {}
 K {}
 V {}
@@ -57,33 +58,33 @@ N -280 0 -240 0 {lab=PWRUP_N_1V8}
 N -160 170 -130 170 {lab=PWRUP_1V8}
 N 120 170 150 170 {lab=PWRUP_1V8}
 N 185 -20 225 -20 {lab=VB_P}
-N 185 5 225 5 {lab=VB_P}
+N 185 5 225 5 {lab=VB_N}
 C {devices/lab_wire.sym} -10 90 0 1 {name=p8 sig_type=std_logic lab=VB_N}
 C {devices/lab_wire.sym} -150 -160 0 0 {name=p13 sig_type=std_logic lab=VSS}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -50 90 0 1 {name=x3}
-C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -110 -130 2 0 {name=x11 }
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -50 90 0 1 {name=xb6}
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -110 -130 2 0 {name=xa6}
 C {devices/lab_wire.sym} -130 90 2 1 {name=p25 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} -90 250 0 0 {name=l29 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} -90 -270 0 1 {name=l31 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} -160 -190 0 0 {name=p19 sig_type=std_logic lab=PWRUP_N_1V8}
 C {devices/lab_wire.sym} -160 170 0 0 {name=p7 sig_type=std_logic lab=PWRUP_1V8}
-C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -130 -190 0 0 {name=x12 }
-C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -130 170 0 0 {name=x13 }
+C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -130 -190 0 0 {name=xb7}
+C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -130 170 0 0 {name=xb5}
 C {devices/lab_wire.sym} -140 0 2 1 {name=p9 sig_type=std_logic lab=VSS}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 40 90 0 0 {name=x15}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 40 90 0 0 {name=xc2}
 C {devices/lab_wire.sym} 120 90 2 0 {name=p10 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 80 250 0 1 {name=l30 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 150 170 0 1 {name=p11 sig_type=std_logic lab=PWRUP_1V8}
-C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} 120 170 0 1 {name=x16 }
-C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 40 -70 0 0 {name=x17 }
+C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} 120 170 0 1 {name=xc1}
+C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 40 -70 0 0 {name=xc3}
 C {devices/lab_pin.sym} 110 -70 0 1 {name=l32 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} -10 -70 0 0 {name=p12 sig_type=std_logic lab=VB_P}
 C {devices/lab_pin.sym} 80 -270 0 1 {name=l33 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 150 -190 0 1 {name=p14 sig_type=std_logic lab=PWRUP_N_1V8}
-C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} 120 -190 0 1 {name=x18 }
+C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} 120 -190 0 1 {name=xc4}
 C {devices/lab_wire.sym} -150 -30 2 1 {name=p15 sig_type=std_logic lab=VSS}
-C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -110 -60 0 1 {name=x19 }
-C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} -90 -40 1 0 {name=x14 }
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -110 -60 0 1 {name=xa5}
+C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} -90 -40 1 0 {name=xa4}
 C {devices/ipin.sym} -280 -40 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} -280 20 0 0 {name=p2 lab=VSS}
 C {devices/ipin.sym} -280 -20 0 0 {name=p3 lab=PWRUP_1V8}

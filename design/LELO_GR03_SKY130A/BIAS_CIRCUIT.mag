@@ -1,0 +1,60 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1775772000
+<< checkpaint >>
+rect 0 0 8648 10320
+<< metal1 >>
+rect 5440 2200 5632 2280
+rect 5312 360 5376 440
+rect 5312 1960 5376 2040
+rect 7912 840 8104 920
+<< locali >>
+rect 16 16 1864 128
+rect 364 2920 652 3160
+use JNWTR_RPPO4 xa4 ../JNW_TR_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 1880 3440
+use JNWTR_RPPO16 xa5 ../JNW_TR_SKY130A
+transform 1 0 0 0 1 3440
+box 0 3440 4472 6880
+use JNWTR_RPPO16 xa6 ../JNW_TR_SKY130A
+transform 1 0 0 0 1 6880
+box 0 6880 4472 10320
+use JNWATR_NCH_8C1F2 xb5 ../JNW_ATR_SKY130A
+transform 1 0 5152 0 1 0
+box 5152 0 6560 800
+use JNWATR_NCH_4C5F0 xb6 ../JNW_ATR_SKY130A
+transform 1 0 5152 0 1 800
+box 5152 800 6304 1600
+use JNWATR_PCH_8C1F2 xb7 ../JNW_ATR_SKY130A
+transform 1 0 5152 0 1 1600
+box 5152 1600 6560 2400
+use JNWATR_NCH_8C1F2 xc1 ../JNW_ATR_SKY130A
+transform 1 0 7240 0 1 0
+box 7240 0 8648 800
+use JNWATR_NCH_4C5F0 xc2 ../JNW_ATR_SKY130A
+transform 1 0 7240 0 1 800
+box 7240 800 8392 1600
+use JNWATR_PCH_4C5F0 xc3 ../JNW_ATR_SKY130A
+transform 1 0 7240 0 1 1600
+box 7240 1600 8392 2400
+use JNWATR_PCH_8C1F2 xc4 ../JNW_ATR_SKY130A
+transform 1 0 7240 0 1 2400
+box 7240 2400 8648 3200
+<< labels >>
+flabel metal1 s 5440 2200 5632 2280 0 FreeSans 400 0 0 0 VDD_1V8
+port 1 nsew power bidirectional
+flabel locali s 16 16 1864 128 0 FreeSans 400 0 0 0 VSS
+port 2 nsew ground bidirectional
+flabel metal1 s 5312 360 5376 440 0 FreeSans 400 0 0 0 PWRUP_1V8
+port 3 nsew signal bidirectional
+flabel metal1 s 5312 1960 5376 2040 0 FreeSans 400 0 0 0 PWRUP_N_1V8
+port 4 nsew signal bidirectional
+flabel metal1 s 7912 840 8104 920 0 FreeSans 400 0 0 0 VB_P
+port 5 nsew signal bidirectional
+flabel locali s 364 2920 652 3160 0 FreeSans 400 0 0 0 VB_N
+port 6 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 8648 10320
+<< end >>

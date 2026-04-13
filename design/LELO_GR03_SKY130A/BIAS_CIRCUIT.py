@@ -78,13 +78,12 @@ def afterPlace(layout):
     # massive connectivity failures. The unfilled height gap above pmos_xb
     # may prompt a DRC diff-edge violation that we'll address in Task 14.
 
-    # Vertical abut nmos above pmos. Then place the resistor stack to the
-    # RIGHT of the transistor column instead of stacking it on top — the
-    # resistor cells are much wider than the transistors and their M1
-    # bulk frames would otherwise span the full cell width, blocking the
-    # power straps that addPowerConnection extends from the pmos bulks.
+    # Vertical abut: pmos above nmos, res above pmos. This is the required
+    # floorplan (resistors above the transistor column so VB_P exits left
+    # and VB_N exits right). We avoid the earlier "cell-spanning M1 sheet"
+    # problem by excluding xa* from addPowerConnection in beforeRoute.
     pmos.abutTop(nmos, space=branch_gap)
-    res.abutRight(pmos, space=branch_gap)
+    res.abutTop(pmos,  space=branch_gap)
 
     for g in (res, pmos, nmos):
         g.updateBoundingRect()
@@ -97,27 +96,27 @@ def afterPlace(layout):
 
 
 def beforeRoute(layout):
-    # Power rings (M1, drawn explicitly because noPowerRoute=True)
+    # Power rings (M1, drawn explicitly because noPowerRoute=True).
     layout.addRouteRing("M1", "VDD_1V8", "t", widthmult=3, spacemult=2)
     layout.addRouteRing("M1", "VSS",     "b", widthmult=3, spacemult=2)
-    # Connect transistor bulks to the M1 power rings. Restrict the include
-    # list to ^x[bc] so that the resistor instances (xa4/5/6) are NOT
-    # included — cicpy's addPowerConnection extends the resistor's wide
-    # M1 bulk frame to the rings, producing a cell-spanning M1 sheet.
-    layout.addPowerConnection("VDD_1V8", r"^x[bc]\d+$", "top")
-    layout.addPowerConnection("VSS",     r"^x[bc]\d+$", "bottom")
+    # VSS connects nmos sources down to the bottom ring (clear path).
+    layout.addPowerConnection("VSS", r"^x[bc]\d+$", "bottom")
+    # VDD: no in-cell strap — any strap direction crosses either res's M1
+    # bulk frames (top, through res) or pmos signal nets (right, across).
+    # Rely on parent cell to route VDD via the top ring.
 
     # In-group signal routes (M2 vertical stub + M3 horizontal trunk)
     s = layout._route_scopes
     # VB_N spans nmos_xc.xc2 (gate) and nmos_xb.xb6 (gate=drain, since it's diode-connected)
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_N$", "track0", 1, "")
-    # VB_P at xc3 (gate=drain, since it's diode-connected)
-    s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_P$", "track0", 1, "")
+    # VB_P at xc3 (diode-connected, gate=drain). Local vertical M2 strap only —
+    # no horizontal trunk needed because VB_P lives at a single device.
+    s["pmos"].addConnectivityRoute("M2", r"^VB_P$", "||", "", 1, "")
 
     # PWRUP_1V8 connects nmos_xb.xb5 gate and nmos_xc.xc1 gate (both NCH PWRUP switches)
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_1V8$",   "track2", 1, "")
     # PWRUP_N_1V8 connects pmos_xb.xb7 gate and pmos_xc.xc4 gate (both PCH PWRUP switches)
-    s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_N_1V8$", "track2,left", 1, "")
+    s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_N_1V8$", "track-2", 1, "")
 
     # Intra-stack source/drain shorts. cicpy stacks do NOT auto-share
     # diffusion between adjacent devices; the schematic-defined nets that
@@ -128,7 +127,12 @@ def beforeRoute(layout):
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^net3$", "track4", 1, "")
     s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^net4$", "track4", 1, "")
 
-    # Resistor stack internal nets (xa5.N↔xa6.N=net5, xa4.P↔xa5.P=net6) — TODO
+    # Resistor stack internal nets (xa5↔xa6 via net5, xa4↔xa5 via net6).
+    # Resistors expose terminals on M1. Use the orthogonal API with
+    # accessLayer=M1 so the trunk lands on M2/M3 (avoiding the M1 plane
+    # where VSS bulk rects would short to our signal).
+    s["res"].addOrthogonalConnectivityRoute("M2", "M3", r"^net5$", "track0",  1, "", accessLayer="M1")
+    s["res"].addOrthogonalConnectivityRoute("M2", "M3", r"^net6$", "track-4", 1, "", accessLayer="M1")
 
     # Cross-group: net1 connects xa6 (top of res) to xb7 (top of pmos_xb)
     layout.addOrthogonalConnectivityRoute(
@@ -142,4 +146,4 @@ def afterPorts(layout):
     layout.addPortOnEdge("M3", "VB_P",        "left",  "|-", "track0")
     layout.addPortOnEdge("M3", "PWRUP_1V8",   "left",  "|-", "track2")
     layout.addPortOnEdge("M3", "PWRUP_N_1V8", "left",  "|-", "track4")
-    # layout.addPortOnEdge("M3", "VB_N",        "right", "-|", "track0")  # debug
+    # layout.addPortOnEdge("M3", "VB_N",        "right", "-|", "offset_track0")  # debug: testing net6

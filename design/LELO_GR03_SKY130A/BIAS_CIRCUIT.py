@@ -74,7 +74,13 @@ def afterPlace(layout):
     # nmos_xc and nmos_xb both have 2 devices, no fill needed.
     pmos.fillDummyTransistors(direction="top")
     pmos.routeDummyDevices()
-    nmos.routeDummyDevices()
+
+    # Vertical abut: pmos above nmos, res above pmos
+    pmos.abutTop(nmos, space=branch_gap)
+    res.abutTop(pmos,  space=branch_gap)
+
+    for g in (res, pmos, nmos):
+        g.updateBoundingRect()
 
     layout._route_scopes = {
         "res": res,   "res_stack": res_stack,

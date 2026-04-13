@@ -16,3 +16,10 @@ data = {
         {"resetOrigins": [[1]]},
     ]
 }
+
+
+def beforePlace(layout):
+    layout.noPowerRoute     = True
+    layout.place_xspace     = [0]
+    layout.place_yspace     = [0]
+    layout.place_groupbreak = [3]   # res / pmos / nmos = 3 column groups

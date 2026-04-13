@@ -22,4 +22,45 @@ def beforePlace(layout):
     layout.noPowerRoute     = True
     layout.place_xspace     = [0]
     layout.place_yspace     = [0]
-    layout.place_groupbreak = [3]   # res / pmos / nmos = 3 column groups
+    layout.place_groupbreak = [3]   # wrap after 3 instance groups (xa, xb, xc)
+
+
+def _inst(layout, name):
+    return layout.getInstanceFromInstanceName(name)
+
+
+def afterPlace(layout):
+    # res group (top) — single resistor stack
+    res = layout.makeCellGroup("res")
+    res_stack = res.addStack("res_stack", [
+        _inst(layout, "xa4"),
+        _inst(layout, "xa5"),
+        _inst(layout, "xa6"),
+    ])
+
+    # pmos group (middle)
+    pmos = layout.makeCellGroup("pmos")
+    pmos_xc = pmos.addStack("pmos_xc", [
+        _inst(layout, "xc3"),
+        _inst(layout, "xc4"),
+    ])
+    pmos_xb = pmos.addStack("pmos_xb", [
+        _inst(layout, "xb7"),
+    ])
+
+    # nmos group (bottom)
+    nmos = layout.makeCellGroup("nmos")
+    nmos_xc = nmos.addStack("nmos_xc", [
+        _inst(layout, "xc1"),
+        _inst(layout, "xc2"),
+    ])
+    nmos_xb = nmos.addStack("nmos_xb", [
+        _inst(layout, "xb5"),
+        _inst(layout, "xb6"),
+    ])
+
+    layout._scopes = {
+        "res": res,   "res_stack": res_stack,
+        "pmos": pmos, "pmos_xc": pmos_xc, "pmos_xb": pmos_xb,
+        "nmos": nmos, "nmos_xc": nmos_xc, "nmos_xb": nmos_xb,
+    }

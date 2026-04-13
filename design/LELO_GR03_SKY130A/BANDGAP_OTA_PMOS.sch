@@ -62,7 +62,7 @@ C {devices/ipin.sym} -100 -190 0 0 {name=p5 lab=PWRUP_N_1V8}
 C {devices/ipin.sym} -50 -270 0 0 {name=p21 lab=VDD}
 C {devices/lab_wire.sym} 450 190 2 0 {name=p24 sig_type=std_logic lab=VSS}
 C {devices/ipin.sym} -100 320 0 0 {name=p15 lab=PWRUP_1V8}
-C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 350 100 1 1 {name=x11[2:0]}
+C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 350 100 1 1 {name=x11[1:0]}
 C {devices/lab_wire.sym} 290 120 2 1 {name=p32 sig_type=std_logic lab=VSS}
 C {devices/title.sym} -320 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
 C {devices/ipin.sym} -180 -90 0 0 {name=p7 lab=VB_P}

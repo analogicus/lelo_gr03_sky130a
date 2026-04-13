@@ -92,8 +92,8 @@ N 100 230 100 310 {lab=DV}
 N -180 110 -180 150 {lab=#net6}
 N -180 230 -180 280 {lab=#net1}
 N -400 -200 820 -200 {lab=SUPPLY}
-N 120 190 140 190 {lab=VSS}
 N -220 190 -200 190 {lab=VSS}
+N 120 190 140 190 {lab=VSS}
 C {devices/lab_wire.sym} -130 120 0 0 {name=p9 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 100 410 0 1 {name=p13 sig_type=std_logic lab=VD2}
 C {devices/lab_pin.sym} 100 280 0 1 {name=p18 sig_type=std_logic lab=DV}
@@ -102,7 +102,7 @@ C {devices/opin.sym} 140 90 0 0 {name=p15 lab=V_CTAT}
 C {devices/ipin.sym} -90 -360 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} -400 530 0 0 {name=p2 lab=VSS}
 C {devices/lab_wire.sym} 20 -130 0 0 {name=p3 sig_type=std_logic lab=VP}
-C {sky130_fd_pr/pnp_05v5.sym} 80 460 0 0 {name=Q2[63:0]
+C {sky130_fd_pr/pnp_05v5.sym} 80 460 0 0 {name=Q2[47:0]
 model=pnp_05v5_W3p40L3p40
 m=1
 spiceprefix=X
@@ -117,7 +117,6 @@ C {devices/lab_wire.sym} -130 60 0 0 {name=p20 sig_type=std_logic lab=PWRUP_1V8}
 C {devices/ipin.sym} -330 100 0 0 {name=p7 lab=PWRUP_N_1V8}
 C {devices/title.sym} -280 -420 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
 C {devices/ipin.sym} -330 140 0 0 {name=p8 lab=VB_P}
-C {devices/lab_wire.sym} -130 190 0 0 {name=p10 sig_type=std_logic lab=VB_P}
 C {devices/lab_wire.sym} -220 -30 0 0 {name=p27 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} -120 -30 0 1 {name=p28 sig_type=std_logic lab=VP}
 C {devices/lab_wire.sym} 140 -30 0 1 {name=p31 sig_type=std_logic lab=VDD_1V8}
@@ -156,7 +155,8 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_2C5F0.sym} -140 -30 0 1 {name=x10}
 C {JNW_ATR_SKY130A/JNWATR_PCH_2C5F0.sym} 310 -30 0 0 {name=x17}
 C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 100 310 1 0 {name=x1 }
 C {devices/lab_wire.sym} 170 -200 0 0 {name=p19 sig_type=std_logic lab=SUPPLY}
+C {devices/lab_wire.sym} -130 190 0 0 {name=p5 sig_type=std_logic lab=VB_P}
+C {devices/lab_pin.sym} -220 190 2 1 {name=p10 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 140 190 2 0 {name=p14 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} -220 190 2 1 {name=p16 sig_type=std_logic lab=VSS}
 C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} 100 230 3 0 {name=x2 }
-C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} -180 150 1 0 {name=x5 }
+C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} -180 150 1 0 {name=x5 }

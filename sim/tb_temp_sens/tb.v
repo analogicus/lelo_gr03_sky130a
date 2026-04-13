@@ -10,12 +10,12 @@ module tb;
   localparam LFCLK_HALF = 15259; // ns (half period)
 
   reg clk = 0;
-  reg rst = 0;
+  reg rst_n = 0;
   reg start = 0;
   wire clk_osc_w;
   reg  clk_osc;
   always @(*) clk_osc = clk_osc_w;
-  wire [`WIDTH-1:0] osc_count;
+  wire [`WIDTH-2:0] osc_count;
   wire pwrup_osc;
 
   always #(LFCLK_HALF) clk = ~clk;
@@ -32,7 +32,7 @@ module tb;
     .WIDTH(`WIDTH)
   ) u_dut (
     .i_clk(clk),
-    .i_rst(rst),
+    .i_rst_n(rst_n),
     .i_start(start),
     .i_clk_osc(clk_osc),
     .o_osc_count(osc_count),
@@ -51,8 +51,8 @@ module tb;
     temperature = 25;
 
     // Reset sequence: assert rst (0->1 posedge), then release
-    rst = 1;
-    #100 rst = 0;
+    rst_n = 0;
+    #100 rst_n = 1;
 
     // Wait a few clocks for FSM to settle in IDLE
     repeat (4) @(posedge clk);

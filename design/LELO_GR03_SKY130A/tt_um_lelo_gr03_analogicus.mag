@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1775144005
+timestamp 1775985069
 << locali >>
 rect 28516 21388 28834 21436
 rect 28894 21388 28953 21436
@@ -250,10 +250,6 @@ use LELO_GR03  LELO_GR03_0
 timestamp 1769081024
 transform 1 0 1100 0 1 1200
 box 0 0 30000 19000
-use temp_sens  temp_sens_0
-timestamp 1775144005
-transform 1 0 15800 0 1 1472
-box 0 2128 13772 15916
 << labels >>
 flabel metal4 s 6686 22104 6746 22304 0 FreeSans 480 90 0 0 clk
 port 0 nsew signal input

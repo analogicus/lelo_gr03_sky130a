@@ -66,6 +66,16 @@ def afterPlace(layout):
     pmos_xc.abutLeft(pmos_xb, space=branch_gap)
     nmos_xc.abutLeft(nmos_xb, space=branch_gap)
 
+    # Add CTAPBOT/CTAPTOP per stack
+    for s in (pmos_xc, pmos_xb, nmos_xc, nmos_xb):
+        s.addTaps()
+
+    # pmos_xb has 1 device, pmos_xc has 2 → fill xb with a dummy on top.
+    # nmos_xc and nmos_xb both have 2 devices, no fill needed.
+    pmos.fillDummyTransistors(direction="top")
+    pmos.routeDummyDevices()
+    nmos.routeDummyDevices()
+
     layout._route_scopes = {
         "res": res,   "res_stack": res_stack,
         "pmos": pmos, "pmos_xc": pmos_xc, "pmos_xb": pmos_xb,

@@ -100,3 +100,5 @@ def beforeRoute(layout):
     s = layout._route_scopes
     # VB_N spans nmos_xc.xc2 (gate) and nmos_xb.xb6 (gate=drain, since it's diode-connected)
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_N$", "track0", 1, "")
+    # VB_P at xc3 (gate=drain, since it's diode-connected)
+    s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_P$", "track0", 1, "")

@@ -17,3 +17,6 @@ CELL=LELO_GR03
 CELLS = LELO_GR03
 
 include ../tech/make/core.make
+
+mag:
+	cicpy sch2mag ${LIB} ${CELL} ${OPT}

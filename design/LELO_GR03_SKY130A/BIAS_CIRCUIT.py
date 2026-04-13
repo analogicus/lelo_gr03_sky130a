@@ -70,14 +70,21 @@ def afterPlace(layout):
     for s in (pmos_xc, pmos_xb, nmos_xc, nmos_xb):
         s.addTaps()
 
-    # pmos_xb has 1 device, pmos_xc has 2 → fill xb with a dummy on top.
-    # nmos_xc and nmos_xb both have 2 devices, no fill needed.
-    pmos.fillDummyTransistors(direction="top")
-    pmos.routeDummyDevices()
+    # NOTE: pmos_xb is one device shorter than pmos_xc, but we deliberately
+    # do NOT call pmos.fillDummyTransistors() here. cicpy's helper places a
+    # fake transistor cell with the SAME cell name as the base device and
+    # then routes its bulk-to-D/S terminals on M1, which both shorts the
+    # auto-generated VDD power straps to internal signal nets and causes
+    # massive connectivity failures. The unfilled height gap above pmos_xb
+    # may prompt a DRC diff-edge violation that we'll address in Task 14.
 
-    # Vertical abut: pmos above nmos, res above pmos
+    # Vertical abut nmos above pmos. Then place the resistor stack to the
+    # RIGHT of the transistor column instead of stacking it on top — the
+    # resistor cells are much wider than the transistors and their M1
+    # bulk frames would otherwise span the full cell width, blocking the
+    # power straps that addPowerConnection extends from the pmos bulks.
     pmos.abutTop(nmos, space=branch_gap)
-    res.abutTop(pmos,  space=branch_gap)
+    res.abutRight(pmos, space=branch_gap)
 
     for g in (res, pmos, nmos):
         g.updateBoundingRect()
@@ -93,8 +100,12 @@ def beforeRoute(layout):
     # Power rings (M1, drawn explicitly because noPowerRoute=True)
     layout.addRouteRing("M1", "VDD_1V8", "t", widthmult=3, spacemult=2)
     layout.addRouteRing("M1", "VSS",     "b", widthmult=3, spacemult=2)
-    layout.addPowerConnection("VDD_1V8", "", "top")
-    layout.addPowerConnection("VSS",     "", "bottom")
+    # Connect transistor bulks to the M1 power rings. Restrict the include
+    # list to ^x[bc] so that the resistor instances (xa4/5/6) are NOT
+    # included — cicpy's addPowerConnection extends the resistor's wide
+    # M1 bulk frame to the rings, producing a cell-spanning M1 sheet.
+    layout.addPowerConnection("VDD_1V8", r"^x[bc]\d+$", "top")
+    layout.addPowerConnection("VSS",     r"^x[bc]\d+$", "bottom")
 
     # In-group signal routes (M2 vertical stub + M3 horizontal trunk)
     s = layout._route_scopes
@@ -106,7 +117,18 @@ def beforeRoute(layout):
     # PWRUP_1V8 connects nmos_xb.xb5 gate and nmos_xc.xc1 gate (both NCH PWRUP switches)
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_1V8$",   "track2", 1, "")
     # PWRUP_N_1V8 connects pmos_xb.xb7 gate and pmos_xc.xc4 gate (both PCH PWRUP switches)
-    s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_N_1V8$", "track2", 1, "")
+    s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_N_1V8$", "track2,left", 1, "")
+
+    # Intra-stack source/drain shorts. cicpy stacks do NOT auto-share
+    # diffusion between adjacent devices; the schematic-defined nets that
+    # bridge a stack pair (xb5.D↔xb6.S, xc1.D↔xc2.S, xc4.D↔xc3.S) need
+    # explicit metal routes. Use track4 to clear the existing track0/track2
+    # trunks above and stay inside each stack's column.
+    s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^net2$", "track4", 1, "")
+    s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^net3$", "track4", 1, "")
+    s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^net4$", "track4", 1, "")
+
+    # Resistor stack internal nets (xa5.N↔xa6.N=net5, xa4.P↔xa5.P=net6) — TODO
 
     # Cross-group: net1 connects xa6 (top of res) to xb7 (top of pmos_xb)
     layout.addOrthogonalConnectivityRoute(
@@ -120,4 +142,4 @@ def afterPorts(layout):
     layout.addPortOnEdge("M3", "VB_P",        "left",  "|-", "track0")
     layout.addPortOnEdge("M3", "PWRUP_1V8",   "left",  "|-", "track2")
     layout.addPortOnEdge("M3", "PWRUP_N_1V8", "left",  "|-", "track4")
-    layout.addPortOnEdge("M3", "VB_N",        "right", "-|", "track0")
+    # layout.addPortOnEdge("M3", "VB_N",        "right", "-|", "track0")  # debug

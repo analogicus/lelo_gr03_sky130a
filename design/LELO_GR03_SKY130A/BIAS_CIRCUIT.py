@@ -114,3 +114,10 @@ def beforeRoute(layout):
         "track0", 1, "", r"^(xa6|xb7)$",
         accessLayer="M2",
     )
+
+
+def afterPorts(layout):
+    layout.addPortOnEdge("M3", "VB_P",        "left",  "|-", "track0")
+    layout.addPortOnEdge("M3", "PWRUP_1V8",   "left",  "|-", "track2")
+    layout.addPortOnEdge("M3", "PWRUP_N_1V8", "left",  "|-", "track4")
+    layout.addPortOnEdge("M3", "VB_N",        "right", "-|", "track0")

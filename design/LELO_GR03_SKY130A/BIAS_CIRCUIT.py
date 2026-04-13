@@ -102,3 +102,8 @@ def beforeRoute(layout):
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_N$", "track0", 1, "")
     # VB_P at xc3 (gate=drain, since it's diode-connected)
     s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^VB_P$", "track0", 1, "")
+
+    # PWRUP_1V8 connects nmos_xb.xb5 gate and nmos_xc.xc1 gate (both NCH PWRUP switches)
+    s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_1V8$",   "track2", 1, "")
+    # PWRUP_N_1V8 connects pmos_xb.xb7 gate and pmos_xc.xc4 gate (both PCH PWRUP switches)
+    s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^PWRUP_N_1V8$", "track2", 1, "")

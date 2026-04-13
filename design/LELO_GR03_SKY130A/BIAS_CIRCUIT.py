@@ -59,6 +59,13 @@ def afterPlace(layout):
         _inst(layout, "xb6"),
     ])
 
+    branch_gap = 2 * layout.um
+
+    # cicpy default place() puts xb at smaller x than xc (alphabetic).
+    # Swap them so xc is on the LEFT and xb is on the RIGHT, per requirement.
+    pmos_xc.abutLeft(pmos_xb, space=branch_gap)
+    nmos_xc.abutLeft(nmos_xb, space=branch_gap)
+
     layout._route_scopes = {
         "res": res,   "res_stack": res_stack,
         "pmos": pmos, "pmos_xc": pmos_xc, "pmos_xb": pmos_xb,

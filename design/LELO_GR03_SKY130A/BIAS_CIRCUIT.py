@@ -96,16 +96,16 @@ def afterPlace(layout):
 
 
 def beforeRoute(layout):
-    # Power rings (M1, drawn explicitly because noPowerRoute=True).
+    # Power rings. VSS on cicpy M1 (Magic locali) with a clean downward
+    # strap from nmos sources. VDD ring is drawn but NOT connected in
+    # cicpy — any in-cell VDD strap direction either crosses res's
+    # locali bulk frames or cicpy's internal signal tracks. The VDD
+    # strap, the resistor intra-stack nets (net5/net6), and the diode
+    # gate/drain bridges (xc3, xb6, xc2) are all added in a klayout
+    # post-processing step; see work/post_process.py.
     layout.addRouteRing("M1", "VDD_1V8", "t", widthmult=3, spacemult=2)
     layout.addRouteRing("M1", "VSS",     "b", widthmult=3, spacemult=2)
-    # VSS connects nmos sources down to the bottom ring (clear path).
     layout.addPowerConnection("VSS", r"^x[bc]\d+$", "bottom")
-    # VDD: strap pmos sources up to the top ring. cicpy's connectivity
-    # check will flag this as a geometric short with res's M1 bulk frames
-    # (which are labeled VSS), but Magic's extractor and netgen LVS treat
-    # same-label rectangles as one net — see if LVS accepts it.
-    layout.addPowerConnection("VDD_1V8", r"^x[bc]\d+$", "top")
 
     # In-group signal routes (M2 vertical stub + M3 horizontal trunk)
     s = layout._route_scopes
@@ -131,14 +131,8 @@ def beforeRoute(layout):
     s["nmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^net3$", "track4", 1, "")
     s["pmos"].addOrthogonalConnectivityRoute("M2", "M3", r"^net4$", "track4", 1, "")
 
-    # Resistor stack internal nets (xa5↔xa6 via net5, xa4↔xa5 via net6).
-    # Resistors expose terminals on M1. Use the orthogonal API with
-    # accessLayer=M1 so the trunk lands on M2/M3 (avoiding the M1 plane
-    # where VSS bulk rects would short to our signal).
-    s["res"].addOrthogonalConnectivityRoute("M2", "M3", r"^net5$", "track0", 1, "", accessLayer="M1")
-    # net6 uses a local vertical M2 strap so no wide M3 trunk collides
-    # with the VB_N right-edge port extension.
-    s["res"].addConnectivityRoute("M2", r"^net6$", "||", "", 1, "")
+    # net5 and net6 are resistor intra-stack nets — deferred to klayout
+    # post-processing, see work/post_process.py.
 
     # Cross-group: net1 connects xa6 (top of res) to xb7 (top of pmos_xb)
     layout.addOrthogonalConnectivityRoute(

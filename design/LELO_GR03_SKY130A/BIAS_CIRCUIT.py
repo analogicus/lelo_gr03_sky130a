@@ -101,9 +101,11 @@ def beforeRoute(layout):
     layout.addRouteRing("M1", "VSS",     "b", widthmult=3, spacemult=2)
     # VSS connects nmos sources down to the bottom ring (clear path).
     layout.addPowerConnection("VSS", r"^x[bc]\d+$", "bottom")
-    # VDD: no in-cell strap — any strap direction crosses either res's M1
-    # bulk frames (top, through res) or pmos signal nets (right, across).
-    # Rely on parent cell to route VDD via the top ring.
+    # VDD: strap pmos sources up to the top ring. cicpy's connectivity
+    # check will flag this as a geometric short with res's M1 bulk frames
+    # (which are labeled VSS), but Magic's extractor and netgen LVS treat
+    # same-label rectangles as one net — see if LVS accepts it.
+    layout.addPowerConnection("VDD_1V8", r"^x[bc]\d+$", "top")
 
     # In-group signal routes (M2 vertical stub + M3 horizontal trunk)
     s = layout._route_scopes

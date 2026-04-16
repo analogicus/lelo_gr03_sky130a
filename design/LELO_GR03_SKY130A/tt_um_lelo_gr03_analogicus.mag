@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1775985069
+timestamp 1776377568
 << locali >>
 rect 28516 21388 28834 21436
 rect 28894 21388 28953 21436
@@ -238,6 +238,10 @@ rect 27662 21978 27722 22038
 rect 28214 21974 28274 22034
 rect 28766 21976 28826 22036
 rect 29318 21972 29378 22032
+use BANDGAP_CIRCUIT  BANDGAP_CIRCUIT_0
+timestamp 1776377568
+transform 1 0 -8244 0 1 -14740
+box 10544 17180 22796 33842
 use JNWTR_TAPCELLB_CV  JNWTR_TAPCELLB_CV_0 JNW_TR_SKY130A
 timestamp 1775144005
 transform 1 0 27886 0 1 20846
@@ -250,6 +254,10 @@ use LELO_GR03  LELO_GR03_0
 timestamp 1769081024
 transform 1 0 1100 0 1 1200
 box 0 0 30000 19000
+use temp_sens  temp_sens_0
+timestamp 1775985069
+transform 1 0 17160 0 1 5232
+box 0 2128 12866 15920
 << labels >>
 flabel metal4 s 6686 22104 6746 22304 0 FreeSans 480 90 0 0 clk
 port 0 nsew signal input

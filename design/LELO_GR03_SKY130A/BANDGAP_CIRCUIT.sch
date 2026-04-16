@@ -102,7 +102,7 @@ C {devices/opin.sym} 140 90 0 0 {name=p15 lab=V_CTAT}
 C {devices/ipin.sym} -90 -360 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} -400 530 0 0 {name=p2 lab=VSS}
 C {devices/lab_wire.sym} 20 -130 0 0 {name=p3 sig_type=std_logic lab=VP}
-C {sky130_fd_pr/pnp_05v5.sym} 80 460 0 0 {name=Q2[47:0]
+C {sky130_fd_pr/pnp_05v5.sym} 80 460 0 0 {name=Q2[23:0]
 model=pnp_05v5_W3p40L3p40
 m=1
 spiceprefix=X

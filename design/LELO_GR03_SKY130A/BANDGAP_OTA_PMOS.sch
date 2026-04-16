@@ -4,7 +4,7 @@ K {}
 V {}
 S {}
 E {}
-N -190 30 -150 30 {lab=IN-}
+N -190 30 -150 30 {lab=INN}
 N 410 220 410 260 {lab=#net1}
 N 410 190 450 190 {lab=VSS}
 N 410 60 470 60 {lab=OUT}
@@ -70,7 +70,7 @@ N 460 -160 500 -160 {lab=VSS}
 N 500 -230 520 -230 {lab=VSS}
 N 520 -230 520 -200 {lab=VSS}
 N 330 100 340 100 {lab=#net5}
-C {devices/ipin.sym} -190 30 0 0 {name=p4 lab=IN-}
+C {devices/ipin.sym} -190 30 0 0 {name=p4 lab=INN}
 C {devices/opin.sym} 470 60 0 0 {name=p9 lab=OUT}
 C {devices/ipin.sym} -110 360 0 0 {name=p1 lab=VSS}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 370 190 0 0 {name=x6}
@@ -90,11 +90,9 @@ C {devices/lab_wire.sym} 90 30 2 1 {name=p13 sig_type=std_logic lab=VDD}
 C {devices/lab_wire.sym} -90 30 2 0 {name=p23 sig_type=std_logic lab=VDD}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 70 190 0 0 {name=x3}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -70 190 0 1 {name=x4}
-C {devices/ipin.sym} 190 30 0 1 {name=p25 lab=IN+}
+C {devices/ipin.sym} 190 30 0 1 {name=p25 lab=INP}
 C {devices/lab_wire.sym} 130 190 2 0 {name=p2 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} -130 190 2 1 {name=p3 sig_type=std_logic lab=VSS}
-C {LELO_ATR_SKY130A/LELOATR_LVT_PCH_4C5F0.sym} -150 30 0 0 {name=x2[2:0]}
-C {LELO_ATR_SKY130A/LELOATR_LVT_PCH_4C5F0.sym} 150 30 0 1 {name=x5[2:0]}
 C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -40 -190 0 0 {name=x1[2:0]}
 C {JNW_ATR_SKY130A/JNWATR_NCH_8C1F2.sym} -40 320 0 0 {name=x4[2:0]}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 310 -200 0 0 {name=x6[2:0]}
@@ -105,3 +103,5 @@ C {devices/lab_wire.sym} 0 -40 0 0 {name=p16 sig_type=std_logic lab=I_TAIL}
 C {devices/lab_wire.sym} 290 120 2 1 {name=p32 sig_type=std_logic lab=VSS}
 C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} 250 100 0 0 {name=x5 }
 C {JNW_TR_SKY130A/JNWTR_CAPX4.sym} 400 100 3 0 {name=x1 }
+C {LELO_ATR_SKY130A/LELOATR_LVT_PCH_4C5F0.sym} -150 30 0 0 {name=x8[2:0]}
+C {LELO_ATR_SKY130A/LELOATR_LVT_PCH_4C5F0.sym} 150 30 0 1 {name=x2[2:0]}

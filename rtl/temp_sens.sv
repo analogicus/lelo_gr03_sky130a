@@ -73,7 +73,7 @@ module temp_sens #(
   // ---------------------------------------------------------------
   // Capture register (i_clk domain)
   // ---------------------------------------------------------------
-  localparam int OFFSET = 150; // Simulated value, won't cause overflow
+  localparam int OFFSET = 120; // Simulated value, won't cause overflow
 
   always_ff @(posedge i_clk, negedge i_rst_n) begin
     if (!i_rst_n) o_osc_count <= 0;

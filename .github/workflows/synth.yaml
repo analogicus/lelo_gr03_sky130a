@@ -13,23 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install AppImage prerequisites
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libfuse2 file
-
-      - name: Download LibreLane AppImage (3.0.2)
-        run: |
-          curl -sSL -o librelane.AppImage \
-            https://github.com/librelane/librelane/releases/download/3.0.2/librelane-devshell-x86_64.AppImage
-          chmod +x librelane.AppImage
-          ./librelane.AppImage --appimage-extract >/dev/null
-          ls squashfs-root/bin | head -5 || true
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            extra-substituters = https://nix-cache.fossi-foundation.org
+            extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
 
       - name: Run LibreLane flow
         working-directory: rtl
         run: |
-          ../squashfs-root/AppRun librelane --pdk-root $HOME/.volare config.json
+          nix run 'github:librelane/librelane/3.0.2#librelane' -- \
+            --pdk-root $HOME/.volare config.json
 
       - name: Collect outputs
         if: always()
@@ -37,9 +33,9 @@ jobs:
           mkdir -p /tmp/out
           if [ -d rtl/runs ]; then
             latest=$(ls -td rtl/runs/*/ | head -1)
+            cp -r "$latest" /tmp/out/full_run || true
             cp -r "$latest/final" /tmp/out/final || true
             cp "$latest/final_summary.log" /tmp/out/ 2>/dev/null || true
-            cp -r "$latest" /tmp/out/full_run || true
           fi
 
       - uses: actions/upload-artifact@v4

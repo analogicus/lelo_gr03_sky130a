@@ -1,0 +1,44 @@
+  Key shortcuts (Altium equivalents)
+
+  ┌─────────┬────────────────────────┬───────────────────┐
+  │ KLayout │         Action         │ Altium equivalent │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ S       │ Select                 │ Click-select      │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ G       │ Move                   │ M                 │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ Shift+P │ Path (wire)            │ Route track       │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ B       │ Box (rectangle)        │ Place fill        │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ E       │ Partial edit (reshape) │ Vertex drag       │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ Q       │ Properties             │ Double-click      │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ R       │ Ruler / measure        │ Dimension         │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ H / V   │ Flip horiz / vert      │ X / Y             │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ , / .   │ Rotate CCW / CW        │ Spacebar          │
+  ├─────────┼────────────────────────┼───────────────────┤7
+  │ Tab     │ Enter coordinates      │ Tab (same!)       │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ D / A   │ Descend / ascend cell  │ —                 │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ F2      │ Zoom fit               │ Home              │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ F3      │ Editor options         │ —                 │
+  ├─────────┼────────────────────────┼───────────────────┤
+  │ #       │ Toggle grid display    │ —                 │
+  └─────────┴────────────────────────┴───────────────────┘
+
+  Routing workflow
+
+  1. Click the target layer in the left panel (e.g., met2 -
+  69/20)
+  2. Press Shift+P for the Path tool
+  3. Press F3 to set path width (e.g., 0.14 µm for minimum
+  met1/met2 in SKY130)
+  4. Click to route, double-click or Enter to finish
+  5. Use E (partial mode) to reshape existing routes by
+  dragging edges/vertices

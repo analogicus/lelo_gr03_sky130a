@@ -1,0 +1,17 @@
+    ┌──────────────────────┐      ← top
+    │        res           │
+    │  xa6  (RPPO16)       │   resistor chain, net1 at top,
+    │  xa5  (RPPO16)       │   VB_N at bottom (closest to transistors)
+    │  xa4  (RPPO4)        │
+    ├──────────┬───────────┤
+    │   xc4    │           │
+    │   xc3    │   xb7     │   pmos row: xc stack (2 dev)
+    │ (dummy?) │           │           xb stack (1 dev + optional dummy)
+    ├──────────┼───────────┤
+    │   xc2    │   xb6     │   matched pair (4C5F0) sit adjacent
+    │   xc1    │   xb5     │   PWRUP sw at bottom (closest to VSS ring)
+    └──────────┴───────────┘      ← bottom
+          ↑               ↑
+        VB_P            VB_N
+        
+        

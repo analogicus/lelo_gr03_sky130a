@@ -27,3 +27,4 @@ sim/tb_temp_sens/*.csv
 CLAUDE.md
 rtl/runs/
 *.pdf
+docs/plans/

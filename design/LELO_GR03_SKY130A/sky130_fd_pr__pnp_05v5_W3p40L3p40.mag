@@ -1,0 +1,15 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1744815600
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40 X0 /opt/pdk/share/pdk/sky130A/libs.ref/sky130_fd_pr/mag
+timestamp 1767376183
+transform 1 0 0 0 1 0
+box 0 0 1340 1340
+<< labels >>
+flabel locali s 554 626 802 730 0 FreeSans 400 0 0 0 Emitter
+flabel locali s 613 1252 714 1301 0 FreeSans 400 0 0 0 Collector
+flabel locali s 590 1102 708 1142 0 FreeSans 400 0 0 0 Base
+<< properties >>
+string FIXED_BBOX 0 0 1340 1340
+<< end >>

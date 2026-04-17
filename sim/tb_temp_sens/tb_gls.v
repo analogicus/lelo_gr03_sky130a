@@ -61,6 +61,12 @@ module tb;
     #100 rst_n = 1;
     repeat (4) @(posedge clk);
 
+    // Warmup measurement discarded: the first post-reset sample latches X
+    // before SDF-annotated flops have a known state on both clock domains.
+    @(posedge clk) start = 1;
+    @(posedge clk) start = 0;
+    repeat (5) @(posedge clk);
+
     for (temperature = -40; temperature <= 125; temperature = temperature + 1) begin
       @(posedge clk) start = 1;
       @(posedge clk) start = 0;

@@ -36,16 +36,19 @@ clean:
 # Gate-level simulation with SDF back-annotation.
 #   Consumes LibreLane outputs under ../../rtl/runs/<latest>/final/
 # ------------------------------------------------------------
-RUN_DIR := $(shell ls -td ../../rtl/runs/*/ 2>/dev/null | head -1)
-NL      := $(RUN_DIR)final/pnl/temp_sens.nl.v
-SDF     := $(shell ls $(RUN_DIR)final/signoff/*.sdf 2>/dev/null | head -1)
+RUN_DIR  := $(shell ls -td ../../rtl/runs/*/ 2>/dev/null | head -1)
+# Support both layouts: local nix-run ($(RUN_DIR)final/...) and CI artifact
+# ($(RUN_DIR)full_run/final/...).
+FINAL    := $(shell for p in $(RUN_DIR)final $(RUN_DIR)full_run/final; do [ -d $$p ] && echo $$p && break; done)
+NL       := $(shell ls $(FINAL)/pnl/temp_sens.*.v 2>/dev/null | head -1)
+SDF      := $(shell ls $(FINAL)/sdf/nom_tt_025C_1v80/*.sdf 2>/dev/null | head -1)
 SKY130V := /opt/pdk/open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hd/verilog
 CELLS   := $(SKY130V)/primitives.v $(SKY130V)/sky130_fd_sc_hd.v
 
 gls: fit
 	@test -f $(NL)  || (echo "ERROR: netlist missing: $(NL)"; exit 1)
 	@test -f $(SDF) || (echo "ERROR: SDF missing: $(SDF)"; exit 1)
-	iverilog $(IVFLAGS) -DFUNCTIONAL -DSDF_FILE=\"$(SDF)\" \
+	iverilog $(IVFLAGS) -gspecify -DUSE_POWER_PINS -DSDF_FILE=\"$(SDF)\" \
 	    -o gls_design $(CELLS) $(NL) osc_model.v tb_gls.v
 	vvp -n gls_design
 	mv gls.csv gls_$(CORNER).csv

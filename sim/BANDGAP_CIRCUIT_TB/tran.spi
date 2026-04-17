@@ -3,7 +3,8 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/BANDGAP_CIRCUIT_TB_lpe.spi
+.include ../../../work/xsch/BANDGAP_CIRCUIT_TB.spice
+.include ../../../work/lpe/BANDGAP_CIRCUIT_lpe.spi
 #else
 .include ../../../work/xsch/BANDGAP_CIRCUIT_TB.spice
 #endif

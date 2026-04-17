@@ -93,7 +93,7 @@ N -180 110 -180 150 {lab=#net6}
 N -180 230 -180 280 {lab=#net1}
 N -400 -200 820 -200 {lab=SUPPLY}
 N -220 190 -200 190 {lab=VSS}
-N 120 190 140 190 {lab=VSS}
+N 60 190 80 190 {lab=VSS}
 C {devices/lab_wire.sym} -130 120 0 0 {name=p9 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 100 410 0 1 {name=p13 sig_type=std_logic lab=VD2}
 C {devices/lab_pin.sym} 100 280 0 1 {name=p18 sig_type=std_logic lab=DV}
@@ -146,7 +146,7 @@ C {devices/lab_wire.sym} -140 -280 0 0 {name=p45 sig_type=std_logic lab=PWRUP_N_
 C {devices/lab_wire.sym} 700 -130 0 0 {name=p51 sig_type=std_logic lab=VSTART}
 C {LELO_GR03_SKY130A/BANDGAP_OTA_PMOS.sym} -20 120 1 1 {name=x21}
 C {JNW_ATR_SKY130A/JNWATR_PCH_2C5F0.sym} 60 -130 0 0 {name=x11}
-C {devices/lab_pin.sym} 60 350 2 1 {name=p36 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 60 350 3 0 {name=p36 sig_type=std_logic lab=VSS}
 C {JNW_ATR_SKY130A/JNWATR_PCH_2C5F0.sym} -140 -130 0 1 {name=x9}
 C {JNW_ATR_SKY130A/JNWATR_PCH_2C5F0.sym} 310 -130 0 0 {name=x14 }
 C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} -80 -280 0 0 {name=x3[2:0]}
@@ -156,7 +156,7 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_2C5F0.sym} 310 -30 0 0 {name=x17}
 C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 100 310 1 0 {name=x1 }
 C {devices/lab_wire.sym} 170 -200 0 0 {name=p19 sig_type=std_logic lab=SUPPLY}
 C {devices/lab_wire.sym} -130 190 0 0 {name=p5 sig_type=std_logic lab=VB_P}
-C {devices/lab_pin.sym} -220 190 2 1 {name=p10 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 140 190 2 0 {name=p14 sig_type=std_logic lab=VSS}
-C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} 100 230 3 0 {name=x2 }
+C {devices/lab_pin.sym} -220 190 3 0 {name=p10 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 60 190 3 0 {name=p14 sig_type=std_logic lab=VSS}
+C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} 100 150 1 0 {name=x2 }
 C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} -180 150 1 0 {name=x5 }

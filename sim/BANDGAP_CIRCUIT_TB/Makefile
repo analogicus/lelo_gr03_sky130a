@@ -5,13 +5,21 @@ all: typical etc mc summary
 
 
 TB=tran
-VIEW=Sch
-#VIEW=Lay
+#VIEW=Sch
+VIEW=Lay
 CELL=BANDGAP_CIRCUIT_TB
 LIB =LELO_GR03_SKY130A
 OPT=
 
 include ../../tech/make/sim.make
+
+# BANDGAP_CIRCUIT_TB is schematic-only; for Lay view run LPE on the DUT, not the TB
+netlist_cell:
+	test -d ../../work/xsch || mkdir ../../work/xsch
+	cd ../../work/ && make xsch LIB=${LIB} CELL=${CELL}
+ifeq ($(VIEW),Lay)
+	cd ../../work && make cdl lpe LIB=${LIB} CELL=BANDGAP_CIRCUIT
+endif
 
 test:
 	${MAKE} typical OPT="Debug"

@@ -4,97 +4,95 @@ K {}
 V {}
 S {}
 E {}
-N -170 -20 -170 50 {lab=#net1}
-N 170 -20 170 50 {lab=#net2}
+N -170 -20 -170 50 {lab=V1}
+N 170 -20 170 50 {lab=V2}
 N 170 110 170 140 {lab=VTAIL}
 N -170 110 -170 140 {lab=VTAIL}
-N -170 -110 -170 -80 {lab=#net3}
-N 170 -110 170 -80 {lab=#net3}
+N -170 -110 -170 -80 {lab=VD}
+N 170 -110 170 -80 {lab=VD}
 N -0 140 -0 160 {lab=VTAIL}
-N -250 80 -210 80 {lab=IN+}
-N 210 80 250 80 {lab=IN-}
+N -250 80 -210 80 {lab=INP}
+N 210 80 250 80 {lab=INN}
 N -190 -50 -170 -50 {lab=VDD}
 N 170 -50 190 -50 {lab=VDD}
 N -80 190 -40 190 {lab=VB_N}
-N 0 220 0 260 {lab=#net4}
+N 0 220 0 260 {lab=VS}
 N 0 190 40 190 {lab=VSS}
 N -170 80 -130 80 {lab=VSS}
 N 130 80 170 80 {lab=VSS}
 N 360 -50 380 -50 {lab=VDD}
-N 360 -110 360 -80 {lab=#net3}
-N 360 220 360 260 {lab=#net4}
+N 360 -110 360 -80 {lab=VD}
+N 360 220 360 260 {lab=VS}
 N 360 190 400 190 {lab=VSS}
-N 360 -20 360 160 {lab=#net5}
-N 0 -160 0 -110 {lab=#net3}
+N 360 -20 360 160 {lab=#net1}
+N 0 -160 0 -110 {lab=VD}
 N -100 -190 -40 -190 {lab=PWRUP_N_1V8}
 N 0 -270 -0 -220 {lab=VDD}
 N -50 -270 -0 -270 {lab=VDD}
 N 0 -190 40 -190 {lab=VDD}
 N 40 -240 40 -190 {lab=VDD}
 N 0 -240 40 -240 {lab=VDD}
-N -0 260 -0 290 {lab=#net4}
+N -0 260 -0 290 {lab=VS}
 N -0 350 -0 360 {lab=VSS}
 N -110 360 -0 360 {lab=VSS}
 N -100 320 -40 320 {lab=PWRUP_1V8}
 N -0 320 30 320 {lab=VSS}
 N 30 320 30 360 {lab=VSS}
 N 0 360 30 360 {lab=VSS}
-N -0 260 360 260 {lab=#net4}
-N -120 -110 360 -110 {lab=#net3}
+N -0 260 360 260 {lab=VS}
+N -120 -110 360 -110 {lab=VD}
 N -160 190 -140 190 {lab=VB_N}
-N -130 -50 -110 -50 {lab=#net1}
+N -130 -50 -110 -50 {lab=V1}
 N -170 140 170 140 {lab=VTAIL}
-N -40 -20 170 20 {lab=#net2}
-N -170 20 40 -20 {lab=#net1}
-N -170 -10 -110 -10 {lab=#net1}
-N -110 -50 -110 -10 {lab=#net1}
-N -110 -50 -80 -50 {lab=#net1}
-N 80 -50 130 -50 {lab=#net2}
-N 110 -50 110 -10 {lab=#net2}
-N 110 -10 170 -10 {lab=#net2}
-N -40 -110 -40 -80 {lab=#net3}
-N 40 -110 40 -80 {lab=#net3}
+N -40 -20 170 20 {lab=V2}
+N -170 20 40 -20 {lab=V1}
+N -170 -10 -110 -10 {lab=V1}
+N -110 -50 -110 -10 {lab=V1}
+N -110 -50 -80 -50 {lab=V1}
+N 80 -50 130 -50 {lab=V2}
+N 110 -50 110 -10 {lab=V2}
+N 110 -10 170 -10 {lab=V2}
+N -40 -110 -40 -80 {lab=VD}
+N 40 -110 40 -80 {lab=VD}
 N -410 -50 -390 -50 {lab=VDD}
-N -390 -110 -390 -80 {lab=#net3}
-N -390 220 -390 260 {lab=#net4}
+N -390 -110 -390 -80 {lab=VD}
+N -390 220 -390 260 {lab=VS}
 N -430 190 -390 190 {lab=VSS}
-N -390 -20 -390 160 {lab=#net6}
-N -390 -110 -120 -110 {lab=#net3}
-N -390 260 -0 260 {lab=#net4}
-N -350 190 -320 190 {lab=#net6}
-N -320 190 -320 230 {lab=#net6}
-N -320 230 290 230 {lab=#net6}
-N 290 190 290 230 {lab=#net6}
-N 290 190 320 190 {lab=#net6}
-N -350 -50 -320 -50 {lab=#net1}
-N -320 -50 -320 10 {lab=#net1}
-N -320 10 -170 10 {lab=#net1}
-N 290 -50 320 -50 {lab=#net2}
-N 290 -50 290 10 {lab=#net2}
-N 170 10 290 10 {lab=#net2}
-N -320 140 -320 190 {lab=#net6}
-N -390 140 -320 140 {lab=#net6}
-N 420 30 480 30 {lab=#net5}
+N -390 -20 -390 160 {lab=#net2}
+N -390 -110 -120 -110 {lab=VD}
+N -390 260 -0 260 {lab=VS}
+N -350 190 -320 190 {lab=#net2}
+N -320 190 -320 230 {lab=#net2}
+N -320 230 290 230 {lab=#net2}
+N 290 190 290 230 {lab=#net2}
+N 290 190 320 190 {lab=#net2}
+N -350 -50 -320 -50 {lab=V1}
+N -320 -50 -320 10 {lab=V1}
+N -320 10 -170 10 {lab=V1}
+N 290 -50 320 -50 {lab=V2}
+N 290 -50 290 10 {lab=V2}
+N 170 10 290 10 {lab=V2}
+N -320 140 -320 190 {lab=#net2}
+N -390 140 -320 140 {lab=#net2}
+N 420 30 480 30 {lab=#net1}
 N 520 130 560 130 {lab=VSS}
 N 520 30 540 30 {lab=VDD}
-N 420 130 480 130 {lab=#net5}
+N 420 130 480 130 {lab=#net1}
 N 520 60 520 100 {lab=OUT}
-N 360 260 520 260 {lab=#net4}
-N 520 160 520 260 {lab=#net4}
-N 360 -110 520 -110 {lab=#net3}
-N 520 -110 520 0 {lab=#net3}
+N 360 260 520 260 {lab=VS}
+N 520 160 520 260 {lab=VS}
+N 360 -110 520 -110 {lab=VD}
+N 520 -110 520 0 {lab=VD}
 N 520 80 600 80 {lab=OUT}
-N 420 30 420 130 {lab=#net5}
-N 360 80 420 80 {lab=#net5}
+N 420 30 420 130 {lab=#net1}
+N 360 80 420 80 {lab=#net1}
 C {devices/lab_wire.sym} -80 190 0 0 {name=p3 sig_type=std_logic lab=VB_N}
 C {devices/lab_wire.sym} -130 80 2 0 {name=p16 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} -20 140 0 0 {name=p17 sig_type=std_logic lab=VTAIL}
-C {devices/ipin.sym} 250 80 0 1 {name=p4 lab=IN-}
-C {devices/ipin.sym} -250 80 0 0 {name=p2 lab=IN+}
+C {devices/ipin.sym} 250 80 0 1 {name=p4 lab=INN}
+C {devices/ipin.sym} -250 80 0 0 {name=p2 lab=INP}
 C {devices/ipin.sym} -110 360 0 0 {name=p1 lab=VSS}
 C {devices/lab_wire.sym} 130 80 2 1 {name=p6 sig_type=std_logic lab=VSS}
-C {LELO_ATR_SKY130A/LELOATR_LVT_NCH_4C5F0.sym} -210 80 0 0 {name=x18[4:0]}
-C {LELO_ATR_SKY130A/LELOATR_LVT_NCH_4C5F0.sym} 210 80 0 1 {name=x19[4:0]}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 130 -50 0 0 {name=x20}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} -130 -50 0 1 {name=x21}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 320 -50 0 0 {name=x10}
@@ -125,3 +123,9 @@ C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 480 130 0 0 {name=x8}
 C {devices/lab_wire.sym} 560 130 2 0 {name=p14 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 540 30 0 1 {name=p20 sig_type=std_logic lab=VDD}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -40 190 0 0 {name=x1[1:0]}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -210 80 0 0 {name=x6[2:0]}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 210 80 0 1 {name=x7[2:0]}
+C {devices/lab_wire.sym} 0 280 0 0 {name=p9 sig_type=std_logic lab=VS}
+C {devices/lab_wire.sym} 0 -130 0 1 {name=p22 sig_type=std_logic lab=VD}
+C {devices/lab_wire.sym} -170 30 0 1 {name=p23 sig_type=std_logic lab=V1}
+C {devices/lab_wire.sym} 170 30 0 0 {name=p25 sig_type=std_logic lab=V2}

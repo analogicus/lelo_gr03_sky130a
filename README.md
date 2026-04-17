@@ -106,6 +106,11 @@ The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized
 
 ![temp_sens measurements](svgs/temp_sens_measurement.svg)
 
+# Milestone 4: The physical design
+In milestone 4 we implemented the physical design of our oscillator, bandgap and RTL. This was done using the Magic template found in the milestone and KLayout was used for inspecting and viewing the curcuits. LibreLane was used for placing and routing the RTL System Verilog code. 
+
+The image below shows the physical layout in magic:
+![temp_sens measurements](svgs/physical_design.svg)
 
 # Implementation
 

@@ -1,9 +1,9 @@
-v {xschem version=3.4.4 file_version=1.2
-}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 N -50 90 -10 90 {lab=VB_N}
 N -130 90 -90 90 {lab=VSS}
@@ -48,9 +48,7 @@ N 120 -190 150 -190 {lab=PWRUP_N_1V8}
 N -160 -190 -130 -190 {lab=PWRUP_N_1V8}
 N -10 -70 10 -70 {lab=VB_P}
 N -110 -130 -90 -130 {lab=#net1}
-N -190 -130 -190 -60 {lab=#net5}
-N -110 -60 -90 -60 {lab=#net6}
-N -90 -60 -90 -40 {lab=#net6}
+N -90 -60 -90 -40 {lab=#net5}
 N -90 -140 -90 -130 {lab=#net1}
 N -280 20 -240 20 {lab=VSS}
 N -280 -20 -240 -20 {lab=PWRUP_1V8}
@@ -59,6 +57,8 @@ N -160 170 -130 170 {lab=PWRUP_1V8}
 N 120 170 150 170 {lab=PWRUP_1V8}
 N 185 -20 225 -20 {lab=VB_P}
 N 185 5 225 5 {lab=VB_N}
+N -190 -130 -190 -60 {lab=#net6}
+N -110 -60 -90 -60 {lab=#net5}
 C {devices/lab_wire.sym} -10 90 0 1 {name=p8 sig_type=std_logic lab=VB_N}
 C {devices/lab_wire.sym} -150 -160 0 0 {name=p13 sig_type=std_logic lab=VSS}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} -50 90 0 1 {name=xb6}
@@ -83,7 +83,7 @@ C {devices/lab_pin.sym} 80 -270 0 1 {name=l33 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 150 -190 0 1 {name=p14 sig_type=std_logic lab=PWRUP_N_1V8}
 C {JNW_ATR_SKY130A/JNWATR_PCH_8C1F2.sym} 120 -190 0 1 {name=xc4}
 C {devices/lab_wire.sym} -150 -30 2 1 {name=p15 sig_type=std_logic lab=VSS}
-C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -110 -60 0 1 {name=xa5}
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} -190 -60 0 0 {name=xa5}
 C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} -90 -40 1 0 {name=xa4}
 C {devices/ipin.sym} -280 -40 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} -280 20 0 0 {name=p2 lab=VSS}

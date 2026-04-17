@@ -27,6 +27,7 @@ annotate:
 gds2mag:
 	${ECHO} "gds read gds/${PRCELL}.gds\nload ${PRCELL}\nsave ../design/${LIB}/${PRCELL}.mag\nquit" > gds/${PRCELL}_gds2mag.tcl
 	magic -noconsole -dnull gds/${PRCELL}_gds2mag.tcl
+	@if [ -f ${PRCELL}.ports ]; then python3 patch_ports.py ../design/${LIB}/${PRCELL}.mag ${PRCELL}.ports; fi
 
 klvs:
 	test -d lvs || mkdir lvs

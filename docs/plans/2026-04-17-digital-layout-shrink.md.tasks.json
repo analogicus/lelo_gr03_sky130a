@@ -1,0 +1,23 @@
+{
+  "planPath": "docs/plans/2026-04-17-digital-layout-shrink.md",
+  "branch": "digital-layout-shrink",
+  "designDoc": "docs/plans/2026-04-17-digital-layout-shrink-design.md",
+  "tasks": [
+    {"id": 0, "nativeId": 7,  "subject": "Task 0: Capture RTL-sim baseline", "status": "pending"},
+    {"id": 1, "nativeId": 8,  "subject": "Task 1: Finalise Nix for LibreLane", "status": "pending"},
+    {"id": 2, "nativeId": 9,  "subject": "Task 2: Create rtl/temp_sens.sdc", "status": "pending"},
+    {"id": 3, "nativeId": 10, "subject": "Task 3: Update rtl/config.json", "status": "pending", "blockedBy": [2]},
+    {"id": 4, "nativeId": 11, "subject": "Task 4: Rewrite rtl/pin_order.cfg", "status": "pending"},
+    {"id": 5, "nativeId": 12, "subject": "Task 5: RTL-sim regression check", "status": "pending", "blockedBy": [0, 3, 4]},
+    {"id": 6, "nativeId": 13, "subject": "Task 6: Run LibreLane via Nix", "status": "pending", "blockedBy": [1, 5]},
+    {"id": 7, "nativeId": 14, "subject": "Task 7: Record LibreLane SHA", "status": "pending", "blockedBy": [6]},
+    {"id": 8, "nativeId": 15, "subject": "Task 8: Inspect STA/DRC/LVS reports", "status": "pending", "blockedBy": [6]},
+    {"id": 9, "nativeId": 16, "subject": "Task 9: Copy regenerated .mag + measure new area", "status": "pending", "blockedBy": [8]},
+    {"id": 10, "nativeId": 17, "subject": "Task 10: Create sim/tb_temp_sens/tb_gls.v", "status": "pending", "blockedBy": [6]},
+    {"id": 11, "nativeId": 18, "subject": "Task 11: Extend Makefile with gls / gls-all targets", "status": "pending", "blockedBy": [10]},
+    {"id": 12, "nativeId": 19, "subject": "Task 12: GLS+SDF on typical corner", "status": "pending", "blockedBy": [0, 11]},
+    {"id": 13, "nativeId": 20, "subject": "Task 13: GLS+SDF on all corners", "status": "pending", "blockedBy": [12]},
+    {"id": 14, "nativeId": 21, "subject": "Task 14: Push branch and open draft PR", "status": "pending", "blockedBy": [7, 9, 13]}
+  ],
+  "lastUpdated": "2026-04-17T00:00:00Z"
+}

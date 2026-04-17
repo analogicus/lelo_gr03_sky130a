@@ -2,8 +2,9 @@ name: Synth (LibreLane)
 
 on:
   push:
-    branches:
-      - digital-layout-shrink
+    paths:
+      - 'rtl/**'
+      - '.github/workflows/synth.yaml'
   workflow_dispatch:
 
 jobs:

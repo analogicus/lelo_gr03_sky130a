@@ -31,3 +31,28 @@ readme:
 clean:
 	-rm -f design tb.vcd tb.csv osc_params.vh
 	-rm -rf output
+
+# ------------------------------------------------------------
+# Gate-level simulation with SDF back-annotation.
+#   Consumes LibreLane outputs under ../../rtl/runs/<latest>/final/
+# ------------------------------------------------------------
+RUN_DIR := $(shell ls -td ../../rtl/runs/*/ 2>/dev/null | head -1)
+NL      := $(RUN_DIR)final/pnl/temp_sens.nl.v
+SDF     := $(shell ls $(RUN_DIR)final/signoff/*.sdf 2>/dev/null | head -1)
+SKY130V := /opt/pdk/open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hd/verilog
+CELLS   := $(SKY130V)/primitives.v $(SKY130V)/sky130_fd_sc_hd.v
+
+gls: fit
+	@test -f $(NL)  || (echo "ERROR: netlist missing: $(NL)"; exit 1)
+	@test -f $(SDF) || (echo "ERROR: SDF missing: $(SDF)"; exit 1)
+	iverilog $(IVFLAGS) -DFUNCTIONAL -DSDF_FILE=\"$(SDF)\" \
+	    -o gls_design $(CELLS) $(NL) osc_model.v tb_gls.v
+	vvp -n gls_design
+	mv gls.csv gls_$(CORNER).csv
+	python3 compare_calibration.py /tmp/rtl-baseline/tb_$(CORNER).csv gls_$(CORNER).csv
+
+gls-all:
+	@for c in $$(python3 fit_osc.py --list) ; do \
+	    echo "=== GLS $$c ===" ; \
+	    python3 fit_osc.py $$c && $(MAKE) gls CORNER=$$c || exit 1 ; \
+	done

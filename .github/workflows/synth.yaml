@@ -1,0 +1,47 @@
+name: Synth (LibreLane)
+
+on:
+  push:
+    paths:
+      - 'rtl/**'
+      - '.github/workflows/synth.yaml'
+  workflow_dispatch:
+
+jobs:
+  librelane:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            extra-substituters = https://nix-cache.fossi-foundation.org
+            extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
+
+      - name: Run LibreLane flow
+        working-directory: rtl
+        run: |
+          nix run 'github:librelane/librelane/3.0.2#librelane' -- \
+            --pdk-root $HOME/.volare config.json
+
+      - name: Collect outputs
+        if: always()
+        run: |
+          mkdir -p /tmp/out
+          if [ -d rtl/runs ]; then
+            latest=$(ls -td rtl/runs/*/ | head -1)
+            cp -r "$latest" /tmp/out/full_run || true
+            cp -r "$latest/final" /tmp/out/final || true
+            cp "$latest/final_summary.log" /tmp/out/ 2>/dev/null || true
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: librelane-run
+          path: /tmp/out/
+          retention-days: 7

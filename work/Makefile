@@ -32,3 +32,6 @@ klvs:
 	test -d lvs || mkdir lvs
 	klayout -b -r ${PDKPATH}/libs.tech/klayout/lvs/sky130.lvs -rd input=gds/${PRCELL}.gds -rd report=${PWD}/lvs/${PRCELL}_klvs.lvsdb -rd schematic=${PWD}/cdl/${PRCELL}.spice -rd target_netlist=${PWD}/lvs/${PRCELL}_klvs_extracted.cir -rd thr=8 -rd run_mode=deep -rd spice_net_names=true -rd verbose=true >& lvs/${PRCELL}_klvs.log
 	@tail -5 lvs/${PRCELL}_klvs.log
+
+klview:
+	klayout -n sky130 -e gds/${PRCELL}.gds &

@@ -9,6 +9,7 @@ on:
       - 'design/**.sym'
       - 'info.yaml'
       - 'config.yaml'
+      - 'work/Makefile'
   workflow_dispatch:
 
 concurrency:

@@ -468,7 +468,7 @@ use BANDGAP_CIRCUIT  x1
 timestamp 1776464767
 transform 1 0 10478 0 1 29208
 box 10544 17180 23376 33842
-use JNWTR_IVX1_CV  x2 ~/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A
+use JNWTR_IVX1_CV  x2 ../JNW_TR_SKY130A
 timestamp 1776464767
 transform 1 0 34900 0 1 60808
 box -150 -120 2130 440
@@ -488,11 +488,11 @@ use COMPARATOR  x7
 timestamp 1776434680
 transform 1 0 29848 0 1 34996
 box 5388 11410 14236 16780
-use JNWTR_DFRNQNX1_CV  x10 ~/pro/aicex/ip/lelo_gr03_sky130a/design/JNW_TR_SKY130A
+use JNWTR_DFRNQNX1_CV  x10 ../JNW_TR_SKY130A
 timestamp 1776464767
 transform 1 0 44908 0 1 47058
 box -150 -120 2130 3960
-use JNWTR_CAPX4__1  x12<0> ~/pro/aicex/ip/lelo_gr03_sky130a/design/LELO_GR03_SKY130A/../JNW_TR_SKY130A
+use JNWTR_CAPX4__1  x12<0> ../JNW_TR_SKY130A
 timestamp 1775823531
 transform 1 0 34240 0 1 53720
 box 480 0 3120 2640

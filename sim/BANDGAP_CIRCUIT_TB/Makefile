@@ -5,8 +5,8 @@ all: typical etc mc summary
 
 
 TB=tran
-#VIEW=Sch
-VIEW=Lay
+VIEW=Sch
+#VIEW=Lay
 CELL=BANDGAP_CIRCUIT_TB
 LIB =LELO_GR03_SKY130A
 OPT=

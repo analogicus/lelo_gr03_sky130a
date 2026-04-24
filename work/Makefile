@@ -31,6 +31,7 @@ xlvs:
 # Override lpe to fix flat-extraction n-well connectivity bug in digital cells:
 # Magic's flatten doesn't maintain the JNWTR_TAPCELLB_CV ntap-to-AVDD connection,
 # leaving all DFF PMOS bodies on a floating net. Post-process to correct this.
+# Node names below match Magic rev 589 (local); CI uses rev 541 — debug output added.
 lpe: xsch
 	test -d lpe || mkdir lpe
 	-rm lpe/${PRCELL}_lpe.spi

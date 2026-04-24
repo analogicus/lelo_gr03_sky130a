@@ -59,6 +59,10 @@ lpe: xsch
 	echo "Running LVS on the extracted netlist to confirm it's the same"
 	cat lpe/${PRCELL}_lpe.spi |egrep -v "^C" > lpe/${PRCELL}_lpe_noc.spi
 	netgen -batch lvs "lpe/${PRCELL}_lpe_noc.spi ${PRCELL}"  "cdl/${PRCELL}.spice ${PRCELL}" ${PDKPATH}/libs.tech/netgen/sky130A_setup.tcl lpe/${PRCELL}_lvs.log > lpe/${PRCELL}_netgen_lvs.log
+	@echo "=== LPE LVS log (for CI debugging) ==="
+	@cat lpe/${PRCELL}_lvs.log
+	@echo "=== x10 DFF nets in extracted netlist ==="
+	@grep "x10\." lpe/${PRCELL}_lpe_noc.spi | head -30 || true
 	cat lpe/${PRCELL}_lvs.log | ../tech/script/checklvs ${PRCELL} --short
 
 mag:

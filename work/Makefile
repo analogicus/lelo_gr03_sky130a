@@ -64,6 +64,8 @@ lpe: xsch
 	@cat lpe/${PRCELL}_lvs.log
 	@echo "=== x10 DFF nets in extracted netlist ==="
 	@grep "x10\." lpe/${PRCELL}_lpe_noc.spi | head -30 || true
+	@echo "=== PFET body connections in extracted netlist ==="
+	@grep -i "pfet_01v8" lpe/${PRCELL}_lpe_noc.spi | head -20 || true
 	cat lpe/${PRCELL}_lvs.log | ../tech/script/checklvs ${PRCELL} --short
 
 mag:

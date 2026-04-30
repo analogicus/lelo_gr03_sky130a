@@ -152,7 +152,7 @@ def _plot_corner_data(axes: tuple, corners: list, nominal_slope: float | None) -
             f25 = np.interp(25, t_arr, f_arr)
             f85 = np.interp(85, t_arr, f_arr)
             slope_2pt = (85 - 25) / (f85 - f25)
-            offset_2pt = 25 - slope_2pt * f25
+            offset_2pt = 25 - slope_2pt * f25 + 1 # Added 1 degree for symmetric error
             t_meas_2pt = slope_2pt * f_arr + offset_2pt
             ax4.plot(temps, t_meas_2pt - t_arr, **kw)
 

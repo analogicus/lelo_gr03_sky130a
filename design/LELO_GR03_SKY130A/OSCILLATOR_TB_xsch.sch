@@ -5,15 +5,15 @@ V {}
 S {}
 E {}
 B 2 -60 -20 740 380 {flags=graph
-y1=-0.56694752
-y2=2.8890525
+y1=-3.0867299e-09
+y2=4.8725565e-10
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=1.1555359e-06
-x2=2.000216e-06
+x1=-5.100166e-07
+x2=7.0357685e-06
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -22,9 +22,8 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-color="4 4"
-node="out
-x1.vx"}
+color=4
+node=i(vdd)}
 N -160 -40 -160 -20 {lab=VDD}
 N -160 40 -160 60 {lab=0}
 N 140 -140 170 -140 {lab=OUT}
@@ -34,7 +33,6 @@ C {devices/lab_wire.sym} -160 60 2 1 {name=p1 sig_type=std_logic lab=0}
 C {devices/lab_wire.sym} -160 -40 0 0 {name=p3 sig_type=std_logic lab=VDD}
 C {devices/lab_wire.sym} -160 -100 2 1 {name=p2 sig_type=std_logic lab=0}
 C {devices/lab_wire.sym} -160 -120 0 0 {name=p4 sig_type=std_logic lab=VDD}
-C {devices/lab_wire.sym} -160 -140 0 0 {name=p5 sig_type=std_logic lab=VDD}
 C {devices/capa.sym} 170 -110 0 0 {name=C1
 m=1
 value=1f
@@ -53,19 +51,21 @@ C {devices/code_shown.sym} -720 -230 0 0 {name=s1 only_toplevel=false value="
 .option gmin=1e-12
 *.option SEED=1
 .save all
-.temp 70
+.temp 25
 .control
 
 optran 0 0 0 10n 1u 0
 *dc VIN 0 1.8 1m
-tran 0.1n 2u
+tran 2n 30u
 *op
 *ac dec 20 1 1G
 
 write OSCILLATOR_TB.raw
 
-exit
+*exit
 .endc
+.meas tran i_vdd_avg avg i(VDD) from=20u to=30u
 "}
 C {devices/lab_wire.sym} 170 -140 0 1 {name=p7 sig_type=std_logic lab=OUT}
 C {devices/title.sym} -550 -320 0 0 {name=l1 author="Martin Solvik, Kim Hamberg, Henrik Alstadhaug"}
+C {devices/lab_wire.sym} -160 -140 0 0 {name=p5 sig_type=std_logic lab=0}

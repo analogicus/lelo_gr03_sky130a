@@ -80,10 +80,26 @@ def _process_corner(cf: Path, seen: set, axes: tuple) -> None:
         ax_idd.plot([t for t, _ in idd], [abs(v) * 1e6 for _, v in idd], **kw)
 
 
+def emit_latex_params(corner_files: list[Path], outpath: Path) -> None:
+    """Emit LaTeX \\providecommand lines for any report values this TB drives.
+
+    Currently a no-op skeleton — COMPARATOR_TB does not yet feed values into
+    docs/latex_report/params.tex. To wire up (e.g., max propagation delay or
+    typical supply current):
+      1. Compute the value from `corner_files`.
+      2. Open `outpath` and write `\\providecommand{{\\valX}}{{value}}`.
+      3. Add `\\InputIfFileExists{...sim_params.tex}{}{}` in params.tex.
+    """
+    _ = corner_files, outpath  # unused until populated
+    return
+
+
 def main(name: str) -> None:
     yamlfile = Path(name).with_suffix(".yaml")
     outdir = yamlfile.parent
     corner_files = sorted(outdir.glob("tran_*.yaml"))
+
+    emit_latex_params(corner_files, outdir / "sim_params.tex")
 
     fig, (ax_tdr, ax_tdf, ax_idd) = plt.subplots(
         1, 3, figsize=(13, 4), facecolor="#fafafa",

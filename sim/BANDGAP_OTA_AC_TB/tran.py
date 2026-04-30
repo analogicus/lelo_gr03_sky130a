@@ -80,10 +80,26 @@ def _process_corner(cf: Path, seen: set, axes: tuple) -> None:
                   [180 + v if v < 0 else v for _, v in data["pmraw"]], **kw)
 
 
+def emit_latex_params(corner_files: list[Path], outpath: Path) -> None:
+    """Emit LaTeX \\providecommand lines for any report values this TB drives.
+
+    Currently a no-op skeleton — BANDGAP_OTA_AC_TB does not yet feed values
+    into docs/latex_report/params.tex. To wire up a value (e.g., min DC gain
+    or worst phase margin):
+      1. Compute it from `corner_files`.
+      2. Open `outpath` and write `\\providecommand{{\\valX}}{{value}}`.
+      3. Add `\\InputIfFileExists{...sim_params.tex}{}{}` in params.tex.
+    """
+    _ = corner_files, outpath  # unused until populated
+    return
+
+
 def main(name: str) -> None:
     yamlfile = Path(name).with_suffix(".yaml")
     outdir = yamlfile.parent
     corner_files = sorted(outdir.glob("tran_*.yaml"))
+
+    emit_latex_params(corner_files, outdir / "sim_params.tex")
 
     fig, (ax_g, ax_b, ax_p) = plt.subplots(
         1, 3, figsize=(13, 4), facecolor="#fafafa",

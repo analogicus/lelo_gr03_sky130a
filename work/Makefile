@@ -115,17 +115,18 @@ svg: renders/${PRCELL}.svg
 pdf: renders/${PRCELL}.pdf
 
 # Published figures (committed to ../svgs/, picked up by README) -------------
+# Recipe: select top cell + findbox + expand cascades through the whole
+# hierarchy (Magic 8.3); then unexpand temp_sens to drop the digital
+# sea-of-cells ("hide tiny details").
 $(SVG_PUBDIR)/%.svg:
 	@mkdir -p $(SVG_PUBDIR)
-	printf 'load %s\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
+	printf 'load %s\nselect top cell\nfindbox\nexpand\nselect cell temp_sens_0\nunexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
 
-# Special case: physical_design.svg renders the Tiny Tapeout wrapper. The
-# wrapper's sub-cells (LELO_GR03, temp_sens) are not expand-marked in the
-# .mag, so we expand LELO_GR03 explicitly and unexpand the digital sea-of-
-# cells inside it ("hide tiny details").
+# Special case: physical_design.svg renders the Tiny Tapeout wrapper, which
+# also has a temp_sens_0 instance under LELO_GR03_1 to unexpand.
 $(SVG_PUBDIR)/physical_design.svg:
 	@mkdir -p $(SVG_PUBDIR)
-	printf 'load tt_um_lelo_gr03_analogicus\nselect cell LELO_GR03_1\nexpand\nselect cell LELO_GR03_1/temp_sens_0\nunexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
+	printf 'load tt_um_lelo_gr03_analogicus\nselect top cell\nfindbox\nexpand\nselect cell temp_sens_0\nunexpand\nselect cell LELO_GR03_1/temp_sens_0\nunexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
 
 $(SVG_PUBDIR)/%.pdf: $(SVG_PUBDIR)/%.svg
 	./svg2pdf.sh $< $@

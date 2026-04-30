@@ -10,6 +10,6 @@ set_clock_groups -asynchronous -group {i_clk} -group {i_clk_osc}
 
 # Zero input/output delays: all block-level I/O hands off to async pads
 # or to the analog feedback loop, neither of which STA covers.
-set_input_delay  -clock i_clk 0 [all_inputs]
+set_input_delay  -clock i_clk 0 [get_ports {i_rst_n i_start}]
 set_output_delay -clock i_clk 0 [all_outputs]
 set_load 0.1 [all_outputs]

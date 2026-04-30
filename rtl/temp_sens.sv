@@ -9,6 +9,7 @@ module temp_sens #(
     , input var logic i_clk_osc
     , output var logic [WIDTH-2:0] o_osc_count // Only the 8 bits are needed
     , output var logic o_pwrup_osc
+    , output var logic o_valid
 );
 
   typedef enum logic [1:0] {
@@ -20,8 +21,8 @@ module temp_sens #(
 
   state_t cur_state, next_state;
   logic cnt_rst;
-  logic [WIDTH-1:0] count;
-  logic [WIDTH-1:0] count_reg;
+  logic [WIDTH-2:0] count;
+  logic [WIDTH-2:0] count_corrected;
   logic [WIDTH-2:0] cnt_r, cnt_f;
 
   // ---------------------------------------------------------------
@@ -68,16 +69,18 @@ module temp_sens #(
     else cnt_f <= cnt_f;
   end
 
-  assign count = {1'b0, cnt_r} + {1'b0, cnt_f};
+  assign count = cnt_r + cnt_f;
 
   // ---------------------------------------------------------------
   // Capture register (i_clk domain)
   // ---------------------------------------------------------------
-  localparam int OFFSET = 120; // Simulated value, won't cause overflow
+  localparam logic [WIDTH-2:0] OFFSET = 'd120; // Subtracted to centre the 8-bit output near zero at nominal temperature.
+
+  assign count_corrected = count - OFFSET;
 
   always_ff @(posedge i_clk, negedge i_rst_n) begin
     if (!i_rst_n) o_osc_count <= 0;
-    else if (cur_state == CAPTURE) o_osc_count <= count - OFFSET;
+    else if (cur_state == CAPTURE) o_osc_count <= count_corrected;
     else o_osc_count <= o_osc_count;
   end
 

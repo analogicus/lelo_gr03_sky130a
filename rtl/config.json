@@ -1,11 +1,13 @@
 {
+    "meta": { "version": 2 },
     "DESIGN_NAME": "temp_sens",
     "VERILOG_FILES": ["dir::temp_sens.sv"],
-    "CLOCK_PERIOD": 10000,
     "CLOCK_PORT": "i_clk",
-    "SDC_FILE": "dir::temp_sens.sdc",
-    "SYNTH_DRIVING_CELL": "sky130_fd_sc_hd__inv_1/Y",
-    "SYNTH_BUFFER_CELL":  "sky130_fd_sc_hd__buf_1/A/X",
-    "FP_CORE_UTIL": 65,
-    "IO_PIN_ORDER_CFG": "dir::pin_order.cfg"
+    "CLOCK_NET": "i_clk",
+    "CLOCK_PERIOD": 10000,
+    "PNR_SDC_FILE": "dir::temp_sens.sdc",
+    "SIGNOFF_SDC_FILE": "dir::temp_sens.sdc",
+    "FP_PIN_ORDER_CFG": "dir::pin_order.cfg",
+    "FP_CORE_UTIL": 70,
+    "SYNTH_STRATEGY": "AREA 0"
 }

@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.ticker import MultipleLocator
-from scipy.interpolate import UnivariateSpline
 
 if TYPE_CHECKING:
     from matplotlib.axes import Axes
@@ -105,15 +104,13 @@ def _plot_corners(
         lw = VAR_LW.get(volt_var, 1.0)
 
         ax1.plot(t_arr, freq / 1e6, label=short, color=c, linestyle=ls, linewidth=lw)
-        t_fine = np.linspace(t_arr[0], t_arr[-1], 200)
 
         if len(t_arr) >= min_points and nominal_slope is not None:
             f25 = float(np.interp(25, t_arr, freq))
             offset = 25 - nominal_slope * f25
             t_meas = nominal_slope * freq + offset
             err = t_meas - t_arr
-            spl = UnivariateSpline(t_arr, err, s=len(t_arr) * 2)
-            ax2.plot(t_fine, spl(t_fine), color=c, linestyle=ls, linewidth=lw)
+            ax2.plot(t_arr, err, color=c, linestyle=ls, linewidth=lw)
 
         count = freq / 32768.0
         ax3.plot(t_arr, count, color=c, linestyle=ls, linewidth=lw)
@@ -125,8 +122,7 @@ def _plot_corners(
             offset_2pt = 25 - slope_2pt * f25
             t_meas_2pt = slope_2pt * freq + offset_2pt
             err_2pt = t_meas_2pt - t_arr
-            spl = UnivariateSpline(t_arr, err_2pt, s=len(t_arr) * 2)
-            ax4.plot(t_fine, spl(t_fine), color=c, linestyle=ls, linewidth=lw)
+            ax4.plot(t_arr, err_2pt, color=c, linestyle=ls, linewidth=lw)
 
 
 def _setup_axes(axes: tuple[Axes, Axes, Axes, Axes]) -> None:
@@ -142,7 +138,7 @@ def _setup_axes(axes: tuple[Axes, Axes, Axes, Axes]) -> None:
     ax1.set_ylabel("Frequency [MHz]")
     _style_ax(ax1)
 
-    ax2.set_title("Temp Error (1-pt cal, 25\u00b0C, smoothed)")
+    ax2.set_title("Temp Error (1-pt cal, 25\u00b0C)")
     ax2.set_xlabel("Temperature [\u00b0C]")
     ax2.set_ylabel("Error [\u00b0C]")
     ax2.axhline(y=10, color="#cccccc", linewidth=0.8, zorder=0)
@@ -154,7 +150,7 @@ def _setup_axes(axes: tuple[Axes, Axes, Axes, Axes]) -> None:
     ax3.set_ylabel("Count [LSB]")
     _style_ax(ax3)
 
-    ax4.set_title("Temp Error (2-pt cal, 25\u00b0C & 85\u00b0C, smoothed)")
+    ax4.set_title("Temp Error (2-pt cal, 25\u00b0C & 85\u00b0C)")
     ax4.set_xlabel("Temperature [\u00b0C]")
     ax4.set_ylabel("Error [\u00b0C]")
     ax4.axhline(y=5, color="#cccccc", linewidth=0.8, zorder=0)

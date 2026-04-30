@@ -1,0 +1,77 @@
+*COMPARATOR delay testbench
+*Drives a small differential step at IN+ vs DC reference at IN- and measures
+*propagation delay from input crossing to output toggling.
+
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+.include ../../../work/xsch/COMPARATOR.spice
+.include ../../../work/xsch/BIAS_CIRCUIT.spice
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param TRF  = 1n
+.param AVDD = {vdda}
+.param VCM  = 0.9
+.param VAMP = 200m
+.param TPER = 1u
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0     dc 0
+VDD  VDD  VSS  pwl 0 0 10n {AVDD}
+VPWRUP   PWRUP_1V8   VSS  pwl 0 0 10n {AVDD}
+VPWRUP_N PWRUP_N_1V8 VSS  pwl 0 {AVDD} 10n 0
+
+* Bias from the project-wide BIAS_CIRCUIT (generates both VB_N and VB_P)
+xBIAS VDD PWRUP_1V8 PWRUP_N_1V8 VSS VB_P VB_N BIAS_CIRCUIT
+
+* Reference (IN-) at common-mode
+V_REF INN VSS dc {VCM}
+
+* Stimulus (IN+): pulse from VCM-VAMP to VCM+VAMP, period TPER
+VIN  INP VSS pulse {VCM-VAMP} {VCM+VAMP} 200n {TRF} {TRF} '{TPER}/2-{TRF}' {TPER}
+
+* Capacitive load at the comparator output
+CL OUT VSS 300f
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+*----------------------------------------------------------------
+* PROBE
+*----------------------------------------------------------------
+.save all
+
+*----------------------------------------------------------------
+* NGSPICE control
+*----------------------------------------------------------------
+.control
+set num_threads=8
+set color0=white
+set color1=black
+unset askquit
+
+optran 0 0 0 1n 100n 0
+
+set fend = .raw
+foreach vtemp -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110 120 125
+  option temp=$vtemp
+  tran 100p 3u
+  write {cicname}_$vtemp$fend
+end
+
+quit
+
+.endc
+
+.end

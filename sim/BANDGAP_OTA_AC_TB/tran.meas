@@ -1,0 +1,29 @@
+*AC measurements: DC gain (dB), unity-gain bandwidth, phase at GBW
+.control
+
+set fend = .raw
+foreach vtemp -20 0 25 50 100 125
+
+  load {cicname}_$vtemp$fend
+
+  let mag_db    = db(v(OUT))
+  let phase_deg = 180/PI * cph(v(OUT))
+
+  meas ac dcgain find mag_db at=1
+  meas ac ugbw   when mag_db=0
+  meas ac pmraw  find phase_deg when mag_db=0
+
+  echo "MEAS_START"
+  echo "dcgain_$vtemp=$&dcgain"
+  echo "ugbw_$vtemp=$&ugbw"
+  echo "pmraw_$vtemp=$&pmraw"
+  echo "MEAS_END"
+
+  destroy all
+
+end
+
+quit
+.endc
+
+.end

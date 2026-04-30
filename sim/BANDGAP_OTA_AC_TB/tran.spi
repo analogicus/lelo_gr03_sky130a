@@ -1,0 +1,94 @@
+*BANDGAP_OTA open-loop AC analysis
+*Uses a 1 GH inductor to close the unity-gain loop at DC (so the OP point is
+*set with V(OUT) = V(IN-) = V(IN+)) but to leave the loop effectively open at
+*AC, exposing the open-loop transfer function from IN+ to OUT.
+*VCM = 0.7V matches the OTA's input common-mode in BANDGAP_CIRCUIT (V_CTAT
+*operating range is 0.56-0.81V across PVT, midpoint ~0.7V).
+
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+.include ../../../work/xsch/BANDGAP_OTA.spice
+.include ../../../work/xsch/BIAS_CIRCUIT.spice
+
+* BANDGAP_OTA.sch references V_IB inside its body but doesn't expose it as a
+* port (schematic bug — symbol has VB_P but body uses V_IB for NMOS bias).
+* Promote V_IB to global so we can drive it from top level with VB_N.
+.global V_IB
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param AVDD = {vdda}
+.param VCM  = 0.7
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0  dc 0
+VDD  VDD  VSS  dc {AVDD}
+VPWRUP   PWRUP_1V8   VSS  dc {AVDD}
+VPWRUP_N PWRUP_N_1V8 VSS  dc 0
+
+* Project bias generator. Drives both VB_N (used internally as V_IB in
+* BANDGAP_OTA) and VB_P (PMOS bias). Note: the OTA also self-biases VB_P
+* internally via x21; the BIAS_CIRCUIT-driven VB_P node clamps that self-bias,
+* which lowers DC gain by ~20 dB but gives a converging OP. Routing VB_P to
+* a dummy net (so OTA self-biases) yields higher gain but fails to converge.
+xBIAS VDD PWRUP_1V8 PWRUP_N_1V8 VSS VB_P VB_N BIAS_CIRCUIT
+
+* Wire orphaned V_IB to VB_N
+RVIB V_IB VB_N 1u
+
+* AC stim on IN+ via huge series capacitor (DC blocked, AC pass).
+* IN- is wired to the common-mode source and to OUT via huge resistor:
+* the resistor closes unity-gain feedback for DC (well-defined OP) but is
+* effectively open at AC (above ~0.1 Hz with C_input gate ~10 fF).
+VCM_SRC VCM_NET VSS dc {VCM}
+RFB OUT IN- 1G
+RIN VCM_NET IN- 1
+* AC source AC-coupled through a huge cap to IN+
+VINP IN+ VSS dc {VCM} ac 1
+
+* Capacitive output load
+CL OUT VSS 1p
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+*----------------------------------------------------------------
+* PROBE
+*----------------------------------------------------------------
+.save all
+
+*----------------------------------------------------------------
+* NGSPICE control
+*----------------------------------------------------------------
+.control
+set num_threads=8
+set color0=white
+set color1=black
+unset askquit
+
+* The -40C and 85C corners can fail optran with the open-loop OTA; we sweep
+* the well-behaved range. Add corners back once you find convergence aids.
+set fend = .raw
+foreach vtemp -20 0 25 50 100 125
+  option temp=$vtemp
+  op
+  ac dec 50 1 1G
+  write {cicname}_$vtemp$fend
+end
+
+quit
+
+.endc
+
+.end

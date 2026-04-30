@@ -1,0 +1,32 @@
+*Comparator measurements: rising/falling propagation delays and supply current.
+*Pulse rises at 200n, period 1µs. Skip first 100n of startup transient.
+.control
+
+set fend = .raw
+foreach vtemp -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 110 120 125
+
+  load {cicname}_$vtemp$fend
+
+  * Rising delay: from INP crossing 0.9V (rise) to OUT crossing 0.9V (rise)
+  meas tran tdr trig v(inp) val=0.9 rise=1 td=100n targ v(out) val=0.9 rise=1
+
+  * Falling delay: pulse falls at 700n; td=300n skips initial rising portion
+  meas tran tdf trig v(inp) val=0.9 fall=1 td=300n targ v(out) val=0.9 fall=1
+
+  * Average supply current across the steady-state portion of the sim
+  meas tran idd avg i(vdd) from=500n to=2.5u
+
+  echo "MEAS_START"
+  echo "tdr_$vtemp=$&tdr"
+  echo "tdf_$vtemp=$&tdf"
+  echo "idd_$vtemp=$&idd"
+  echo "MEAS_END"
+
+  destroy all
+
+end
+
+quit
+.endc
+
+.end

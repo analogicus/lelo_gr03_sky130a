@@ -1,7 +1,9 @@
 *.run
 *.ext
 __pycache__
-output_*/
+**/output_*/*
+!**/output_*/*.yaml
+!**/output_*/*.csv
 *.tcl
 *.log
 work/
@@ -24,6 +26,7 @@ docs/plans/
 .svls.toml
 sim/**/README.md
 sim/tb_temp_sens/*.csv
+!sim/tb_temp_sens/gls_tran_*.csv
 CLAUDE.md
 rtl/runs/
 *.pdf

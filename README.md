@@ -110,7 +110,7 @@ The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized
 In milestone 4 we implemented the physical design of our oscillator. The layout of the oscillator, LELO_GR03.mag passes the drc check, but there is some port trouble in the LVS check. It can't seem to separate VDD_1V8 and VSS causing an issue. The submodules, BANDGAP_CIRCUIT.mag, BIAS_CIRCUIT.mag and COMPARATOR.mag passes both drc and lvs check. The issue arises when we connect everything together in LELO_GR03. The layout can be seen in the figure below. The Left part of the image comprises the bandgap circuit, the lower right part is the comparator and D-flip-flop for the relaxation oscillator and the middle area is the bias circuit generating bias voltages for the OTA (in the bandgap circuit) and the comparator (lower rigth side). The layout is made to fit in a Tiny Tapeout template with the digital circuitry being supposed to fit in the upper right corner. The circuit in the tiny tapeout template can be seen in the figure below.
 
 This image below shows the physical layout in of the oscillator:
-![Physical design in Magic](svgs/LELO_GR03.svg)
+![Physical design in Magic](svgs/LELO_GR03.png)
 This image below shows the physical layout in the Tiny Tapeout template:
 ![Physical design in Magic](svgs/physical_design.svg)
 

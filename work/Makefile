@@ -115,15 +115,21 @@ svg: renders/${PRCELL}.svg
 pdf: renders/${PRCELL}.pdf
 
 # Published figures (committed to ../svgs/, picked up by README) -------------
+# LELO_GR03 ships as PNG: rendered via Magic's `plot pnm` then converted to
+# PNG with PIL. Simpler than the SVG -> chromium PDF chain and the .lyp
+# colors come straight from Magic's tech file.
+PNG_WIDTH ?= 2400
+$(SVG_PUBDIR)/LELO_GR03.png:
+	@mkdir -p $(SVG_PUBDIR)
+	@TMP=$$(mktemp --suffix=.pnm); \
+	  printf 'load LELO_GR03\nselect top cell\nfindbox\nexpand\nfindbox\nplot pnm %s $(PNG_WIDTH)\nquit -noprompt\n' "$$TMP" | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH); \
+	  python3 -c "from PIL import Image; Image.open('$$TMP').save('$@', optimize=True)"; \
+	  rm -f "$$TMP"
+
+# physical_design still rendered as SVG (vector, kept for the wrapper view).
 # Recipe: select top cell + findbox + expand cascades through the whole
 # hierarchy (Magic 8.3); then unexpand temp_sens to drop the digital
-# sea-of-cells ("hide tiny details").
-$(SVG_PUBDIR)/%.svg:
-	@mkdir -p $(SVG_PUBDIR)
-	printf 'load %s\nselect top cell\nfindbox\nexpand\nselect cell temp_sens_0\nunexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
-
-# Special case: physical_design.svg renders the Tiny Tapeout wrapper, which
-# also has a temp_sens_0 instance under LELO_GR03_1 to unexpand.
+# sea-of-cells.
 $(SVG_PUBDIR)/physical_design.svg:
 	@mkdir -p $(SVG_PUBDIR)
 	printf 'load tt_um_lelo_gr03_analogicus\nselect top cell\nfindbox\nexpand\nselect cell temp_sens_0\nunexpand\nselect cell LELO_GR03_1/temp_sens_0\nunexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
@@ -132,5 +138,5 @@ $(SVG_PUBDIR)/%.pdf: $(SVG_PUBDIR)/%.svg
 	./svg2pdf.sh $< $@
 
 .PHONY: readme-figures
-readme-figures: $(SVG_PUBDIR)/LELO_GR03.svg $(SVG_PUBDIR)/LELO_GR03.pdf $(SVG_PUBDIR)/physical_design.svg $(SVG_PUBDIR)/physical_design.pdf
+readme-figures: $(SVG_PUBDIR)/LELO_GR03.png $(SVG_PUBDIR)/physical_design.svg $(SVG_PUBDIR)/physical_design.pdf
 	@echo "README figures regenerated under $(SVG_PUBDIR)/"

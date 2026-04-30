@@ -86,3 +86,22 @@ klvs:
 
 klview:
 	klayout -n sky130 -e gds/${PRCELL}.gds &
+
+# Render layout to vector SVG / PDF using Magic's Cairo backend.
+# Needs xvfb-run (xorg-server-xvfb) and rsvg-convert (librsvg).
+#   make svg CELL=LELO_GR03   -> renders/LELO_GR03.svg
+#   make pdf CELL=LELO_GR03   -> renders/LELO_GR03.pdf
+SVG_TECH ?= ${PDKPATH}/libs.tech/magic/sky130A.tech
+
+renders:
+	mkdir -p $@
+
+renders/%.svg: | renders
+	printf 'load %s\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a magic -d XR -noconsole -T $(SVG_TECH)
+
+renders/%.pdf: renders/%.svg
+	rsvg-convert -f pdf $< -o $@
+
+svg: renders/${PRCELL}.svg
+
+pdf: renders/${PRCELL}.pdf

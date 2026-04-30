@@ -19,6 +19,7 @@ work/gds
 work/drc
 work/xsch
 *.raw
+*.dat
 .claude
 .vscode/
 docs/plans/
@@ -32,3 +33,4 @@ rtl/runs/
 *.pdf
 docs/plans/
 docs/
+python/

@@ -81,4 +81,11 @@ module temp_sens #(
     else o_osc_count <= o_osc_count;
   end
 
+  always_ff @(posedge i_clk, negedge i_rst_n) begin
+    if (!i_rst_n) o_valid <= 1'b0;
+    else if (cur_state == CAPTURE) o_valid <= 1'b1;
+    else if (cur_state == IDLE) o_valid <= 1'b0;
+    else o_valid <= o_valid;
+  end
+
 endmodule

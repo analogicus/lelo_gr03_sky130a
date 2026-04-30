@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -12,38 +11,15 @@ import numpy as np
 import pandas as pd
 from matplotlib.ticker import MultipleLocator
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _corners import parse_corner_label
+from _plotstyle import PROC_COLORS, VAR_LW, VAR_STYLES, style_ax
+
 if TYPE_CHECKING:
     from matplotlib.axes import Axes
 
-PROC_COLORS: dict[str, str] = {
-    "Kff": "#c44e52",
-    "Kfs": "#dd8452",
-    "Ksf": "#55a868",
-    "Kss": "#4c72b0",
-    "Ktt": "#636363",
-    "Kttmm": "#8172b3",
-}
-VAR_STYLES: dict[str, str] = {"Vh": "-", "Vl": "--", "Vt": "-"}
-VAR_LW: dict[str, float] = {"Vh": 1.2, "Vl": 1.2, "Vt": 1.8}
-
 OUTPUT_DIR = Path(__file__).resolve().parent / "output"
 SVG_PATH = Path(__file__).resolve().parent / "../../svgs/temp_sens_measurement.svg"
-
-
-def _style_ax(ax: Axes) -> None:
-    ax.grid(visible=True, linewidth=0.4, alpha=0.5)
-    ax.tick_params(labelsize=8)
-    ax.title.set_fontsize(9)
-    ax.xaxis.label.set_fontsize(8)
-    ax.yaxis.label.set_fontsize(8)
-
-
-def _parse_corner_name(name: str) -> tuple[str, str]:
-    """Extract (process, voltage_variant) from a corner label like KttTtVt."""
-    m = re.search(r"(K\w\w(?:mm)?)(T\w)(V\w)", name)
-    if m:
-        return m.group(1), m.group(3)
-    return "Ktt", "Vt"
 
 
 CornerData = tuple[str, str, str, np.ndarray, np.ndarray]
@@ -56,7 +32,7 @@ def _load_corners() -> list[CornerData]:
 
     for csv_path in sorted(OUTPUT_DIR.glob("tb_*.csv")):
         corner = csv_path.stem.removeprefix("tb_")
-        proc, volt_var = _parse_corner_name(corner)
+        proc, volt_var = parse_corner_label(corner)
 
         dedup_key = proc + volt_var
         if dedup_key in seen:
@@ -136,26 +112,26 @@ def _setup_axes(axes: tuple[Axes, Axes, Axes, Axes]) -> None:
     ax1.set_title("Frequency vs Temperature")
     ax1.set_xlabel("Temperature [\u00b0C]")
     ax1.set_ylabel("Frequency [MHz]")
-    _style_ax(ax1)
+    style_ax(ax1)
 
     ax2.set_title("Temp Error (1-pt cal, 25\u00b0C)")
     ax2.set_xlabel("Temperature [\u00b0C]")
     ax2.set_ylabel("Error [\u00b0C]")
     ax2.axhline(y=10, color="#cccccc", linewidth=0.8, zorder=0)
     ax2.axhline(y=-10, color="#cccccc", linewidth=0.8, zorder=0)
-    _style_ax(ax2)
+    style_ax(ax2)
 
     ax3.set_title("Oscillator Count vs Temperature")
     ax3.set_xlabel("Temperature [\u00b0C]")
     ax3.set_ylabel("Count [LSB]")
-    _style_ax(ax3)
+    style_ax(ax3)
 
     ax4.set_title("Temp Error (2-pt cal, 25\u00b0C & 85\u00b0C)")
     ax4.set_xlabel("Temperature [\u00b0C]")
     ax4.set_ylabel("Error [\u00b0C]")
     ax4.axhline(y=5, color="#cccccc", linewidth=0.8, zorder=0)
     ax4.axhline(y=-5, color="#cccccc", linewidth=0.8, zorder=0)
-    _style_ax(ax4)
+    style_ax(ax4)
 
 
 def main() -> None:

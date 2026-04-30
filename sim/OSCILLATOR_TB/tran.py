@@ -2,32 +2,16 @@
 """Plot OSCILLATOR_TB measurement results."""
 
 import re
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import yaml
-from matplotlib.axes import Axes
 
-# Muted, high-contrast palette — matches bandgap plots
-PROC_COLORS = {
-    "Kff": "#c44e52",  # muted red
-    "Kfs": "#dd8452",  # warm ochre
-    "Ksf": "#55a868",  # sage green
-    "Kss": "#4c72b0",  # steel blue
-    "Ktt": "#636363",  # dark gray
-    "Kttmm": "#8172b3",  # soft purple
-}
-VAR_STYLES = {"Vh": "-", "Vl": "--", "Vt": "-"}
-VAR_LW = {"Vh": 1.2, "Vl": 1.2, "Vt": 1.8}
-
-
-def _style_ax(ax: Axes) -> None:
-    ax.grid(visible=True, linewidth=0.4, alpha=0.5)
-    ax.tick_params(labelsize=8)
-    ax.title.set_fontsize(9)
-    ax.xaxis.label.set_fontsize(8)
-    ax.yaxis.label.set_fontsize(8)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _corners import parse_corner_label
+from _plotstyle import PROC_COLORS, VAR_LW, VAR_STYLES, style_ax
 
 
 def _parse_measurements(obj: dict) -> tuple[dict, dict, dict]:
@@ -44,17 +28,6 @@ def _parse_measurements(obj: dict) -> tuple[dict, dict, dict]:
             idd_vals[int(key.split("_")[1])] = float(val)
     return t1_vals, t2_vals, idd_vals
 
-#testing stuff
-# def export_corner_csv(label, temps, freq):
-#     outdir = Path("fsm_input")
-#     outdir.mkdir(exist_ok=True)
-
-#     path = outdir / f"{label}.csv"
-#     with path.open("w") as f:
-#         f.write("temperature,frequency\n")
-#         for t, f_mhz in zip(temps, freq):
-#             f.write(f"{t},{f_mhz * 1e6}\n")  # convert MHz → Hz
-
 
 def _parse_corner(cf: Path) -> tuple | None:
     """Read a corner YAML and return (label, proc, volt_var, temps, freq, idd_vals)."""
@@ -68,11 +41,7 @@ def _parse_corner(cf: Path) -> tuple | None:
         return None
 
     label = re.sub(r"^tran_\w*Gt", "", base)
-    m = re.match(r"(K\w\w(?:mm)?)(T\w)(V\w)", label)
-    if m:
-        proc, volt_var = m.group(1), m.group(3)
-    else:
-        proc, volt_var = "Ktt", "Vt"
+    proc, volt_var = parse_corner_label(label)
 
     t1_vals, t2_vals, idd_vals = _parse_measurements(obj)
 
@@ -152,7 +121,7 @@ def _plot_corner_data(axes: tuple, corners: list, nominal_slope: float | None) -
             f25 = np.interp(25, t_arr, f_arr)
             f85 = np.interp(85, t_arr, f_arr)
             slope_2pt = (85 - 25) / (f85 - f25)
-            offset_2pt = 25 - slope_2pt * f25 + 1 # Added 1 degree for symmetric error
+            offset_2pt = 25 - slope_2pt * f25
             t_meas_2pt = slope_2pt * f_arr + offset_2pt
             ax4.plot(temps, t_meas_2pt - t_arr, **kw)
 
@@ -163,7 +132,7 @@ def _setup_oscillator_axes(axes: tuple) -> None:
     ax1.set_title("Frequency vs Temperature")
     ax1.set_xlabel("Temperature [°C]")
     ax1.set_ylabel("Frequency [MHz]")
-    _style_ax(ax1)
+    style_ax(ax1)
 
     ax2.set_title("Temp Error (1-pt cal, 25°C)")
     ax2.set_xlabel("Temperature [°C]")
@@ -172,12 +141,12 @@ def _setup_oscillator_axes(axes: tuple) -> None:
     ax2.axhline(y=-10, color="#cccccc", linewidth=0.8, zorder=0)
     ax2.axvline(0, color="#aaaaaa", linewidth=0.8, linestyle="--")
     ax2.axvline(70, color="#aaaaaa", linewidth=0.8, linestyle="--")
-    _style_ax(ax2)
+    style_ax(ax2)
 
     ax3.set_title("Active Supply Current")
     ax3.set_xlabel("Temperature [°C]")
     ax3.set_ylabel("Current [µA]")
-    _style_ax(ax3)
+    style_ax(ax3)
 
     ax4.set_title("Temp Error (2-pt cal, 25°C & 85°C)")
     ax4.set_xlabel("Temperature [°C]")
@@ -186,7 +155,7 @@ def _setup_oscillator_axes(axes: tuple) -> None:
     ax4.axhline(y=-5, color="#cccccc", linewidth=0.8, zorder=0)
     ax4.axvline(0, color="#aaaaaa", linewidth=0.8, linestyle="--")
     ax4.axvline(70, color="#aaaaaa", linewidth=0.8, linestyle="--")
-    _style_ax(ax4)
+    style_ax(ax4)
 
 
 def emit_latex_params(corners: list, nominal_slope: float | None, outpath: Path) -> None:
@@ -268,7 +237,6 @@ def main(name: str) -> None:
         seen.add(dedup_key)
 
         corners.append(result)
-        #export_corner_csv(_label, _temps, _freq)
 
     nominal_slope = _find_nominal_slope(corners)
 

@@ -2,32 +2,16 @@
 """Plot BANDGAP_CIRCUIT_TB measurement results."""
 
 import re
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import yaml
 from matplotlib.axes import Axes
 
-# Muted, high-contrast palette — distinct but cohesive
-PROC_COLORS = {
-    "Kff": "#c44e52",  # muted red
-    "Kfs": "#dd8452",  # warm ochre
-    "Ksf": "#55a868",  # sage green
-    "Kss": "#4c72b0",  # steel blue
-    "Ktt": "#636363",  # dark gray
-    "Kttmm": "#8172b3",  # soft purple
-}
-# Solid = high voltage, dashed = low voltage, typical = solid
-VAR_STYLES = {"Vh": "-", "Vl": "--", "Vt": "-"}
-VAR_LW = {"Vh": 1.2, "Vl": 1.2, "Vt": 1.8}
-
-
-def _style_ax(ax: Axes) -> None:
-    ax.grid(visible=True, linewidth=0.4, alpha=0.5)
-    ax.tick_params(labelsize=8)
-    ax.title.set_fontsize(9)
-    ax.xaxis.label.set_fontsize(8)
-    ax.yaxis.label.set_fontsize(8)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _corners import parse_corner_label
+from _plotstyle import PROC_COLORS, VAR_LW, VAR_STYLES, style_ax
 
 
 def _extract_measurements(obj: dict) -> tuple[list, list, list, list]:
@@ -54,20 +38,20 @@ def _setup_axes_labels(ax1: Axes, ax2: Axes, ax3: Axes, ax4: Axes) -> None:
     ax1.set_title("PTAT Current")
     ax1.set_xlabel("Temperature [°C]")
     ax1.set_ylabel("Current [µA]")
-    _style_ax(ax1)
+    style_ax(ax1)
     ax2.set_title("CTAT Voltage")
     ax2.set_xlabel("Temperature [°C]")
     ax2.set_ylabel("Voltage [V]")
-    _style_ax(ax2)
+    style_ax(ax2)
     ax3.set_title("Power-Down Leakage")
     ax3.set_xlabel("Temperature [°C]")
     ax3.set_ylabel("Current [nA]")
     ax3.set_ylim(0, 2)
-    _style_ax(ax3)
+    style_ax(ax3)
     ax4.set_title("Active Supply Current")
     ax4.set_xlabel("Temperature [°C]")
     ax4.set_ylabel("Current [µA]")
-    _style_ax(ax4)
+    style_ax(ax4)
 
 
 def _process_corner_file(
@@ -87,12 +71,7 @@ def _process_corner_file(
         return
 
     label = re.sub(r"^tran_\w*Gt", "", base)
-
-    m = re.match(r"(K\w\w(?:mm)?)(T\w)(V\w)", label)
-    if m:
-        proc, volt_var = m.group(1), m.group(3)
-    else:
-        proc, volt_var = "Ktt", "Vt"
+    proc, volt_var = parse_corner_label(label)
 
     # Th and Tl produce identical results — deduplicate
     dedup_key = proc + volt_var

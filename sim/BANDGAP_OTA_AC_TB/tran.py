@@ -2,30 +2,15 @@
 """Plot BANDGAP_OTA AC analysis: DC gain, GBW, phase margin vs temperature."""
 
 import re
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import yaml
-from matplotlib.axes import Axes
 
-PROC_COLORS = {
-    "Kff": "#c44e52",
-    "Kfs": "#dd8452",
-    "Ksf": "#55a868",
-    "Kss": "#4c72b0",
-    "Ktt": "#636363",
-    "Kttmm": "#8172b3",
-}
-VAR_STYLES = {"Vh": "-", "Vl": "--", "Vt": "-"}
-VAR_LW = {"Vh": 1.2, "Vl": 1.2, "Vt": 1.8}
-
-
-def _style_ax(ax: Axes) -> None:
-    ax.grid(visible=True, linewidth=0.4, alpha=0.5)
-    ax.tick_params(labelsize=8)
-    ax.title.set_fontsize(9)
-    ax.xaxis.label.set_fontsize(8)
-    ax.yaxis.label.set_fontsize(8)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _corners import parse_corner_label
+from _plotstyle import PROC_COLORS, VAR_LW, VAR_STYLES, style_ax
 
 
 def _extract(obj: dict) -> dict[str, list[tuple[int, float]]]:
@@ -53,8 +38,7 @@ def _process_corner(cf: Path, seen: set, axes: tuple) -> None:
         return
 
     label = re.sub(r"^tran_\w*Gt", "", base)
-    m = re.match(r"(K\w\w(?:mm)?)(T\w)(V\w)", label)
-    proc, volt_var = (m.group(1), m.group(3)) if m else ("Ktt", "Vt")
+    proc, volt_var = parse_corner_label(label)
 
     dedup = proc + volt_var
     if dedup in seen:
@@ -80,26 +64,10 @@ def _process_corner(cf: Path, seen: set, axes: tuple) -> None:
                   [180 + v if v < 0 else v for _, v in data["pmraw"]], **kw)
 
 
-def emit_latex_params(corner_files: list[Path], outpath: Path) -> None:
-    """Emit LaTeX \\providecommand lines for any report values this TB drives.
-
-    Currently a no-op skeleton — BANDGAP_OTA_AC_TB does not yet feed values
-    into docs/latex_report/params.tex. To wire up a value (e.g., min DC gain
-    or worst phase margin):
-      1. Compute it from `corner_files`.
-      2. Open `outpath` and write `\\providecommand{{\\valX}}{{value}}`.
-      3. Add `\\InputIfFileExists{...sim_params.tex}{}{}` in params.tex.
-    """
-    _ = corner_files, outpath  # unused until populated
-    return
-
-
 def main(name: str) -> None:
     yamlfile = Path(name).with_suffix(".yaml")
     outdir = yamlfile.parent
     corner_files = sorted(outdir.glob("tran_*.yaml"))
-
-    emit_latex_params(corner_files, outdir / "sim_params.tex")
 
     fig, (ax_g, ax_b, ax_p) = plt.subplots(
         1, 3, figsize=(13, 4), facecolor="#fafafa",
@@ -114,19 +82,19 @@ def main(name: str) -> None:
     ax_g.set_title("DC Gain")
     ax_g.set_xlabel("Temperature [°C]")
     ax_g.set_ylabel("Gain [dB]")
-    _style_ax(ax_g)
+    style_ax(ax_g)
 
     ax_b.set_title("Unity-Gain Bandwidth")
     ax_b.set_xlabel("Temperature [°C]")
     ax_b.set_ylabel("GBW [MHz]")
-    _style_ax(ax_b)
+    style_ax(ax_b)
 
     ax_p.set_title("Phase Margin")
     ax_p.set_xlabel("Temperature [°C]")
     ax_p.set_ylabel("PM [°]")
     ax_p.axhline(60, color="#cccccc", linewidth=0.8, zorder=0)
     ax_p.axhline(45, color="#cccccc", linewidth=0.8, zorder=0)
-    _style_ax(ax_p)
+    style_ax(ax_p)
 
     handles, labels = ax_g.get_legend_handles_labels()
     fig.legend(handles, labels, fontsize=7, frameon=False,

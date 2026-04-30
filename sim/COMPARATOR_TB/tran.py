@@ -2,30 +2,15 @@
 """Plot COMPARATOR_TB measurement results: propagation delay and supply current."""
 
 import re
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import yaml
-from matplotlib.axes import Axes
 
-PROC_COLORS = {
-    "Kff": "#c44e52",
-    "Kfs": "#dd8452",
-    "Ksf": "#55a868",
-    "Kss": "#4c72b0",
-    "Ktt": "#636363",
-    "Kttmm": "#8172b3",
-}
-VAR_STYLES = {"Vh": "-", "Vl": "--", "Vt": "-"}
-VAR_LW = {"Vh": 1.2, "Vl": 1.2, "Vt": 1.8}
-
-
-def _style_ax(ax: Axes) -> None:
-    ax.grid(visible=True, linewidth=0.4, alpha=0.5)
-    ax.tick_params(labelsize=8)
-    ax.title.set_fontsize(9)
-    ax.xaxis.label.set_fontsize(8)
-    ax.yaxis.label.set_fontsize(8)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _corners import parse_corner_label
+from _plotstyle import PROC_COLORS, VAR_LW, VAR_STYLES, style_ax
 
 
 def _extract(obj: dict) -> tuple[list, list, list]:
@@ -53,8 +38,7 @@ def _process_corner(cf: Path, seen: set, axes: tuple) -> None:
         return
 
     label = re.sub(r"^tran_\w*Gt", "", base)
-    m = re.match(r"(K\w\w(?:mm)?)(T\w)(V\w)", label)
-    proc, volt_var = (m.group(1), m.group(3)) if m else ("Ktt", "Vt")
+    proc, volt_var = parse_corner_label(label)
 
     dedup = proc + volt_var
     if dedup in seen:
@@ -80,26 +64,10 @@ def _process_corner(cf: Path, seen: set, axes: tuple) -> None:
         ax_idd.plot([t for t, _ in idd], [abs(v) * 1e6 for _, v in idd], **kw)
 
 
-def emit_latex_params(corner_files: list[Path], outpath: Path) -> None:
-    """Emit LaTeX \\providecommand lines for any report values this TB drives.
-
-    Currently a no-op skeleton — COMPARATOR_TB does not yet feed values into
-    docs/latex_report/params.tex. To wire up (e.g., max propagation delay or
-    typical supply current):
-      1. Compute the value from `corner_files`.
-      2. Open `outpath` and write `\\providecommand{{\\valX}}{{value}}`.
-      3. Add `\\InputIfFileExists{...sim_params.tex}{}{}` in params.tex.
-    """
-    _ = corner_files, outpath  # unused until populated
-    return
-
-
 def main(name: str) -> None:
     yamlfile = Path(name).with_suffix(".yaml")
     outdir = yamlfile.parent
     corner_files = sorted(outdir.glob("tran_*.yaml"))
-
-    emit_latex_params(corner_files, outdir / "sim_params.tex")
 
     fig, (ax_tdr, ax_tdf, ax_idd) = plt.subplots(
         1, 3, figsize=(13, 4), facecolor="#fafafa",
@@ -114,17 +82,17 @@ def main(name: str) -> None:
     ax_tdr.set_title("Propagation Delay (rising)")
     ax_tdr.set_xlabel("Temperature [°C]")
     ax_tdr.set_ylabel("Delay [ns]")
-    _style_ax(ax_tdr)
+    style_ax(ax_tdr)
 
     ax_tdf.set_title("Propagation Delay (falling)")
     ax_tdf.set_xlabel("Temperature [°C]")
     ax_tdf.set_ylabel("Delay [ns]")
-    _style_ax(ax_tdf)
+    style_ax(ax_tdf)
 
     ax_idd.set_title("Supply Current")
     ax_idd.set_xlabel("Temperature [°C]")
     ax_idd.set_ylabel("Current [µA]")
-    _style_ax(ax_idd)
+    style_ax(ax_idd)
 
     handles, labels = ax_tdr.get_legend_handles_labels()
     fig.legend(handles, labels, fontsize=7, frameon=False,

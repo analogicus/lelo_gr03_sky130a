@@ -6,16 +6,6 @@ from pathlib import Path
 import yaml
 
 
-def emit_latex_params(corner_files: list[Path], outpath: Path) -> None:
-    """Emit LaTeX \\providecommand lines for any report values this TB drives.
-
-    Skeleton — populate when this testbench gains measurements that feed
-    docs/latex_report/params.tex. Call from main() once activated.
-    """
-    _ = corner_files, outpath  # unused until populated
-    return
-
-
 def main(name: str) -> None:
     """Post-process BANDGAP_OTA_TB simulation results."""
     # Delete next line if you want to use python post processing

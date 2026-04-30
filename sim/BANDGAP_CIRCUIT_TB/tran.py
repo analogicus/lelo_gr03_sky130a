@@ -1,125 +1,89 @@
 #!/usr/bin/env python3
-"""Plot BANDGAP_CIRCUIT_TB measurement results."""
+"""Plot BANDGAP_CIRCUIT_TB measurements as four IEEE-columnwidth PDFs.
+
+Emits to ../../svgs/:
+* bandgap_iptat.pdf  (PTAT current)
+* bandgap_vctat.pdf  (CTAT voltage)
+* bandgap_ileak.pdf  (power-down leakage)
+* bandgap_iact.pdf   (active supply current)
+
+Also emits sim_params.tex with \\valPtatSpread for the report.
+"""
 
 import re
 import sys
 from pathlib import Path
 
-import matplotlib.pyplot as plt
 import yaml
-from matplotlib.axes import Axes
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from _corners import parse_corner_label
-from _plotstyle import PROC_COLORS, VAR_LW, VAR_STYLES, style_ax
+from _plotstyle import (
+    PROC_COLORS,
+    VAR_LW,
+    VAR_STYLES,
+    init_ieee_style,
+    save_overlay_pdf,
+)
 
 
-def _extract_measurements(obj: dict) -> tuple[list, list, list, list]:
-    """Extract temperature and measurement arrays from yaml object."""
-    iptat = []
-    vctat = []
-    ileak = []
-    iact = []
+def _extract(obj: dict) -> dict[str, list[tuple[int, float]]]:
+    out = {"iptat": [], "vctat": [], "ileak": [], "iact": []}
     for key, val in obj.items():
-        temp = int(key.split("_")[-1])
-        if key.startswith("iptat"):
-            iptat.append((temp, val))
-        elif key.startswith("vctat"):
-            vctat.append((temp, val))
-        elif key.startswith("ileak"):
-            ileak.append((temp, val))
-        elif key.startswith("iact"):
-            iact.append((temp, val))
-    return iptat, vctat, ileak, iact
+        m = re.match(r"(iptat|vctat|ileak|iact)_(-?\d+)$", key)
+        if m:
+            out[m.group(1)].append((int(m.group(2)), float(val)))
+    for v in out.values():
+        v.sort()
+    return out
 
 
-def _setup_axes_labels(ax1: Axes, ax2: Axes, ax3: Axes, ax4: Axes) -> None:
-    """Configure axes titles, labels, and styling."""
-    ax1.set_title("PTAT Current")
-    ax1.set_xlabel("Temperature [°C]")
-    ax1.set_ylabel("Current [µA]")
-    style_ax(ax1)
-    ax2.set_title("CTAT Voltage")
-    ax2.set_xlabel("Temperature [°C]")
-    ax2.set_ylabel("Voltage [V]")
-    style_ax(ax2)
-    ax3.set_title("Power-Down Leakage")
-    ax3.set_xlabel("Temperature [°C]")
-    ax3.set_ylabel("Current [nA]")
-    ax3.set_ylim(0, 2)
-    style_ax(ax3)
-    ax4.set_title("Active Supply Current")
-    ax4.set_xlabel("Temperature [°C]")
-    ax4.set_ylabel("Current [µA]")
-    style_ax(ax4)
+def _build_traces(corner_files: list[Path]):
+    """Return per-metric list of (label, color, linestyle, linewidth, xs, ys).
 
+    Th/Tl identical -> deduplicated.
+    """
+    by_metric: dict[str, list] = {k: [] for k in ("iptat", "vctat", "ileak", "iact")}
+    seen: set[str] = set()
+    for cf in corner_files:
+        base = cf.stem
+        if re.search(r"_\d+$", base):
+            continue
+        with cf.open() as fi:
+            obj = yaml.safe_load(fi)
+        if not obj:
+            continue
+        label = re.sub(r"^tran_\w*Gt", "", base)
+        proc, volt_var = parse_corner_label(label)
+        dedup = proc + volt_var
+        if dedup in seen:
+            continue
+        seen.add(dedup)
 
-def _process_corner_file(
-    cf: Path,
-    seen: set,
-    axes: tuple,
-) -> None:
-    """Process a single corner file and plot its data."""
-    ax1, ax2, ax3, ax4 = axes
-    base = cf.stem
-    if re.search(r"_\d+$", base):
-        return
+        c = PROC_COLORS.get(proc, "#999999")
+        ls = VAR_STYLES.get(volt_var, "-")
+        lw = VAR_LW.get(volt_var, 1.0)
+        data = _extract(obj)
 
-    with cf.open() as fi:
-        obj = yaml.safe_load(fi)
-    if not obj:
-        return
-
-    label = re.sub(r"^tran_\w*Gt", "", base)
-    proc, volt_var = parse_corner_label(label)
-
-    # Th and Tl produce identical results — deduplicate
-    dedup_key = proc + volt_var
-    if dedup_key in seen:
-        return
-    seen.add(dedup_key)
-
-    short_label = proc + volt_var
-
-    c = PROC_COLORS.get(proc, "#999999")
-    ls = VAR_STYLES.get(volt_var, "-")
-    lw = VAR_LW.get(volt_var, 1.0)
-
-    iptat, vctat, ileak, iact = _extract_measurements(obj)
-
-    iptat.sort(key=lambda x: x[0])
-    vctat.sort(key=lambda x: x[0])
-    ileak.sort(key=lambda x: x[0])
-    iact.sort(key=lambda x: x[0])
-
-    kw = {"color": c, "linestyle": ls, "linewidth": lw}
-
-    if iptat:
-        ax1.plot(
-            [t for t, _ in iptat],
-            [v * 1e6 for _, v in iptat],
-            label=short_label,
-            **kw,
-        )
-    if vctat:
-        ax2.plot([t for t, _ in vctat], [v for _, v in vctat], **kw)
-    if ileak:
-        ax3.plot([t for t, _ in ileak], [abs(v) * 1e9 for _, v in ileak], **kw)
-    if iact:
-        ax4.plot([t for t, _ in iact], [abs(v) * 1e6 for _, v in iact], **kw)
+        for metric, points in data.items():
+            if not points:
+                continue
+            xs = [t for t, _ in points]
+            if metric == "iptat":
+                ys = [v * 1e6 for _, v in points]
+            elif metric == "vctat":
+                ys = [v for _, v in points]
+            elif metric == "ileak":
+                ys = [abs(v) * 1e9 for _, v in points]
+            elif metric == "iact":
+                ys = [abs(v) * 1e6 for _, v in points]
+            by_metric[metric].append((dedup, c, ls, lw, xs, ys))
+    return by_metric
 
 
 def emit_latex_params(corner_files: list[Path], outpath: Path) -> None:
-    """Write LaTeX \\providecommand lines summarising the post-layout PVT sweep.
-
-    The report's params.tex \\InputIfFileExists this file; \\providecommand
-    means a hand value in params.tex always wins. Comment out a hand line
-    in params.tex to fall back to the value computed here.
-
-    Scope: post-layout PVT corners only (LayGt prefix), excluding MC runs
-    (Kttmm) and per-temperature `.raw` stubs (suffixed with _N).
-    """
-    sample_temp = 30  # degC, closest to room temp on the 10-degC sim grid
+    """Write LaTeX \\providecommand lines summarising the post-layout PVT sweep."""
+    sample_temp = 30
     iptat_at_typ: list[float] = []
     for cf in corner_files:
         stem = cf.stem
@@ -131,10 +95,8 @@ def emit_latex_params(corner_files: list[Path], outpath: Path) -> None:
             obj = yaml.safe_load(fi)
         if obj and f"iptat_{sample_temp}" in obj:
             iptat_at_typ.append(abs(obj[f"iptat_{sample_temp}"]))
-
     if not iptat_at_typ:
         return
-
     mean = sum(iptat_at_typ) / len(iptat_at_typ)
     spread_pct = (max(iptat_at_typ) - min(iptat_at_typ)) / mean * 100
     with outpath.open("w") as f:
@@ -144,43 +106,76 @@ def emit_latex_params(corner_files: list[Path], outpath: Path) -> None:
 
 
 def main(name: str) -> None:
-    """Plot simulation results from corner yaml files."""
+    init_ieee_style()
     yamlfile = Path(name).with_suffix(".yaml")
     outdir = yamlfile.parent
-
     corner_files = sorted(outdir.glob("tran_*.yaml"))
+    if not corner_files:
+        print(f"no tran_*.yaml in {outdir.resolve()}", file=sys.stderr)
+        return
 
     emit_latex_params(corner_files, outdir / "sim_params.tex")
 
-    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(
-        2,
-        2,
-        figsize=(10, 7),
-        facecolor="#fafafa",
+    by_metric = _build_traces(corner_files)
+
+    save_overlay_pdf(
+        by_metric["iptat"],
+        ylabel=r"PTAT current [\unit{\micro\ampere}]",
+        outname="bandgap_iptat.pdf",
     )
-    for ax in (ax1, ax2, ax3, ax4):
-        ax.set_facecolor("#fafafa")
-
-    seen = set()
-
-    for cf in corner_files:
-        _process_corner_file(cf, seen, (ax1, ax2, ax3, ax4))
-
-    _setup_axes_labels(ax1, ax2, ax3, ax4)
-
-    handles, labels = ax1.get_legend_handles_labels()
-    fig.legend(
-        handles,
-        labels,
-        fontsize=7,
-        frameon=False,
-        loc="lower center",
-        bbox_to_anchor=(0.5, -0.01),
-        ncol=6,
+    save_overlay_pdf(
+        by_metric["vctat"],
+        ylabel=r"CTAT voltage [\unit{\volt}]",
+        outname="bandgap_vctat.pdf",
     )
-    fig.tight_layout(rect=(0, 0.05, 1, 1))
-    fig.savefig(
-        "../../svgs/bandgap_measurement.svg",
-        bbox_inches="tight",
-        facecolor=fig.get_facecolor(),
+    # Leakage: y-clip at 2 nA so the hot-corner exponential doesn't flatten
+    # the 25 C spec region (<1 nA) into invisibility — handled in a custom
+    # helper since the shared overlay function has no ylim hook.
+    _save_leak_with_ylim(by_metric["ileak"])
+
+    save_overlay_pdf(
+        by_metric["iact"],
+        ylabel=r"Active supply current [\unit{\micro\ampere}]",
+        outname="bandgap_iact.pdf",
     )
+
+
+def _save_leak_with_ylim(traces) -> None:
+    """Re-emit the leakage panel with y-axis clipped to [0, 2] nA so the
+    25 C spec region is readable. Overwrites bandgap_ileak.pdf."""
+    import matplotlib.pyplot as plt
+    from _plotstyle import (
+        IEEE_ACCENT,
+        IEEE_COLUMN_WIDTH_IN,
+        IEEE_FIG_HEIGHT_IN,
+        IEEE_LINE_WIDTH,
+    )
+    fig, ax = plt.subplots(
+        figsize=(IEEE_COLUMN_WIDTH_IN, IEEE_FIG_HEIGHT_IN),
+        layout="constrained",
+    )
+    seen: set[str] = set()
+    for label, color, ls, lw, xs, ys in traces:
+        kw = {"color": color, "linestyle": ls, "linewidth": lw}
+        if label in seen:
+            ax.plot(xs, ys, **kw)
+        else:
+            ax.plot(xs, ys, label=label, **kw)
+            seen.add(label)
+    ax.axhline(1.0, color=IEEE_ACCENT, linestyle="--",
+               linewidth=IEEE_LINE_WIDTH,
+               label=r"\qty{1}{\nano\ampere} spec")
+    ax.set_xlabel(r"Temperature [\unit{\celsius}]")
+    ax.set_ylabel(r"Power-down leakage [\unit{\nano\ampere}]")
+    ax.set_ylim(0, 2)
+    ax.grid(visible=True)
+    ax.legend(loc="best", frameon=False, ncol=2, fontsize=7)
+    out = Path(__file__).resolve().parents[2] / "svgs" / "bandgap_ileak.pdf"
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"saved {out} (clipped 0-2 nA)")
+
+
+if __name__ == "__main__":
+    name = sys.argv[1] if len(sys.argv) > 1 else "output_tran/tran"
+    main(name)

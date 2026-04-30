@@ -89,19 +89,43 @@ klview:
 
 # Render layout to vector SVG / PDF using Magic's Cairo backend.
 # Needs xvfb-run (xorg-server-xvfb) and rsvg-convert (librsvg).
-#   make svg CELL=LELO_GR03   -> renders/LELO_GR03.svg
-#   make pdf CELL=LELO_GR03   -> renders/LELO_GR03.pdf
+#
+#   make svg CELL=LELO_GR03         -> renders/LELO_GR03.svg
+#   make pdf CELL=LELO_GR03         -> renders/LELO_GR03.pdf
+#
+# README figures (committed to ../svgs/, referenced by README.md):
+#   make readme-figures             -> ../svgs/LELO_GR03.{svg,pdf}
+#                                      ../svgs/physical_design.{svg,pdf}
 SVG_TECH ?= ${PDKPATH}/libs.tech/magic/sky130A.tech
+SVG_PUBDIR := ../svgs
+XVFB_GEOM ?= -screen 0 2000x1500x24
 
+# Local (gitignored) renders -------------------------------------------------
 renders:
 	mkdir -p $@
 
 renders/%.svg: | renders
-	printf 'load %s\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a magic -d XR -noconsole -T $(SVG_TECH)
+	printf 'load %s\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
 
 renders/%.pdf: renders/%.svg
 	rsvg-convert -f pdf $< -o $@
 
 svg: renders/${PRCELL}.svg
-
 pdf: renders/${PRCELL}.pdf
+
+# Published figures (committed to ../svgs/, picked up by README) -------------
+$(SVG_PUBDIR)/%.svg:
+	@mkdir -p $(SVG_PUBDIR)
+	printf 'load %s\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
+
+# Special case: physical_design.{svg,pdf} renders the Tiny Tapeout wrapper.
+$(SVG_PUBDIR)/physical_design.svg:
+	@mkdir -p $(SVG_PUBDIR)
+	printf 'load tt_um_lelo_gr03_analogicus\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
+
+$(SVG_PUBDIR)/%.pdf: $(SVG_PUBDIR)/%.svg
+	rsvg-convert -f pdf $< -o $@
+
+.PHONY: readme-figures
+readme-figures: $(SVG_PUBDIR)/LELO_GR03.svg $(SVG_PUBDIR)/LELO_GR03.pdf $(SVG_PUBDIR)/physical_design.svg $(SVG_PUBDIR)/physical_design.pdf
+	@echo "README figures regenerated under $(SVG_PUBDIR)/"

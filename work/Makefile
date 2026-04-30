@@ -88,7 +88,8 @@ klview:
 	klayout -n sky130 -e gds/${PRCELL}.gds &
 
 # Render layout to vector SVG / PDF using Magic's Cairo backend.
-# Needs xvfb-run (xorg-server-xvfb) and rsvg-convert (librsvg).
+# Needs xvfb-run (xorg-server-xvfb) and chromium (for SVG -> PDF;
+# rsvg-convert can't handle Magic's <pattern>+<filter> layer fills).
 #
 #   make svg CELL=LELO_GR03         -> renders/LELO_GR03.svg
 #   make pdf CELL=LELO_GR03         -> renders/LELO_GR03.pdf
@@ -108,7 +109,7 @@ renders/%.svg: | renders
 	printf 'load %s\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
 
 renders/%.pdf: renders/%.svg
-	rsvg-convert -f pdf $< -o $@
+	./svg2pdf.sh $< $@
 
 svg: renders/${PRCELL}.svg
 pdf: renders/${PRCELL}.pdf
@@ -118,13 +119,16 @@ $(SVG_PUBDIR)/%.svg:
 	@mkdir -p $(SVG_PUBDIR)
 	printf 'load %s\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$*' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
 
-# Special case: physical_design.{svg,pdf} renders the Tiny Tapeout wrapper.
+# Special case: physical_design.svg renders the Tiny Tapeout wrapper. The
+# wrapper's sub-cells (LELO_GR03, temp_sens) are not expand-marked in the
+# .mag, so we expand LELO_GR03 explicitly and unexpand the digital sea-of-
+# cells inside it ("hide tiny details").
 $(SVG_PUBDIR)/physical_design.svg:
 	@mkdir -p $(SVG_PUBDIR)
-	printf 'load tt_um_lelo_gr03_analogicus\nexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
+	printf 'load tt_um_lelo_gr03_analogicus\nselect cell LELO_GR03_1\nexpand\nselect cell LELO_GR03_1/temp_sens_0\nunexpand\nselect top cell\nfindbox zoom\nplot svg %s\nquit -noprompt\n' '$@' | xvfb-run -a -s "$(XVFB_GEOM)" magic -d XR -noconsole -T $(SVG_TECH)
 
 $(SVG_PUBDIR)/%.pdf: $(SVG_PUBDIR)/%.svg
-	rsvg-convert -f pdf $< -o $@
+	./svg2pdf.sh $< $@
 
 .PHONY: readme-figures
 readme-figures: $(SVG_PUBDIR)/LELO_GR03.svg $(SVG_PUBDIR)/LELO_GR03.pdf $(SVG_PUBDIR)/physical_design.svg $(SVG_PUBDIR)/physical_design.pdf

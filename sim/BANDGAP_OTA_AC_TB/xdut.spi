@@ -1,2 +1,2 @@
-*Automatic generated instance fron ../../tech/scripts/genxdut BANDGAP_OTA
-XDUT VDD IN+ OUT IN- VSS PWRUP_N_1V8 PWRUP_1V8 VB_P  BANDGAP_OTA
+*Automatic generated instance fron ../../tech/scripts/genxdut BANDGAP_OTA_PMOS
+XDUT VDD INP OUT INN VSS PWRUP_N_1V8 PWRUP_1V8 VB_P  BANDGAP_OTA_PMOS

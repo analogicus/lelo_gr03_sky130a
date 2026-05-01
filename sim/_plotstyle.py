@@ -75,6 +75,29 @@ IEEE_ACCENT = LATTE_RED
 IEEE_GRID = LATTE_SURFACE0
 
 
+def legend_above_two_rows(ax, fontsize: int = 7) -> None:
+    """Place the axes legend above the plot, spanning the figure width in two rows.
+
+    ``ncol`` is set to ``ceil(N/2)`` so the entries fill exactly two rows
+    (top row gets the extra entry when the count is odd). With one entry the
+    legend collapses to a single row.
+    """
+    handles, labels = ax.get_legend_handles_labels()
+    if not handles:
+        return
+    ncol = (len(handles) + 1) // 2
+    ax.legend(
+        handles, labels,
+        loc="lower left",
+        bbox_to_anchor=(0.0, 1.02, 1.0, 0.2),
+        mode="expand",
+        ncol=ncol,
+        frameon=False,
+        fontsize=fontsize,
+        borderaxespad=0.0,
+    )
+
+
 def save_overlay_pdf(
     traces: list[tuple[str, str, str, float, list[int], list[float]]],
     ylabel: str,
@@ -112,7 +135,7 @@ def save_overlay_pdf(
     ax.set_ylabel(ylabel)
     ax.grid(visible=True)
     if legend and seen_labels:
-        ax.legend(loc="best", frameon=False, ncol=2, fontsize=7)
+        legend_above_two_rows(ax)
 
     out = _Path.cwd().resolve()
     # Walk up to find the IP root by looking for a sibling 'svgs' directory.

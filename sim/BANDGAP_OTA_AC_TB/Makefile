@@ -5,7 +5,7 @@ all: typical etc summary
 TB=tran
 VIEW=Sch
 #VIEW=Lay
-CELL=BANDGAP_OTA
+CELL=BANDGAP_OTA_PMOS
 LIB =LELO_GR03_SKY130A
 OPT=
 

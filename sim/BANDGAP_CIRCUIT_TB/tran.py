@@ -149,6 +149,7 @@ def _save_leak_with_ylim(traces) -> None:
         IEEE_COLUMN_WIDTH_IN,
         IEEE_FIG_HEIGHT_IN,
         IEEE_LINE_WIDTH,
+        legend_above_two_rows,
     )
     fig, ax = plt.subplots(
         figsize=(IEEE_COLUMN_WIDTH_IN, IEEE_FIG_HEIGHT_IN),
@@ -164,12 +165,12 @@ def _save_leak_with_ylim(traces) -> None:
             seen.add(label)
     ax.axhline(1.0, color=IEEE_ACCENT, linestyle="--",
                linewidth=IEEE_LINE_WIDTH,
-               label=r"\qty{1}{\nano\ampere} spec")
+               label="spec")
     ax.set_xlabel(r"Temperature [\unit{\celsius}]")
     ax.set_ylabel(r"Power-down leakage [\unit{\nano\ampere}]")
     ax.set_ylim(0, 2)
     ax.grid(visible=True)
-    ax.legend(loc="best", frameon=False, ncol=2, fontsize=7)
+    legend_above_two_rows(ax)
     out = Path(__file__).resolve().parents[2] / "svgs" / "bandgap_ileak.pdf"
     fig.savefig(out)
     plt.close(fig)

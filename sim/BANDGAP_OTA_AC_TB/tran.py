@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Plot BANDGAP_OTA AC analysis as one IEEE-columnwidth PDF per metric.
 
-Emits three PDFs to ../../svgs/:
+Emits three PDFs to ../../svgs/, overlaying every PVT corner that has data:
 * bandgap_ota_ac_dcgain.pdf
 * bandgap_ota_ac_gbw.pdf
 * bandgap_ota_ac_pm.pdf
@@ -11,16 +11,16 @@ import re
 import sys
 from pathlib import Path
 
-import matplotlib.pyplot as plt
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _corners import parse_corner_label
 from _plotstyle import (
-    IEEE_ACCENT,
-    IEEE_COLUMN_WIDTH_IN,
-    IEEE_FIG_HEIGHT_IN,
-    IEEE_TRACE,
+    PROC_COLORS,
+    VAR_LW,
+    VAR_STYLES,
     init_ieee_style,
+    save_overlay_pdf,
 )
 
 
@@ -37,32 +37,49 @@ def _extract(obj: dict) -> dict[str, list[tuple[int, float]]]:
     return out
 
 
-def _save_panel(temps: list[int], values: list[float],
-                ylabel: str, outname: str,
-                accent_target: float | None = None,
-                accent_label: str | None = None) -> None:
-    fig, ax = plt.subplots(
-        figsize=(IEEE_COLUMN_WIDTH_IN, IEEE_FIG_HEIGHT_IN),
-        layout="constrained",
-    )
-    ax.plot(temps, values, color=IEEE_TRACE, marker="o", markersize=3)
-    if accent_target is not None:
-        ax.axhline(accent_target, color=IEEE_ACCENT, linestyle="--",
-                   label=accent_label)
-        ax.legend(loc="best", frameon=False)
-    ax.set_xlabel(r"Temperature [\unit{\celsius}]")
-    ax.set_ylabel(ylabel)
-    ax.grid(visible=True)
-    out = Path(__file__).resolve().parents[2] / "svgs" / outname
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out)
-    plt.close(fig)
-    print(f"saved {out}")
+def _build_traces(corner_files: list[Path]):
+    """Return per-metric list of (label, color, linestyle, linewidth, xs, ys).
+    Deduplicated by proc+volt so Th/Tl runs collapse."""
+    by_metric: dict[str, list] = {
+        k: [] for k in ("dcgain", "ugbw", "pmraw")
+    }
+    seen: set[str] = set()
+    for cf in corner_files:
+        base = cf.stem
+        if re.search(r"_-?\d+$", base):
+            continue
+        with cf.open() as fi:
+            obj = yaml.safe_load(fi)
+        if not obj:
+            continue
+        label = re.sub(r"^tran_\w*Gt", "", base)
+        proc, volt_var = parse_corner_label(label)
+        dedup = proc + volt_var
+        if dedup in seen:
+            continue
+        seen.add(dedup)
+
+        c = PROC_COLORS.get(proc, "#999999")
+        ls = VAR_STYLES.get(volt_var, "-")
+        lw = VAR_LW.get(volt_var, 1.0)
+        data = _extract(obj)
+
+        for metric, points in data.items():
+            if not points:
+                continue
+            xs = [t for t, _ in points]
+            if metric == "ugbw":
+                ys = [v / 1e6 for _, v in points]  # Hz -> MHz
+            elif metric == "pmraw":
+                ys = [(180 + v if v < 0 else v) for _, v in points]
+            else:
+                ys = [v for _, v in points]
+            by_metric[metric].append((dedup, c, ls, lw, xs, ys))
+    return by_metric
 
 
 def main(name: str) -> None:
     init_ieee_style()
-
     yamlfile = Path(name).with_suffix(".yaml")
     outdir = yamlfile.parent
     corner_files = sorted(outdir.glob("tran_*.yaml"))
@@ -70,44 +87,26 @@ def main(name: str) -> None:
         print(f"no tran_*.yaml in {outdir.resolve()}", file=sys.stderr)
         return
 
-    aggregated: dict[str, list[tuple[int, float]]] = {
-        "dcgain": [], "ugbw": [], "pmraw": [],
-    }
-    for cf in corner_files:
-        if re.search(r"_-?\d+$", cf.stem):
-            continue
-        with cf.open() as fi:
-            obj = yaml.safe_load(fi)
-        if not obj:
-            continue
-        for k, v in _extract(obj).items():
-            aggregated[k].extend(v)
+    by_metric = _build_traces(corner_files)
 
-    for k in aggregated:
-        aggregated[k].sort()
-
-    if aggregated["dcgain"]:
-        temps = [t for t, _ in aggregated["dcgain"]]
-        gains = [v for _, v in aggregated["dcgain"]]
-        _save_panel(temps, gains,
-                    ylabel=r"DC gain [\unit{dB}]",
-                    outname="bandgap_ota_ac_dcgain.pdf")
-
-    if aggregated["ugbw"]:
-        temps = [t for t, _ in aggregated["ugbw"]]
-        gbw_mhz = [v / 1e6 for _, v in aggregated["ugbw"]]
-        _save_panel(temps, gbw_mhz,
-                    ylabel=r"GBW [\unit{\mega\hertz}]",
-                    outname="bandgap_ota_ac_gbw.pdf")
-
-    if aggregated["pmraw"]:
-        temps = [t for t, _ in aggregated["pmraw"]]
-        pm = [(180 + v if v < 0 else v) for _, v in aggregated["pmraw"]]
-        _save_panel(temps, pm,
-                    ylabel=r"Phase margin [\unit{\degree}]",
-                    outname="bandgap_ota_ac_pm.pdf",
-                    accent_target=60,
-                    accent_label=r"\qty{60}{\degree} stability target")
+    if by_metric["dcgain"]:
+        save_overlay_pdf(
+            by_metric["dcgain"],
+            ylabel=r"DC gain [\unit{dB}]",
+            outname="bandgap_ota_ac_dcgain.pdf",
+        )
+    if by_metric["ugbw"]:
+        save_overlay_pdf(
+            by_metric["ugbw"],
+            ylabel=r"GBW [\unit{\mega\hertz}]",
+            outname="bandgap_ota_ac_gbw.pdf",
+        )
+    if by_metric["pmraw"]:
+        save_overlay_pdf(
+            by_metric["pmraw"],
+            ylabel=r"Phase margin [\unit{\degree}]",
+            outname="bandgap_ota_ac_pm.pdf",
+        )
 
 
 if __name__ == "__main__":

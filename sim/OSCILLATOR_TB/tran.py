@@ -29,6 +29,7 @@ from _plotstyle import (
     VAR_LW,
     VAR_STYLES,
     init_ieee_style,
+    legend_above_two_rows,
     save_overlay_pdf,
 )
 
@@ -100,7 +101,7 @@ def _save_err_pdf(traces, outname: str, accent_pm: float):
             seen.add(label)
     ax.axhline(accent_pm, color=IEEE_ACCENT, linestyle="--",
                linewidth=IEEE_LINE_WIDTH,
-               label=rf"$\pm$\qty{{{accent_pm:g}}}{{\celsius}} spec")
+               label="spec")
     ax.axhline(-accent_pm, color=IEEE_ACCENT, linestyle="--",
                linewidth=IEEE_LINE_WIDTH)
     ax.axvline(0, color="#9ca0b0", linestyle=":", linewidth=IEEE_LINE_WIDTH)
@@ -108,7 +109,7 @@ def _save_err_pdf(traces, outname: str, accent_pm: float):
     ax.set_xlabel(r"Temperature [\unit{\celsius}]")
     ax.set_ylabel(r"Error [\unit{\celsius}]")
     ax.grid(visible=True)
-    ax.legend(loc="best", frameon=False, ncol=2, fontsize=7)
+    legend_above_two_rows(ax)
     out = Path(__file__).resolve().parents[2] / "svgs" / outname
     fig.savefig(out)
     plt.close(fig)

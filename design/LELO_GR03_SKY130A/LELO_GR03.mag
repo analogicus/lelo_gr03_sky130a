@@ -1285,10 +1285,6 @@ use BIAS_CIRCUIT2  BIAS_CIRCUIT2_0
 timestamp 1777558399
 transform 1 0 30100 0 1 40116
 box -100 6284 5190 18042
-use LELO_GR02  LELO_GR02_0 ~/pro/aicex/ip/lelo_gr02_sky130a/design/LELO_GR02_SKY130A
-timestamp 1777554959
-transform 1 0 19826 0 1 45154
-box 0 0 30000 19000
 use temp_sens  temp_sens_0
 timestamp 1777558988
 transform 1 0 38490 0 1 51984

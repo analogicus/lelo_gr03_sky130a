@@ -1055,5 +1055,5 @@ port 31 nsew
 flabel metal3 6166 14606 6234 16774 0 FreeSans 1600 0 0 0 INN
 port 33 nsew
 << properties >>
-string FIXED_BBOX -96 0 1408 25600
+string FIXED_BBOX 5388 11410 14236 16780
 << end >>

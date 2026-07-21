@@ -673,5 +673,5 @@ port 31 nsew
 flabel metal2 20596 32930 23376 32994 0 FreeSans 1600 0 0 0 PWRUP_N_1V8
 port 33 nsew
 << properties >>
-string FIXED_BBOX 0 0 9261 48816
+string FIXED_BBOX 10544 17324 23376 33842
 << end >>

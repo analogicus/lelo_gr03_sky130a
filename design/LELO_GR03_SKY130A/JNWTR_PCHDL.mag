@@ -68,5 +68,5 @@ port 4 nsew signal bidirectional
 flabel locali s 90 105 180 135 0 FreeSans 400 0 0 0 D
 port 1 nsew signal bidirectional
 << properties >>
-string FIXED_BBOX 0 0 495 160
+string FIXED_BBOX 0 -60 570 220
 << end >>

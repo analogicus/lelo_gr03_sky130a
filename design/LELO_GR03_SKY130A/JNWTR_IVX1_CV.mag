@@ -41,5 +41,5 @@ port 3 nsew signal bidirectional
 flabel m3 s 315 0 403 160 0 FreeSans 400 0 0 0 AVSS
 port 4 nsew signal bidirectional
 << properties >>
-string FIXED_BBOX 0 0 990 160
+string FIXED_BBOX -75 -60 1065 220
 << end >>

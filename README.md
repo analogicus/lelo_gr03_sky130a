@@ -42,13 +42,13 @@ below, each milestone will have a short description.
 
 # Milestone 1: The Bandgap
 
-The bandgap OTA is a two-stage Miller OTA (see [BANDGAP_OTA](#bandgap_ota)). The
+The bandgap OTA is a two-stage Miller OTA. The
 input NMOS transistors are low-threshold-voltage transistors, since they operate
 with the diode drop in the input common-mode voltage, reducing it from ~0.8V to
 ~0.5V over the temperature range of -40° to 125°.
 
 
-The bandgap circuit (see [BANDGAP_CIRCUIT](#bandgap_circuit)) uses a 1:8 BJT
+The bandgap circuit uses a 1:8 BJT
 ratio (Q1 = 1×, Q2 = 8×). If we compare the voltages across the lower
 diode-connected BJTs, Q1 and Q2, the voltage difference will be proportional to
 the size difference and temperature:
@@ -121,8 +121,7 @@ The goal is to measure the frequency of the oscillator. We assume access to an a
 The digital block temp_sens.sv implements a 4-state FSM with a dual-edge counter
 that captures both rising and falling edges of the oscillator output for 2×
 resolution. The FSM powers up the oscillator for one reference clock period (~30
-µs), lets the counter settle (CDC safety), then latches the count. See the [FSM
-state diagram](#tempsens-fsm) below.
+µs), lets the counter settle (CDC safety), then latches the count. 
 
 
 The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized

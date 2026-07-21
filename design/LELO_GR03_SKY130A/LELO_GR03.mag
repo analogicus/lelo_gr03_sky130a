@@ -1245,5 +1245,5 @@ port 59 nsew
 flabel locali 41336 46422 44368 46584 0 FreeSans 1600 0 0 0 VSS
 port 61 nsew
 << properties >>
-string FIXED_BBOX 0 0 19150 102616
+string FIXED_BBOX 20312 45126 47038 64186
 << end >>

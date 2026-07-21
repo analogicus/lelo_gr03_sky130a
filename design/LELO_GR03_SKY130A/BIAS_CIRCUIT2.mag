@@ -313,5 +313,5 @@ port 17 n
 rlabel locali 1326 3322 1952 3418 1 VSS
 port 17 n
 << properties >>
-string FIXED_BBOX -180 0 2344 8420
+string FIXED_BBOX -50 3142 2595 9021
 << end >>

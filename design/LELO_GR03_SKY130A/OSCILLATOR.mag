@@ -518,5 +518,5 @@ port 49 nsew
 flabel metal1 35184 60594 37324 60654 0 FreeSans 1600 0 0 0 PWRUP_1V8
 port 51 nsew
 << properties >>
-string FIXED_BBOX 0 0 19150 102616
+string FIXED_BBOX 21022 46388 47038 63062
 << end >>

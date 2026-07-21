@@ -396,5 +396,5 @@ port 5 nsew
 flabel metal2 s 5836 9471 5836 9471 0 FreeSans 783 0 0 0 VB_N
 port 6 nsew
 << properties >>
-string FIXED_BBOX -360 0 4688 16840
+string FIXED_BBOX -2609 6454 6463 17344
 << end >>

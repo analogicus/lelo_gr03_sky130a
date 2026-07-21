@@ -761,5 +761,5 @@ port 15 nsew
 flabel metal2 3412 14646 3476 16214 0 FreeSans 1600 0 0 0 INP
 port 20 nsew
 << properties >>
-string FIXED_BBOX 0 0 2640 24656
+string FIXED_BBOX -440 9589 7924 16218
 << end >>

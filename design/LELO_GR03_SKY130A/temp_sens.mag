@@ -9460,5 +9460,5 @@ port 14 nsew signal output
 flabel metal2 s 10314 12700 10370 13500 0 FreeSans 224 90 0 0 o_valid
 port 15 nsew signal output
 << properties >>
-string FIXED_BBOX 0 0 11357 13501
+string FIXED_BBOX 566 0 10382 13501
 << end >>

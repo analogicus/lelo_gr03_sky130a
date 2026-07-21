@@ -81,7 +81,17 @@ The power-down leakage stays well below 1 nA across all corners.
 
 # Milestone 2: The Oscillator
 
-The PTAT current from the bandgap charges a timing capacitor (12 MIM caps, see [OSCILLATOR](#oscillator)), and the voltage across the capacitors feeds into the [COMPARATOR](#comparator) alongside the reference voltage V_CTAT. Then, if the capacitor voltage exceeds V_CTAT, the comparator fires, and a reset pulse discharges the capacitor through an NMOS switch, restarting the cycle. The comparator output feeds into a D flip-flop, which divides the frequency by 2 to produce a clean square wave. Since both the charging current (PTAT) and the threshold voltage (CTAT) are proportional to temperature, the resulting output frequency is approximately linear in temperature. Using the equation for current through a capacitor:
+The PTAT current from the bandgap charges a timing capacitor (12 MIM caps, see
+OSCILLATOR, and the voltage across the capacitors feeds into the
+COMPARATOR alongside the reference voltage V_CTAT. Then, if the
+capacitor voltage exceeds V_CTAT, the comparator fires, and a reset pulse
+discharges the capacitor through an NMOS switch, restarting the cycle. The
+comparator output feeds into a D flip-flop, which divides the frequency by 2 to
+produce a clean square wave. Since both the charging current (PTAT) and the
+threshold voltage (CTAT) are proportional to temperature, the resulting output
+frequency is approximately linear in temperature. Using the equation for current
+through a capacitor:
+
 
 $$i = C \frac{dV}{dt} \Rightarrow dt = C \frac{dV}{i} \Rightarrow f(T) = \frac{1}{dt} = \frac{I_{PTAT}(T)}{C \cdot V_{CTAT}(T)} $$
 
@@ -108,11 +118,20 @@ The plots below show the oscillator performance across PVT corners. All corners 
 
 The goal is to measure the frequency of the oscillator. We assume access to an accurate 32768 Hz clock source. The approach is to power up the oscillator for a fixed number of reference clock cycles and count the output pulses. For example, counting 128 pulses over 2 periods of the 32768 Hz clock gives a frequency of approximately 2.09 MHz. Once we have the frequency, we can calculate the temperature.
 
-The digital block ([temp_sens.sv](rtl/temp_sens.sv)) implements a 4-state FSM with a dual-edge counter that captures both rising and falling edges of the oscillator output for 2× resolution. The FSM powers up the oscillator for one reference clock period (~30 µs), lets the counter settle (CDC safety), then latches the count. See the [FSM state diagram](#tempsens-fsm) below.
+The digital block temp_sens.sv implements a 4-state FSM with a dual-edge counter
+that captures both rising and falling edges of the oscillator output for 2×
+resolution. The FSM powers up the oscillator for one reference clock period (~30
+µs), lets the counter settle (CDC safety), then latches the count. See the [FSM
+state diagram](#tempsens-fsm) below.
 
-The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized oscillator frequency, then sweeps temperature from -40°C to 125°C. The plots below show the measured count and calibration error across all PVT corners:
+
+The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized
+oscillator frequency, then sweeps temperature from -40°C to 125°C. The plots
+below show the measured count and calibration error across all PVT corners:
+
 
 ![temp_sens measurements](svgs/temp_sens_measurement.svg)
+
 
 # Milestone 4: The physical design
 In milestone 4 we implemented the physical design of our oscillator. The layout

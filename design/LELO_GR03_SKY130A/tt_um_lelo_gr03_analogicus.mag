@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1784665270
+timestamp 1784667118
 << locali >>
 rect 27222 21120 27300 21640
 rect 28420 21530 28640 21536
@@ -304,7 +304,7 @@ timestamp 1784653329
 transform 1 0 27886 0 1 21166
 box -150 -120 2130 440
 use LELO_GR03  LELO_GR03_1
-timestamp 1784665270
+timestamp 1784667118
 transform 1 0 -19030 0 1 -44634
 box 20312 45126 47038 64186
 use sky130_fd_pr__diode_pw2nd_05v5_QK8PWZ  sky130_fd_pr__diode_pw2nd_05v5_QK8PWZ_0

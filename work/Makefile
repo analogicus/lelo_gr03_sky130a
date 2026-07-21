@@ -11,8 +11,8 @@
 
 PREFIX=
 LIB=LELO_GR03_SKY130A
-CELL=LELO_GR03
-
+#CELL=LELO_GR03
+CELL=tt_um_lelo_gr03_analogicus
 #- Provide cells you want to check for the lvsall drcall commands
 CELLS = LELO_GR03
 
@@ -20,13 +20,13 @@ include ../tech/make/core.make
 
 # Override xlvs to strip Magic's rf_pnp BJT wrapper subcircuit before netgen;
 # the upstream core.make lacks this step and netgen segfaults on the **devattr line.
-xlvs:
-	test -d lvs || mkdir lvs
-	cat ../tech/magic/lvs.tcl|perl -pe 's#{PATH}#${LMAG}#ig;s#{CELL}#${PRCELL}#ig;' > lvs/${PRCELL}_spi.tcl
-	magic -noconsole -dnull lvs/${PRCELL}_spi.tcl > lvs/${PRCELL}_spi.log ${RDIR}
-	perl -i -0pe 's/\.subckt sky130_fd_pr__pnp_05v5_W\S+.*?\.ends\n//sg' lvs/${PRCELL}.spi
-	netgen -batch lvs "lvs/${PRCELL}.spi ${PRCELL}"  "cdl/${PRCELL}.spice ${PRCELL}" ${PDKPATH}/libs.tech/netgen/sky130A_setup.tcl lvs/${PRCELL}_lvs.log > lvs/${PRCELL}_netgen_lvs.log
-	cat lvs/${PRCELL}_lvs.log | ../tech/script/checklvs ${PRCELL} ${OPT}
+#xlvs:
+#	test -d lvs || mkdir lvs
+#	cat ../tech/magic/lvs.tcl|perl -pe 's#{PATH}#${LMAG}#ig;s#{CELL}#${PRCELL}#ig;' > lvs/${PRCELL}_spi.tcl
+#	magic -noconsole -dnull lvs/${PRCELL}_spi.tcl > lvs/${PRCELL}_spi.log ${RDIR}
+#	perl -i -0pe 's/\.subckt sky130_fd_pr__pnp_05v5_W\S+.*?\.ends\n//sg' lvs/${PRCELL}.spi
+#	netgen -batch lvs "lvs/${PRCELL}.spi ${PRCELL}"  "cdl/${PRCELL}.spice ${PRCELL}" ${PDKPATH}/libs.tech/netgen/sky130A_setup.tcl lvs/${PRCELL}_lvs.log > lvs/${PRCELL}_netgen_lvs.log
+#	cat lvs/${PRCELL}_lvs.log | ../tech/script/checklvs ${PRCELL} ${OPT}
 
 # Override lpe to fix flat-extraction n-well connectivity bug in digital cells:
 # Magic's flatten doesn't maintain the JNWTR_TAPCELLB_CV ntap-to-AVDD connection,

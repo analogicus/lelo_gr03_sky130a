@@ -1,6 +1,6 @@
 magic
 tech sky130A
-timestamp 1776460608
+timestamp 1784659146
 << locali >>
 rect -6 9009 2248 9018
 rect -6 8931 845 9009
@@ -257,26 +257,26 @@ rect 1206 3684 1209 3716
 rect 1884 3706 1916 3744
 rect 1881 3674 1884 3706
 rect 1916 3674 1919 3706
-use JNWTR_RPPO4  xa4 JNW_TR_SKY130A
-timestamp 1775823531
+use JNWTR_RPPO4  xa4 ../JNW_TR_SKY130A
+timestamp 1784647331
 transform -1 0 988 0 1 3142
 box 0 0 940 1720
 use JNWTR_RPPO16  xa5 JNW_TR_SKY130A
-timestamp 1737500400
+timestamp 1784653329
 transform 1 0 48 0 1 4891
 box 0 0 2236 1720
 use JNWTR_RPPO16  xa6
-timestamp 1737500400
+timestamp 1784653329
 transform -1 0 2284 0 1 6680
 box 0 0 2236 1720
 use JNWATR_NCH_8C1F2  xb5 JNW_ATR_SKY130A
 timestamp 1740610800
 transform 1 0 1799 0 1 3408
-box -61 -33 765 433
-use JNWATR_NCH_4C5F0  xb6 JNW_ATR_SKY130A
+box -92 -64 796 464
+use JNWATR_NCH_4C5F0  xb6 ../JNW_ATR_SKY130A
 timestamp 1740610800
 transform 1 0 1751 0 1 3924
-box -61 -33 637 433
+box -92 -64 668 464
 use JNWATR_PCH_8C1F2  xb7 JNW_ATR_SKY130A
 timestamp 1740610800
 transform 1 0 692 0 1 8514
@@ -284,11 +284,11 @@ box -92 -64 796 464
 use JNWATR_NCH_8C1F2  xc1
 timestamp 1740610800
 transform 1 0 1095 0 1 3408
-box -61 -33 765 433
+box -92 -64 796 464
 use JNWATR_NCH_4C5F0  xc2
 timestamp 1740610800
 transform 1 0 1097 0 1 3924
-box -61 -33 637 433
+box -92 -64 668 464
 use JNWATR_PCH_4C5F0  xc3 JNW_ATR_SKY130A
 timestamp 1740610800
 transform 1 0 42 0 1 8514

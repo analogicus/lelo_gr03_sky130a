@@ -1,0 +1,3 @@
+[submodule "lelo-tt-gr03-2026"]
+	path = tapeout
+	url = git@github.com:analogicus/lelo-tt-gr03-2026.git

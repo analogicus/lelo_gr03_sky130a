@@ -657,103 +657,103 @@ use BANDGAP_OTA_PMOS  x21 ../LELO_GR03_SKY130A
 timestamp 1776327997
 transform 1 0 11000 0 1 14503
 box -440 9589 7924 16218
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<0> ../LELO_GR03_SKY130A
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<0> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 12700 0 1 22620
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<1>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<1> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 15420 0 1 17180
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<2>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<2> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 14060 0 1 18540
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<3>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<3> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 14060 0 1 19900
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<4>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<4> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 12700 0 1 17180
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<5>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<5> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 12700 0 1 18540
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<6>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<6> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 12700 0 1 19900
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<10>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<10> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 14060 0 1 22620
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<11>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<11> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 16780 0 1 18540
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<12>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<12> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 16780 0 1 19900
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<13>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<13> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 16780 0 1 21260
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<14>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<14> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 16780 0 1 22620
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<15>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<15> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 15420 0 1 22620
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<17>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<17> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 12700 0 1 21260
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<18>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<18> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 14060 0 1 21260
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<19>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<19> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 16780 0 1 17180
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<20>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<20> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 15420 0 1 18540
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<21>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<21> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 15420 0 1 19900
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<22>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<22> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 15420 0 1 21260
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<23>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<23> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 14060 0 1 17180
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2 $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 11340 0 1 22620
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<7>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<7> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 11340 0 1 17180
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<8>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<8> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 11340 0 1 18540
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<9>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<9> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 11340 0 1 19900
 box 0 0 1340 1340
-use sky130_fd_pr__pnp_05v5_W3p40L3p40  XQ2<16>
+use sky130_fd_pr__rf_pnp_05v5_W3p40L3p40  XQ2<16> $PDKPATH/libs.ref/sky130_fd_pr/mag
 timestamp 1744815600
 transform 1 0 11340 0 1 21260
 box 0 0 1340 1340

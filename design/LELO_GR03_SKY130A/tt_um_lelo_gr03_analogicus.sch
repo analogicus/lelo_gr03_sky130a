@@ -23,6 +23,10 @@ N 250 -220 310 -220 {lab=uo_out[0]}
 N -330 -210 -300 -210 {lab=ui_in[0]}
 N 190 -220 250 -220 {lab=uo_out[0]}
 N -300 -210 -240 -210 {lab=ui_in[0]}
+N -360 -370 -360 -340 {lab=VGND}
+N -360 -340 -310 -340 {lab=VGND}
+N -360 -470 -360 -430 {lab=ui_in[0]}
+N -360 -470 -280 -470 {lab=ui_in[0]}
 C {devices/opin.sym} 370 -720 0 0 {name=p4 lab=uo_out[7:0]}
 C {devices/opin.sym} 360 -590 0 0 {name=p6 lab=uio_out[7:0]}
 C {JNW_TR_SKY130A/JNWTR_TAPCELLB_CV.sym} -40 -470 0 0 {name=x8 }
@@ -49,3 +53,11 @@ C {devices/lab_wire.sym} -170 -250 0 0 {name=p11 sig_type=std_logic lab=VDPWR}
 C {LELO_GR03_SKY130A/LELO_GR03.sym} -20 -190 0 0 {name=x1}
 C {devices/ipin.sym} -490 -170 0 0 {name=p13 lab=clk
 }
+C {sky130_fd_pr/diode.sym} -360 -400 0 0 {name=D1[0]
+model=diode_pw2nd_05v5
+area=2.025e11
+perim=1.8e6
+spiceprefix=X
+}
+C {devices/lab_wire.sym} -310 -340 0 0 {name=p28 sig_type=std_logic lab=VGND}
+C {devices/lab_wire.sym} -330 -470 0 1 {name=p29 sig_type=std_logic lab=ui_in[0]}

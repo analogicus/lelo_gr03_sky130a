@@ -5,68 +5,76 @@
 
 # Who
 
-We are group 3 in the 2026 Advanced Integrated Circuits course. Test.
+We are group 3 in the 2026 Advanced Integrated Circuits course.
 
 # Why
 
-To get an understanding of the design of advanced integrated circuits in CMOS technology, and to get an overview of the circuits needed to make a System-On-Chip.
+To get an understanding of the design of advanced integrated circuits in CMOS
+technology, and to get an overview of the circuits needed to make a
+System-On-Chip.
+
 
 # How
 
-The course consists, among other things, of a project divided into 5 (6 if tapeout) milestones. The idea is to design a temperature sensor. In the README below, each milestone will have a short description.
-
-
-
-# What
-
-| What            |        Cell/Name |
-| :----           |  :----:       |
-| Schematic       | design/LELO_GR03_SKY130A/LELO_GR03.sch |
-| Layout          | design/LELO_GR03_SKY130A/LELO_GR03.mag |
-
-
-
-# Signal interface
-
-
-| Signal       | Direction | Domain  | Description                               |
-| :---         | :---:     | :---:   | :---                                      |
-| VDD_1V8      | Input     | VDD_1V8 | Main supply                               |
-| OSC_TEMP_1V8 | Output    | VDD_1V8 | Temperature dependent oscillation frequency|
-| PWRUP_1V8    | Input     | VDD_1V8 | Power up the circuit                      |
-| VSS          | Input     | Ground  |                                           |
+The course consists, among other things, of a project divided into 5 (6 if
+tapeout) milestones. The idea is to design a temperature sensor. In the README
+below, each milestone will have a short description.
 
 
 # Key parameters
 
 
 <!-- AUTO:KEY_PARAMS -->
-| Parameter           | Min     | Typ             | Max     | Unit  |
-| :---                | :---:   | :---:           | :---:   | :---: |
-| Technology          |         | Skywater 130 nm |         |       |
-| AVDD                | 1.7     | 1.8             | 1.9     | V     |
-| Temperature         | -40     | 27              | 125     | C     |
-| Tc (conversion)     |         | ~30.5           |         | µs    |
-| Ts (sample rate)    |         | 100             |         | ms    |
-| Ileak (power-down)  |         | ~0.2    | 1       | nA    |
-| Iact (active)       |         | ~51     | 100     | µA    |
-| Iavg (average)      |         | ~15.8     | 50      | nA    |
-| Kerr (1-pt cal)     |         | ±8.9    | ±10     | C     |
-| Kerr (2-pt cal)     |         | ±8.9    | ±5      | C     |
+| Parameter          | Min | Typ             | Max | Unit |
+|:-------------------|:---:|:---------------:|:---:|:----:|
+| Technology         |     | Skywater 130 nm |     |      |
+| AVDD               | 1.7 | 1.8             | 1.9 | V    |
+| Temperature        | -40 | 27              | 125 | C    |
+| Tc (conversion)    |     | ~30.5           |     | µs   |
+| Ts (sample rate)   |     | 100             |     | ms   |
+| Ileak (power-down) |     | ~0.2            | 1   | nA   |
+| Iact (active)      |     | ~51             | 100 | µA   |
+| Iavg (average)     |     | ~15.8           | 50  | nA   |
+| Kerr (1-pt cal)    |     | ±8.9            | ±10 | C    |
+| Kerr (2-pt cal)    |     | ±8.9            | ±5  | C    |
 <!-- /AUTO:KEY_PARAMS -->
 
 
 # Milestone 1: The Bandgap
 
-The bandgap OTA is a two-stage Miller OTA (see [BANDGAP_OTA](#bandgap_ota)). The input NMOS transistors are low-threshold-voltage transistors, since they operate with the diode drop in the input common-mode voltage, reducing it from ~0.8V to ~0.5V over the temperature range of -40° to 125°.
+The bandgap OTA is a two-stage Miller OTA (see [BANDGAP_OTA](#bandgap_ota)). The
+input NMOS transistors are low-threshold-voltage transistors, since they operate
+with the diode drop in the input common-mode voltage, reducing it from ~0.8V to
+~0.5V over the temperature range of -40° to 125°.
 
-The bandgap circuit (see [BANDGAP_CIRCUIT](#bandgap_circuit)) uses a 1:8 BJT ratio (Q1 = 1×, Q2 = 8×). If we compare the voltages across the lower diode-connected BJTs, Q1 and Q2, the voltage difference will be proportional to the size difference and temperature:
 
-$$V_{D1} - V_{D2} = \Delta V_{BE} = V_T \text{ln}\left (\frac{I_D}{I_{S1}}\right ) - V_T \text{ln}\left (\frac{I_D}{I_{S2}}\right ) = V_T \text{ln}(N)$$
+The bandgap circuit (see [BANDGAP_CIRCUIT](#bandgap_circuit)) uses a 1:8 BJT
+ratio (Q1 = 1×, Q2 = 8×). If we compare the voltages across the lower
+diode-connected BJTs, Q1 and Q2, the voltage difference will be proportional to
+the size difference and temperature:
 
-Here $V_T = \frac{kT}{q}$. The V_CTAT voltage across Q1 will have a negative temperature coefficient and will be approximately linear over the temperature range of interest (-40° to 125°). I_PTAT will be the current set by the voltage difference $\Delta V_{BE}$ over the resistor, which we denote as R1. The operational amplifier forces its inputs to be equal, resulting in a voltage drop $V_{D1} - V_{D2} = \Delta V_{BE}$ across R1. I_PTAT will thus be $\Delta V_{BE} / R1$.
 
-The plots below show the corner simulations over temperature for PTAT current, CTAT voltage, power-down leakage current, and active supply current. The PTAT current varies significantly across process corners, as verified by the resistance variation of resistor R1 across the different corners. We tested this by replacing R1 with a generic resistor with no process variations and observed much less variation, with a worst-case error of less than 10% compared to 30%. The power-down leakage stays well below 1 nA across all corners.
+$$V_{D1} - V_{D2} = \Delta V_{BE} = V_T \text{ln}\left (\frac{I_D}{I_{S1}}\right
+) - V_T \text{ln}\left (\frac{I_D}{I_{S2}}\right ) = V_T \text{ln}(N)$$
+
+
+Here $V_T = \frac{kT}{q}$. The V_CTAT voltage across Q1 will have a negative
+temperature coefficient and will be approximately linear over the temperature
+range of interest (-40° to 125°). I_PTAT will be the current set by the voltage
+difference $\Delta V_{BE}$ over the resistor, which we denote as R1. The
+operational amplifier forces its inputs to be equal, resulting in a voltage drop
+$V_{D1} - V_{D2} = \Delta V_{BE}$ across R1. I_PTAT will thus be $\Delta V_{BE}
+/ R1$.
+
+
+The plots below show the corner simulations over temperature for PTAT current,
+CTAT voltage, power-down leakage current, and active supply current. The PTAT
+current varies significantly across process corners, as verified by the
+resistance variation of resistor R1 across the different corners. We tested this
+by replacing R1 with a generic resistor with no process variations and observed
+much less variation, with a worst-case error of less than 10% compared to 30%.
+The power-down leakage stays well below 1 nA across all corners.
+
 
 ![bandgap measurements](svgs/bandgap_measurement.svg)
 
@@ -107,30 +115,22 @@ The behavioral simulation fits a 2nd-order polynomial to the SPICE-characterized
 ![temp_sens measurements](svgs/temp_sens_measurement.svg)
 
 # Milestone 4: The physical design
-In milestone 4 we implemented the physical design of our oscillator. The layout of the oscillator, LELO_GR03.mag passes the drc check, but there is some port trouble in the LVS check. It can't seem to separate VDD_1V8 and VSS causing an issue. The submodules, BANDGAP_CIRCUIT.mag, BIAS_CIRCUIT.mag and COMPARATOR.mag passes both drc and lvs check. The issue arises when we connect everything together in LELO_GR03. The layout can be seen in the figure below. The Left part of the image comprises the bandgap circuit, the lower right part is the comparator and D-flip-flop for the relaxation oscillator and the middle area is the bias circuit generating bias voltages for the OTA (in the bandgap circuit) and the comparator (lower rigth side). The layout is made to fit in a Tiny Tapeout template with the digital circuitry being supposed to fit in the upper right corner. The circuit in the tiny tapeout template can be seen in the figure below.
+In milestone 4 we implemented the physical design of our oscillator. The layout
+of the oscillator, LELO_GR03.mag passes the drc check, but there is some port
+trouble in the LVS check. It can't seem to separate VDD_1V8 and VSS causing an
+issue. The submodules, BANDGAP_CIRCUIT.mag, BIAS_CIRCUIT.mag and COMPARATOR.mag
+passes both drc and lvs check. The issue arises when we connect everything
+together in LELO_GR03. The layout can be seen in the figure below. The Left part
+of the image comprises the bandgap circuit, the lower right part is the
+comparator and D-flip-flop for the relaxation oscillator and the middle area is
+the bias circuit generating bias voltages for the OTA (in the bandgap circuit)
+and the comparator (lower rigth side). The layout is made to fit in a Tiny
+Tapeout template with the digital circuitry being supposed to fit in the upper
+right corner. 
 
-This image below shows the physical layout in of the oscillator:
-![Physical design in Magic](svgs/LELO_GR03.png)
-This image below shows the physical layout in the Tiny Tapeout template:
-![Physical design in Magic](svgs/physical_design.svg)
 
-# Implementation
 
-## BANDGAP_OTA
 
-![BANDGAP_OTA schematic](svgs/BANDGAP_OTA.svg)
-
-## BANDGAP_CIRCUIT
-
-![BANDGAP_CIRCUIT schematic](svgs/BANDGAP_CIRCUIT.svg)
-
-## COMPARATOR
-
-![COMPARATOR schematic](svgs/COMPARATOR.svg)
-
-## OSCILLATOR
-
-![OSCILLATOR schematic](svgs/OSCILLATOR.svg)
 
 ## TempSens FSM
 
